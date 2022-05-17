@@ -18,10 +18,12 @@
                 <option value="fem">Feminino</option>
                 <option value="ninfo">Não informado</option>
               </select>
+              <span class="text-danger" v-text="errors.genero" v-show="errors.genero"></span>
             </div>
             <div class="col-4">
               <label>Data Nascimento</label>
               <vee-field type="date" name="dataNasc" class="form-control" v-model="user.dataNasc"/>
+              <span class="text-danger" v-text="errors.dataNasc" v-show="errors.dataNasc"></span>
             </div>
             <div class="col-3">
               <label for="cargo">Cargo:</label>
@@ -31,24 +33,29 @@
                 <option value="servGerais">Serviços Gerais</option>
                 <option value="gerencia">Gerência</option>
               </select>
+              <span class="text-danger" v-text="errors.cargo" v-show="errors.cargo"></span>
             </div>
             <div class="col-5">
               <label>Telefone</label>
               <vee-field type="number" name="telefone" class="form-control" v-model="user.telefone"/>
+              <span class="text-danger" v-text="errors.telefone" v-show="errors.telefone"></span>
             </div>
           </div>
           <div class="row g-3 justify-content-md-center mt-1">
             <div class="col-7">
               <label>E-Mail</label>
               <vee-field type="email" name="email" class="form-control" v-model="user.email"/>
+              <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
             </div>
             <div class="col-7">
               <label>Senha</label>
               <vee-field type="text" id="senha1" name="senha1" class="form-control"/>
+              <span class="text-danger" v-text="errors.senha1" v-show="errors.senha1"></span>
             </div>
             <div class="col-7">
               <label>Confirme a Senha</label>
               <vee-field type="text" name="senha" class="form-control" v-model="user.senha"/>
+              <span class="text-danger" v-text="errors.senha" v-show="errors.senha"></span>
             </div>
           </div>
 
@@ -60,6 +67,7 @@
             <div class="col-4">
               <label>CEP</label>
               <vee-field type="number" name="cep" class="form-control" v-model="user.cep"/>
+              <span class="text-danger" v-text="errors.cep" v-show="errors.cep"></span>
             </div>
             <div class="col-1">
               <br>
@@ -68,30 +76,37 @@
             <div class="col-4">
               <label>Cidade</label>
               <vee-field type="text" name="cidade" class="form-control" v-model="user.cidade"/>
+              <span class="text-danger" v-text="errors.cidade" v-show="errors.cidade"></span>
             </div>
             <div class="col-3">
               <label>Estado</label>
               <vee-field type="text" name="estado" class="form-control" v-model="user.estado"/>
+              <span class="text-danger" v-text="errors.estado" v-show="errors.estado"></span>
             </div>
             <div class="col-4">
               <label>Logradouro</label>
               <vee-field type="text" name="logradouro" class="form-control" v-model="user.logradouro"/>
+              <span class="text-danger" v-text="errors.logradouro" v-show="errors.logradouro"></span>
             </div>
             <div class="col-2">
               <label>Número</label>
               <vee-field type="number" name="numero" class="form-control" v-model="user.numero"/>
+              <span class="text-danger" v-text="errors.numero" v-show="errors.numero"></span>
             </div>
             <div class="col-6">
               <label>Complemento</label>
               <vee-field type="text" name="complemento" class="form-control" v-model="user.complemento"/>
+              <span class="text-danger" v-text="errors.complemento" v-show="errors.complemento"></span>
             </div>
             <div class="col-5">
               <label>Bairro</label>
               <vee-field type="text" name="bairro" class="form-control" v-model="user.bairro"/>
+              <span class="text-danger" v-text="errors.bairro" v-show="errors.bairro"></span>
             </div>
             <div class="col-7">
               <label>Ponto de referência</label>
               <vee-field type="text" name="pontoRefe" class="form-control" v-model="user.pontoRefe"/>
+              <span class="text-danger" v-text="errors.pontoRefe" v-show="errors.pontoRefe"></span>
             </div>
           </div>
           <div class="row mt-4">
@@ -117,20 +132,21 @@ export default {
   data() {
     const schema = {
       nome: "required",
-      genero: 'required',
-      dataNasc: 'required|dataInferior',
-      telefone: 'required',
-      cargo: 'required',
-      email: 'required|email',
-      senha: 'required|confirmed:senha1',
-      cep: 'required',
-      cidade: 'required',
-      estado: 'required',
-      logradouro: 'required',
-      complemento: 'required',
-      bairro: 'required',
-      numero: 'required',
-      pontoRefe: 'required'
+      genero: "required",
+      dataNasc: "required|dataInferior",
+      telefone: "required",
+      cargo: "required",
+      email: "required|email",
+      senha1: "required|min:8",
+      senha: "required|confirmed:senha1",
+      cep: "required",
+      cidade: "required",
+      estado: "required",
+      logradouro: "required",
+      complemento: "required",
+      bairro: "required",
+      numero: "required",
+      pontoRefe: "required"
     }
     return {
       schema,

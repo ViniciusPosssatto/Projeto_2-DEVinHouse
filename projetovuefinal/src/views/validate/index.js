@@ -12,7 +12,7 @@ const email = defineRule('email', value => {
         return true;
     }
     
-    if (!/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/.test(value)) {
+    if (!/[a-z-9._%+-]+@[a-z-9.-]+\.[a-z]{2,4}/.test(value)) {
         return 'O email não é valido!';
     }
     return true;
