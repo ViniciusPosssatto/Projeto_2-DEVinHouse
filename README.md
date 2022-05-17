@@ -4,7 +4,7 @@
 <h2 align="center">Este é um repositório para o projeto final do primeiro módulo do curso DEVinHouse - SENAI</h2>
 
 - SENAI_SC - DEVinHouse - [Turma Conecta Nuvem](https://devinhouse.tech)
-- 
+
 <h4> Projeto baseado em framework VueJS</h4>
 
 - 📫 Email para contato - **vinicius-possatto@hotmail.com**
