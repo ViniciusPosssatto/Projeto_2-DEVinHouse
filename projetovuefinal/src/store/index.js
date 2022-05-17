@@ -6,34 +6,10 @@ const setUserModule = {
     state() {
         return {
             user: {},
-            listaUsers: []
+            listaUsers: [],
+            autenticado: false
         }
     },
-    actions: {
-
-        newUser(context, user) {
-        context.state.listaUsers.push({user});
-        //console.log(this.listaUsers)
-            if(context.state.listaUsers.length > 0){
-                var lista = JSON.stringify(context.state.listaUsers);
-                localStorage.setItem('listaUsers', lista);
-            }
-        },
-        
-    }
-}
-
-const autenticaUser = {
-    namespaced: true,
-    state() {
-        return {
-            usuarios: [],
-            autenticado: false,
-            //id: '',
-            erro: false
-        }
-    },
-
     methods: {
         usuariosLista(state) {
             let lista = localStorage.getItem('listaUsers');
@@ -43,22 +19,37 @@ const autenticaUser = {
         }
 
     },
-
     actions: {
 
+        newUser(context, user) {
+        context.state.listaUsers.push({user});
+        //console.log(this.listaUsers)
+            if(context.state.listaUsers.length > 0){
+                var lista = JSON.stringify(context.state.listaUsers);
+                localStorage.setItem('listaUsers', lista);
+                console.log(context.listaUsers)
+            }
+        },
+
         autenticar(context, login) {
-            context.state.usuarios.forEach(item => {
-                if(login.email === item.email) {
-                    if(login.senha === item.senha){
-                        //console.log(item.email)
-                        return context.state.autenticado = true;
-                        //context.state.id = item.id;
+            if(context.state.autenticado === false){
+                context.state.listaUsers.forEach(user => {
+                    if(login.email === user.email) {
+                        if(login.senha === user.senha){
+                            //console.log(user.email)
+                            user.autenticado = true;
+                            context.state.autenticado = true;
+                            //context.state.id = user.id;
+                        }
+                    } else {
+                        console.log('deu ruim');
                     }
-                } else {
-                    return console.log('deu ruim');
-                }
-                
-            })
+                    
+                })
+
+            } else {
+                return context.state.erro = true;
+            }
         },
 
         getUsers(context) {
@@ -83,8 +74,7 @@ const autenticaUser = {
 
 const store = createStore({
     modules: {
-        setUserModule,
-        autenticaUser
+        setUserModule
     }
 });
 

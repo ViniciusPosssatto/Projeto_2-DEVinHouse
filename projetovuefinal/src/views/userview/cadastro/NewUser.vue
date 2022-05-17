@@ -179,7 +179,7 @@ export default {
     newUser() {
       // commit para novo usuario
       this.$store.dispatch('setUserModule/newUser', this.user)
-      this.$router.push('/login')
+      //this.$router.push('/login')
       console.log(this.user)
     },
 
