@@ -8,7 +8,7 @@
           <div class="row g-3">
             <div class="col-7">
               <label>Nome Completo</label>
-              <vee-field type="text" name="nome" class="form-control" v-model="user.nome" />
+              <vee-field type="text" name="nome" class="form-control" v-model="user.nome"/>
             </div>
             <div class="col-5">
               <label for="genero">Gênero:</label>
