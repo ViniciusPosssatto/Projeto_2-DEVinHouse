@@ -6,13 +6,13 @@
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email:</label>
           <vee-field type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="login.email"/>
-          <div id="emailHelp" class="form-text">Nunca compartilhe senhas com ninguém.</div>
           <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
         </div>
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">password:</label>
           <vee-field name="password" type="password" class="form-control" id="exampleInputPassword1" v-model="login.password"/>
           <span class="text-danger" v-text="errors.password" v-show="errors.password"></span>
+          <div id="emailHelp" class="form-text">Nunca compartilhe senhas com ninguém.</div>
         </div>
         <div class="mb-3">
           <small><a href="#">Esqueceu a senha?</a></small>
