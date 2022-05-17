@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column p-3 text-white bg-dark" style="width: 220px" id="div">
+  <div class="d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" style="width: 220px" id="div">
     <span class="fs-4">Sidebar</span>
     <hr />
     <ul class="nav nav-pills flex-column mb-auto">

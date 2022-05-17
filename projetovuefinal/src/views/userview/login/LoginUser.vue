@@ -9,9 +9,9 @@
           <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">password:</label>
-          <vee-field name="password" type="password" class="form-control" id="exampleInputPassword1" v-model="login.password"/>
-          <span class="text-danger" v-text="errors.password" v-show="errors.password"></span>
+          <label for="exampleInputPassword1" class="form-label">Senha:</label>
+          <vee-field name="senha" type="password" class="form-control" id="exampleInputPassword1" v-model="login.senha"/>
+          <span class="text-danger" v-text="errors.senha" v-show="errors.senha"></span>
           <div id="emailHelp" class="form-text">Nunca compartilhe senhas com ninguém.</div>
         </div>
         <div class="mb-3">
@@ -20,8 +20,11 @@
         <div class="mb-3">
           <small><a href="#">Fazer login com a conta Google</a></small>
         </div>
-        <button type="submit" class="btn btn-primary">Fazer login</button>
-        <button type="button" class="btn btn-warning" @click="cadastrar">Cadastrar-se</button>
+        <button type="submit" class="btn btn-success">Fazer login</button>
+        <div class="col-12 mb-3 mt-3">
+          <span>Não tenho cadastro</span>
+        </div>
+        <button type="button" class="btn btn-primary" @click="cadastrar">Cadastrar-se</button>
       </vee-form>
     </div>
   </div>
@@ -30,16 +33,15 @@
 <script>
 import { Form, Field } from 'vee-validate'
 
-
 export default {
-components: {
-  'vee-form': Form,
-  'vee-field': Field
-},
-data() {
+  components: {
+    'vee-form': Form,
+    'vee-field': Field
+  },
+  data() {
     const schema = {
       email: "required|email",
-      password: "required"
+      senha: "required"
     }
     return {
       schema,
@@ -49,23 +51,23 @@ data() {
   },
   methods: {
     autenticar() {
-      this.loader = this.$loading.show();
+      //this.loader = this.$loading.show();
       this.$store.dispatch('autenticaUser/autenticar', this.login)
         .then(() => {
-          //console.log(this.login)
+          console.log(this.login)
           // mensagem de login efetuado
-          this.$toast.success('Login efetuado com sucesso!', {
-            position: 'top'
-          });
-          this.loader.hide();
+          // this.$toast.success('Login efetuado com sucesso!', {
+          //   position: 'top'
+          // });
+          //this.loader.hide();
           // redireciona para tela de dashboard caso o login for correto
-          this.$router.push('/dash');
+          //this.$router.push('/home');
         })
         .catch((err) => {
           console.log(err.message)
-          this.$toast.error('Login ou senha incorretos!', {
-            position: 'top'
-          });
+          // this.$toast.error('Login ou senha incorretos!', {
+          //   position: 'top'
+          // });
         });
     },
     cadastrar() {
