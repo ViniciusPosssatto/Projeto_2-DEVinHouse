@@ -4,11 +4,11 @@
       <div class="col-8">
         <h2>Dados Pessoais</h2>
         <hr>
-        <vee-form @submit="newUser">
+        <vee-form @submit="newUser" >
           <div class="row g-3">
             <div class="col-7">
               <label>Nome Completo</label>
-              <vee-field type="text" name="nome" class="form-control" v-model="user.nome"/>
+              <vee-field type="text" name="nome" class="form-control" v-model="user.nome" />
             </div>
             <div class="col-5">
               <label for="genero">Gênero:</label>
@@ -141,7 +141,9 @@ export default {
   methods: {
     newUser() {
       // commit para novo usuario
-      console.log(this.user)
+      this.$store.commit('newUser', this.user)
+      this.$router.push('/')
+      //console.log(this.user)
     },
 
     limparCampos() {
