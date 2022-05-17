@@ -35,4 +35,11 @@ const min = defineRule('minLength', (value, [limit]) => {
     return true;
   });
 
-export { required, email, confirmed, min };
+const dataInferior = defineRule("dataInferior", value => {                
+    if (new Date(value) > new Date()) {
+        return "Data deve ser inferior a data atual"
+    }
+    return true;  
+});
+
+export { required, email, confirmed, min, dataInferior };

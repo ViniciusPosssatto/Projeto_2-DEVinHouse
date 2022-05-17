@@ -4,11 +4,12 @@
       <div class="col-8">
         <h2>Dados Pessoais</h2>
         <hr>
-        <vee-form @submit="newUser" >
+        <vee-form @submit="newUser" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
             <div class="col-7">
               <label>Nome Completo</label>
               <vee-field type="text" name="nome" class="form-control" v-model="user.nome"/>
+              <span class="text-danger" v-text="errors.nome" v-show="errors.nome"></span>
             </div>
             <div class="col-5">
               <label for="genero">Gênero:</label>
@@ -109,12 +110,30 @@
 
 <script>
 import { Form, Field } from 'vee-validate'
-import '@/views/validate'
+import '@/views/validate/index.js'
 import axios from 'axios'
 
 export default {
   data() {
+    const schema = {
+      nome: "required",
+      genero: 'required',
+      dataNasc: 'required|dataInferior',
+      telefone: 'required',
+      cargo: 'required',
+      email: 'required|email',
+      senha: 'required|confirmed:senha1',
+      cep: 'required',
+      cidade: 'required',
+      estado: 'required',
+      logradouro: 'required',
+      complemento: 'required',
+      bairro: 'required',
+      numero: 'required',
+      pontoRefe: 'required'
+    }
     return {
+      schema,
       user: {
         nome: '',
         genero: '',
