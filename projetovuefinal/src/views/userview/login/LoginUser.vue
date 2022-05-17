@@ -63,7 +63,7 @@ data() {
         })
         .catch((err) => {
           console.log(err.message)
-          this.$toast.error('Algo de errado ocorreu!', {
+          this.$toast.error('Login ou senha incorretos!', {
             position: 'top'
           });
         });
