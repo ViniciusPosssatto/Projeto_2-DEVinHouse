@@ -4,7 +4,7 @@
       <div class="col-8">
         <h2>Dados Pessoais</h2>
         <hr>
-        <vee-form @submit="newUser" :validation-schema="schema" v-slot="{ errors }">
+        <vee-form id="formUser" @submit="newUser" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
             <div class="col-7">
               <label>Nome Completo</label>
@@ -179,6 +179,8 @@ export default {
     newUser() {
       // commit para novo usuario
       this.$store.dispatch('setUserModule/newUser', this.user)
+      this.user = {};
+      document.getElementById('formUser').reset();
       //this.$router.push('/login')
       console.log(this.user)
     },

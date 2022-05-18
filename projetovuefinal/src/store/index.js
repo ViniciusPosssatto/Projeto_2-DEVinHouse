@@ -7,18 +7,11 @@ const setUserModule = {
         return {
             user: {},
             listaUsers: [],
-            autenticado: false
+            autenticado: false,
+            erro: false
         }
     },
-    methods: {
-        usuariosLista(state) {
-            let lista = localStorage.getItem('listaUsers');
-            lista.JSON.parse('lista');
-            state.usuarios.push(lista);
-            console.log(state.usuarios)
-        }
-
-    },
+    
     actions: {
 
         newUser(context, user) {
@@ -32,23 +25,41 @@ const setUserModule = {
         },
 
         autenticar(context, login) {
+            store.dispatch('setUserModule/getUsers');
             if(context.state.autenticado === false){
-                context.state.listaUsers.forEach(user => {
-                    if(login.email === user.email) {
-                        if(login.senha === user.senha){
-                            //console.log(user.email)
-                            user.autenticado = true;
+                context.state.listaUsers.forEach(item => {
+                  //validação de email e senha = true => segue login
+                    if(login.email === item.user.email) {
+                        if(login.senha === item.user.senha){
+                            item.user.autenticado = true;
+                            const token = item.user.id;
+                            localStorage.setItem('token', token);
                             context.state.autenticado = true;
-                            //context.state.id = user.id;
+                            var lista = JSON.stringify(context.state.listaUsers);
+                            localStorage.setItem('listaUsers', lista);
                         }
                     } else {
                         console.log('deu ruim');
                     }
-                    
                 })
-
             } else {
+                console.log('deu ruim no segundo else');
                 return context.state.erro = true;
+            }
+        },
+
+        logOut(context) {
+            store.dispatch('setUserModule/getUsers');
+            if(context.state.autenticado === true){
+                context.state.listaUsers.forEach(item => {
+                    item.user.autenticado = false;
+                    localStorage.removeItem('token');
+                    context.state.autenticado = false;
+                    var lista = JSON.stringify(context.state.listaUsers);
+                    localStorage.setItem('listaUsers', lista);
+                });
+            } else {
+                console.log('deu ruim');
             }
         },
 
@@ -57,14 +68,14 @@ const setUserModule = {
                 let lista = localStorage.getItem('listaUsers')
 
                 if(lista.length > 0) {
-                    lista = JSON.parse('lista')
-                    context.state.usuarios.push(lista);
+                    lista = JSON.parse(lista)
+                    context.state.listaUsers = lista;
                 } else {
-                    return context.state.usuarios = [];
+                    return context.state.listaUsers = [];
                 }
             }
             catch(err) {
-                console.log(err)
+                console.log('erro do catch '+ err)
             }
         }
     }

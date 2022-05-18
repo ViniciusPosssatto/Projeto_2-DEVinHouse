@@ -1,7 +1,8 @@
 <template>
  <div class="app">
-   <NavBar/>
-   <SideBar/>
+   <NavBar />
+   <SideBar class="left"/>
+   
   <router-view></router-view>
 
  </div>
@@ -23,4 +24,7 @@ export default {
 
 <style>
 
+.left{
+  float: left;
+}
 </style>

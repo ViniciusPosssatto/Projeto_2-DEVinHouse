@@ -1,8 +1,8 @@
 <template>
-  <div class="d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" style="width: 220px" id="div">
+  <div class="sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" style="width: 220px" id="div">
     <span class="fs-4">Sidebar</span>
     <hr />
-    <ul class="nav nav-pills flex-column mb-auto">
+    <ul class="nav nav-pills flex-column  justify-content-between">
       <li class="nav-item">
         <router-link to="/home" class="nav-link text-white" aria-current="page">
           <svg class="bi me-2" width="16" height="16">
@@ -51,7 +51,7 @@
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
         <div>
-          <a class="nav-link text-white ms-3" href="#">Logout</a>
+          <a class="nav-link text-white ms-3" @click="logOut">Logout</a>
         </div>
       </li>
     </ul>
@@ -60,20 +60,18 @@
 
 <script>
 export default {
-
+  methods: {
+    logOut() {
+      this.$store.dispatch('setUserModule/logOut');
+    }
+  }
 }
 </script>
 
-<style>
-body {
-    position: relative;
-    overflow-x: hidden;
-    background-color: #CFD8DC;
-    margin-bottom: 45px;
-}
+<style scoped>
 
 #div {
-  height: 100% !important;
+  height: 100vh !important;
 }
 ul li {
   transition: 1s;
