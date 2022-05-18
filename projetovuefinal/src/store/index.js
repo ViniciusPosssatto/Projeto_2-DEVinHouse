@@ -24,16 +24,16 @@ const setUserModule = {
         newUser(context, user) {
         context.state.listaUsers.push({user});
         //console.log(this.listaUsers)
-            if(context.state.listaUsers.length > 0){  // ao cadastrar um usuário na lista ele joga pro localStorage
+            if(context.state.listaUsers.length > 0) {  // ao cadastrar um usuário na lista ele joga pro localStorage
                 var lista = JSON.stringify(context.state.listaUsers);
                 localStorage.setItem('listaUsers', lista);
-                console.log(context.state.listaUsers)
+                //console.log(context.state.listaUsers)
             }
         },
 
         autenticar(context, login) {
             store.dispatch('setUserModule/getUsers');
-            if(context.state.autenticado === false){
+            if(context.state.autenticado === false) {
                 context.state.listaUsers.forEach(item => {
                   //validação de email e senha = true => segue login
                     if(login.email === item.user.email && login.senha === item.user.senha) {
