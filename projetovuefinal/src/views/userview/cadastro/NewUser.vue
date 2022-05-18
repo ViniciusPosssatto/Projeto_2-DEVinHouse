@@ -4,7 +4,7 @@
       <div class="col-8">
         <h2>Dados Pessoais</h2>
         <hr>
-        <vee-form @submit="newUser" :validation-schema="schema" v-slot="{ errors }">
+        <vee-form id="formUser" @submit="newUser" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
             <div class="col-7">
               <label>Nome Completo</label>
@@ -132,12 +132,12 @@ export default {
   data() {
     const schema = {
       nome: "required",
-      genero: "required",
+      genero: "",
       dataNasc: "required|dataInferior",
       telefone: "required",
-      cargo: "required",
+      cargo: "",
       email: "required|email",
-      senha1: "required|min:8",
+      senha1: "required",
       senha: "required|confirmed:senha1",
       cep: "required",
       cidade: "required",
@@ -151,21 +151,23 @@ export default {
     return {
       schema,
       user: {
-        nome: '',
-        genero: '',
-        dataNasc: '',
-        telefone: '',
-        cargo: '',
-        email: '',
-        senha: '',
-        cep: '',
+        id: Date.now(),
+        autenticado: false,
+        nome: 'vine',
+        genero: 'masc',
+        dataNasc: '2022-05-02',
+        telefone: '34343',
+        cargo: 'operador',
+        email: 'admin@admin.com.br',
+        senha: '123',
+        cep: '88080400',
         cidade: '',
         estado: '',
         logradouro: '',
         complemento: '',
         bairro: '',
-        numero: '',
-        pontoRefe: ''
+        numero: '34',
+        pontoRefe: 'sdfsdfd'
       }
     }
   },
@@ -176,9 +178,19 @@ export default {
   methods: {
     newUser() {
       // commit para novo usuario
-      this.$store.commit('newUser', this.user)
-      this.$router.push('/')
-      //console.log(this.user)
+      this.$store.dispatch('setUserModule/newUser', this.user)
+      .then(() => {
+        
+        document.getElementById('formUser').reset();
+        this.$toast.success('Cadastro criado com sucesso!', { 
+          position: 'top'
+        });
+
+        //this.$router.push('/login')
+      }).catch((err) => {
+        console.log('erro no catch da criação ' + err)
+      })
+     // console.log(this.user)
     },
 
     limparCampos() {
