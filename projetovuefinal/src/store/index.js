@@ -34,7 +34,7 @@ const setUserModule = {
                             item.user.autenticado = true;
                             const token = item.user.id;
                             localStorage.setItem('token', token);
-                            context.state.autenticado = true;
+                            //context.state.autenticado = true;
                             var lista = JSON.stringify(context.state.listaUsers);
                             localStorage.setItem('listaUsers', lista);
                         
@@ -54,7 +54,7 @@ const setUserModule = {
                 context.state.listaUsers.forEach(item => {
                     item.user.autenticado = false;
                     localStorage.removeItem('token');
-                    context.state.autenticado = false;
+                    //context.state.autenticado = false;
                     var lista = JSON.stringify(context.state.listaUsers);
                     localStorage.setItem('listaUsers', lista);
                 });

@@ -62,8 +62,10 @@
 export default {
   methods: {
     logOut() {
-      this.$store.dispatch('setUserModule/logOut');
-      this.$router.push('/login')
+      this.$store.dispatch('setUserModule/logOut')
+      .then(() => {
+        this.$router.push('/login')
+      })
     }
   }
 }
