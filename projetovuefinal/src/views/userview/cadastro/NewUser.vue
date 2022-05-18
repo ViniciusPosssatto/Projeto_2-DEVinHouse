@@ -179,10 +179,18 @@ export default {
     newUser() {
       // commit para novo usuario
       this.$store.dispatch('setUserModule/newUser', this.user)
-      this.user = {};
-      document.getElementById('formUser').reset();
-      //this.$router.push('/login')
-      console.log(this.user)
+      .then(() => {
+        
+        document.getElementById('formUser').reset();
+        this.$toast.success('Cadastro criado com sucesso!', { 
+          position: 'top'
+        });
+
+        //this.$router.push('/login')
+      }).catch((err) => {
+        console.log('erro no catch da criação ' + err)
+      })
+     // console.log(this.user)
     },
 
     limparCampos() {

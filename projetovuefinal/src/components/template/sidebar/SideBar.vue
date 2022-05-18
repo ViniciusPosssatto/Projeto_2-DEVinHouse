@@ -63,6 +63,7 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch('setUserModule/logOut');
+      this.$router.push('/login')
     }
   }
 }

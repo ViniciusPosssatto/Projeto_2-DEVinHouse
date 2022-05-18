@@ -54,23 +54,24 @@ export default {
   },
   methods: {
     usuariosLista() {
-      //this.loader = this.$loading.show();
+      this.loader = this.$loading.show();
       this.$store.dispatch('setUserModule/autenticar', this.login)
         .then(() => {
-          console.log(this.login)
+          //console.log(this.login)
           // mensagem de login efetuado
-          this.$toast.success('Login efetuado com sucesso!', {
+          this.$toast.success('Login efetuado com sucesso!', {    // FALTA VERIFICAR O THEN E O CATCH PQ ESTÁ APARECENDO O TOAST ERRADO QUANDO O LOGIN DA ERRADO
             position: 'top'
           });
-          this.loader.hide();
+          
           // redireciona para tela de dashboard caso o login for correto
-          this.$router.push('/home');
+          this.loader.hide();
+          //this.$router.push('/home');
         })
         .catch((err) => {
           console.log(err.message)
-          // this.$toast.error('Login ou senha incorretos!', {
-          //   position: 'top'
-          // });
+          this.$toast.error('Login ou senha incorretos!', {
+            position: 'top'
+          });
         });
     },
     cadastrar() {

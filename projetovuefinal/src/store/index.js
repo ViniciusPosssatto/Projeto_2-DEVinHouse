@@ -8,7 +8,7 @@ const setUserModule = {
             user: {},
             listaUsers: [],
             autenticado: false,
-            erro: false
+            
         }
     },
     
@@ -29,22 +29,22 @@ const setUserModule = {
             if(context.state.autenticado === false){
                 context.state.listaUsers.forEach(item => {
                   //validação de email e senha = true => segue login
-                    if(login.email === item.user.email) {
-                        if(login.senha === item.user.senha){
+                    if(login.email === item.user.email && login.senha === item.user.senha) {
+                        
                             item.user.autenticado = true;
                             const token = item.user.id;
                             localStorage.setItem('token', token);
                             context.state.autenticado = true;
                             var lista = JSON.stringify(context.state.listaUsers);
                             localStorage.setItem('listaUsers', lista);
-                        }
+                        
                     } else {
-                        console.log('deu ruim');
+                        console.log('deu ruim na autenticaao');
                     }
                 })
             } else {
                 console.log('deu ruim no segundo else');
-                return context.state.erro = true;
+                
             }
         },
 
@@ -59,7 +59,7 @@ const setUserModule = {
                     localStorage.setItem('listaUsers', lista);
                 });
             } else {
-                console.log('deu ruim');
+                console.log('deu ruim no logout');
             }
         },
 
