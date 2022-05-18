@@ -28,7 +28,7 @@
           <button type="button" class="btn btn-primary" @click="cadastrar">Cadastrar-se</button>
         </vee-form>
       </div>
-      <p v-show="erro">Já tem usuario logado</p>
+      <p v-show="autenticado">Já tem usuario logado</p>
     </div>
   </div>
 </template>
@@ -65,7 +65,7 @@ export default {
           
           // redireciona para tela de dashboard caso o login for correto
           this.loader.hide();
-          //this.$router.push('/home');
+          this.$router.push('/home');
         })
         .catch((err) => {
           console.log(err.message)
@@ -80,9 +80,14 @@ export default {
     }
   },
   computed: {
-    erro() {
-      return this.$store.state.erro;
+    
+    autenticado() {
+      return this.$store.state.setUserModule.autenticado;
     }
+  },
+
+  mounted() {
+    this.$store.state.setUserModule.autenticado = localStorage.getItem('token') ? true : false;
   }
 }
 </script>

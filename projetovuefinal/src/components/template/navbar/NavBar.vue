@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="autenticado">
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -14,11 +14,16 @@
 <script>
 export default {
   computed: {
-    //usuario() {
-      // definir o usuário que está logado
+     // definir o usuário que está logado //// ainda falta identificar o usuário e colocar sua foto e nome na navbar
+    autenticado() {
+      return this.$store.state.setUserModule.autenticado;
     }
-  }
+  },
 
+  mounted() {
+    this.$store.state.setUserModule.autenticado = localStorage.getItem('token') ? true : false;
+  }
+}
 </script>
 
 <style>
