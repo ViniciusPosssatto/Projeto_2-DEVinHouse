@@ -10,6 +10,7 @@ import PageNewItens from '@/views/dashboard/PageNewItens.vue'
 import NewUser from '@/views/userview/cadastro/NewUser.vue'
 import LoginUser from '@/views/userview/login/LoginUser.vue'
 
+// criação das rotas
 const routes = [
     {
         path: '/',
@@ -18,19 +19,23 @@ const routes = [
     },
     {
         path: '/emprestimo',
-        component: PageEmprestimo
+        component: PageEmprestimo,
+        meta: { auth: true }
     },
     {
         path: '/inventario',
-        component: PageInventario
+        component: PageInventario,
+        meta: { auth: true }
     },
     {
         path: '/listagem',
-        component: PageListagem
+        component: PageListagem,
+        meta: { auth: true }
     },
     {
         path: '/newitens',
-        component: PageNewItens
+        component: PageNewItens,
+        meta: { auth: true }
     },
     {
         path: '/newuser',
@@ -42,12 +47,25 @@ const routes = [
         alias: ['/auth'],
         component: LoginUser
     },
-
 ]
+
 
 const router = createRouter({
     routes,
     history: createWebHashHistory()
 });
+
+
+// guard para utilizar nas rotas e deixar o código mais limpo
+router.beforeEach((to, from, next) => {
+    const auth = localStorage.getItem('token');
+    if (to.meta.auth === !auth) {
+        next("/login")
+    }else{
+        next()
+    }
+    
+})
+
 
 export default router;

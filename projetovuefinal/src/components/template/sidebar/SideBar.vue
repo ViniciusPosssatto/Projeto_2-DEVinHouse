@@ -1,5 +1,5 @@
 <template>
-  <div class="sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" style="width: 220px" id="div">
+  <div class="sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" style="width: 220px" id="div" v-if="autenticado">
     <span class="fs-4">Sidebar</span>
     <hr />
     <ul class="nav nav-pills flex-column  justify-content-between">
@@ -62,9 +62,23 @@
 export default {
   methods: {
     logOut() {
-      this.$store.dispatch('setUserModule/logOut');
+      this.$store.dispatch('setUserModule/logOut')
       this.$router.push('/login')
+      this.$toast.warning('Logout realizado. Faça login para navegar novamente.', {
+        position: 'top'
+      });
+      
     }
+  },
+   computed: {
+    
+    autenticado() {
+      return this.$store.state.setUserModule.autenticado;
+    }
+  },
+
+  mounted() {
+    this.$store.state.setUserModule.autenticado = localStorage.getItem('token') ? true : false;
   }
 }
 </script>

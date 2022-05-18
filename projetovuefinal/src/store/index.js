@@ -11,16 +11,23 @@ const setUserModule = {
             
         }
     },
+
+    mutatios: {
+
+        isAutenticado(state) {
+            state.autenticado = localStorage.getItem('token') ? true : false;
+        }
+    },
     
     actions: {
 
         newUser(context, user) {
         context.state.listaUsers.push({user});
         //console.log(this.listaUsers)
-            if(context.state.listaUsers.length > 0){
+            if(context.state.listaUsers.length > 0){  // ao cadastrar um usuário na lista ele joga pro localStorage
                 var lista = JSON.stringify(context.state.listaUsers);
                 localStorage.setItem('listaUsers', lista);
-                console.log(context.listaUsers)
+                console.log(context.state.listaUsers)
             }
         },
 
