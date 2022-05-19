@@ -108,7 +108,7 @@ export default {
       nome: "required",
       email: "required|email",
       password: "required",
-      senha: "required"
+      senha: "required|confirmed:password"
     }
     return {
       schema,
@@ -141,7 +141,7 @@ export default {
           
           // redireciona para tela de dashboard caso o login for correto
           this.loader.hide();
-          this.$router.push('/home');
+          //this.$router.push('/home');
         })
         .catch((err) => {
           console.log(err.message)
@@ -154,6 +154,14 @@ export default {
     newUserLogin() {
       this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
        .then(() => {
+         this.userLogin = {
+           id: Date.now(),
+           autenticado: false
+           };
+          //document.getElementById('formUserLogin').reset();
+         this.$toast.success('Cadastro criado com sucesso!', {  
+            position: 'top'
+          });
          //console.log(this.userLogin)
        })
     },

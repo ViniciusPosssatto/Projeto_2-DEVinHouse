@@ -6,12 +6,12 @@
         <hr>
         <vee-form id="formUser" @submit="newUser" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
-            <div class="col-7">
+            <div class="col-5">
               <label>Nome Completo</label>
               <vee-field type="text" name="nome" class="form-control" v-model="user.nome"/>
               <span class="text-danger" v-text="errors.nome" v-show="errors.nome"></span>
             </div>
-            <div class="col-5">
+            <div class="col-3">
               <label for="genero">Gênero:</label>
               <select name="genero" id="genero" form="generoForm" class="form-control" v-model="user.genero">
                 <option value="masc">Masculino</option>
@@ -28,36 +28,26 @@
             <div class="col-3">
               <label for="cargo">Cargo:</label>
               <select name="cargo" id="cargo" form="cargoForm" class="form-control" v-model="user.cargo">
-                <option value="operador">Operador</option>
-                <option value="escritorio">Escritório</option>
+                <option value="estudante">Estudante</option>
+                <option value="professor">Professor</option>
                 <option value="servGerais">Serviços Gerais</option>
-                <option value="gerencia">Gerência</option>
+                <option value="outros">Outros</option>
               </select>
               <span class="text-danger" v-text="errors.cargo" v-show="errors.cargo"></span>
             </div>
-            <div class="col-5">
+            <div class="col-4">
               <label>Telefone</label>
               <vee-field type="number" name="telefone" class="form-control" v-model="user.telefone"/>
               <span class="text-danger" v-text="errors.telefone" v-show="errors.telefone"></span>
             </div>
-          </div>
-          <div class="row g-3 justify-content-md-center mt-1">
-            <div class="col-7">
+            <div class="col-5">
               <label>E-Mail</label>
               <vee-field type="email" name="email" class="form-control" v-model="user.email"/>
               <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
             </div>
-            <div class="col-7">
-              <label>Senha</label>
-              <vee-field type="text" id="senha1" name="senha1" class="form-control"/>
-              <span class="text-danger" v-text="errors.senha1" v-show="errors.senha1"></span>
-            </div>
-            <div class="col-7">
-              <label>Confirme a Senha</label>
-              <vee-field type="text" name="senha" class="form-control" v-model="user.senha"/>
-              <span class="text-danger" v-text="errors.senha" v-show="errors.senha"></span>
-            </div>
           </div>
+          
+         
 
           <hr>
           
@@ -137,8 +127,6 @@ export default {
       telefone: "required",
       cargo: "",
       email: "required|email",
-      senha1: "required",
-      senha: "required|confirmed:senha1",
       cep: "required",
       cidade: "required",
       estado: "required",
@@ -157,9 +145,8 @@ export default {
         genero: 'masc',
         dataNasc: '2022-05-02',
         telefone: '34343',
-        cargo: 'operador',
+        cargo: '',
         email: 'admin@admin.com.br',
-        senha: '123',
         cep: '88080400',
         cidade: '',
         estado: '',
@@ -194,7 +181,8 @@ export default {
     },
 
     limparCampos() {
-      // limpar os campos do formulário (lembrar de não ficar os campos obrigatórios aparecendo)
+      // limpar os campos do formulário
+      this.user = {};
     },
 
     buscaCep() {  // realiza a busca do cep e preenche alguns campos no formulário

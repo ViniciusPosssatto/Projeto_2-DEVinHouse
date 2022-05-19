@@ -4,7 +4,7 @@
     <!-- Colaboradores cadastrados-->
     <div class="row justify-content-md-center">
       <div class="col-12 mt-3">
-        <h3 style="text-align: center">Inventário de itens</h3>
+        <h3 style="text-align: center">Listagem de colaboradores</h3>
       </div>
 
       <!----------------------->
@@ -12,7 +12,7 @@
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
           <form class="input-group">
-            <input class="form-control me-2" type="search" placeholder="Ex: notebook" aria-label="Search">
+            <input class="form-control me-2" type="search" placeholder="Digite o nome do colaborador" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Buscar</button>
           </form>
         </div>

@@ -2,7 +2,7 @@
  <div class="container mt-5">
     <div class="row justify-content-md-center">
       <div class="col-8">
-        <h2>Cadastro de novos itens</h2>
+        <h2>Cadastro de novos Livros</h2>
         <hr>
         <h5>Dados principais</h5>
         <hr>
@@ -11,19 +11,26 @@
             
             <div class="col-3">
               <label>Código patrimônio</label>
-              <vee-field type="number" name="codigo" class="form-control" v-model="item.codigo"/>
+              <vee-field type="number" name="codigo" class="form-control" v-model="livro.codigo"/>
               <span class="text-danger" v-text="errors.codigo" v-show="errors.codigo"></span>
             </div>
 
             <div class="col-5">
-              <label>Título do item</label>
-              <vee-field type="text" name="titulo" class="form-control" v-model="item.titulo"/>
+              <label>Título do livro</label>
+              <vee-field type="text" name="titulo" class="form-control" v-model="livro.titulo"/>
               <span class="text-danger" v-text="errors.titulo" v-show="errors.titulo"></span>
             </div>
 
             <div class="col-4">
-              <label>Categoria do item</label>
-              <vee-field type="text" name="categoria" class="form-control" v-model="item.categoria"/>
+              <label for="categoria">Categoria do livro</label>
+              <select name="categoria" id="categoria" form="categoriaForm" class="form-control" v-model="livro.categoria">
+                <option value="geografia">Geografia</option>
+                <option value="historia">História</option>
+                <option value="ingles">Inglês</option>
+                <option value="literatura">Literatura</option>
+                <option value="portugues">Português</option>
+                <option value="biologia">Biologia</option>
+              </select>
               <span class="text-danger" v-text="errors.categoria" v-show="errors.categoria"></span>
             </div>
 
@@ -34,27 +41,27 @@
             <hr>
 
             <div class="col-3">
-              <label>Valor do item (R$)</label>
-              <vee-field type="number" name="valor" class="form-control" v-model="item.valor"/>
+              <label>Valor do livro (R$)</label>
+              <vee-field type="number" name="valor" class="form-control" v-model="livro.valor"/>
               <span class="text-danger" v-text="errors.valor" v-show="errors.valor"></span>
             </div>
             <div class="col-9">
               <label>URL da foto</label>
-              <vee-field type="text" name="url" class="form-control" v-model="item.url"/>
+              <vee-field type="text" name="url" class="form-control" v-model="livro.url"/>
             </div>
             <div class="col-6">
-              <label>Marca</label>
-              <vee-field type="text" name="marca" class="form-control" v-model="item.marca"/>
+              <label>Editora</label>
+              <vee-field type="text" name="marca" class="form-control" v-model="livro.marca"/>
               <span class="text-danger" v-text="errors.marca" v-show="errors.marca"></span>
             </div>
             <div class="col-6">
-              <label>Modelo</label>
-              <vee-field type="text" name="modelo" class="form-control" v-model="item.modelo"/>
+              <label>Autor</label>
+              <vee-field type="text" name="modelo" class="form-control" v-model="livro.modelo"/>
               <span class="text-danger" v-text="errors.modelo" v-show="errors.modelo"></span>
             </div>
             <div class="col-12">
               <label>Descrição</label>
-              <vee-field type="text" name="descricao" class="form-control" v-model="item.descricao"/>
+              <vee-field type="text" name="descricao" class="form-control" placeholder="Algum detalhe que o livro possui" v-model="livro.descricao"/>
               <span class="text-danger" v-text="errors.descricao" v-show="errors.descricao"></span>
             </div>
           </div>
@@ -92,9 +99,7 @@ export default {
 
     return {
       schema,
-      item: {
-        codigo: Date.now()
-      }
+      livro: {}
     }
     
   },
@@ -107,11 +112,12 @@ export default {
 
     newItens() {
       // cadastra um item
-      this.$store.dispatch('setItemModule/newItem', this.item);
+      this.$store.dispatch('setItemModule/newItem', this.livro);
     },
 
     limparCampos() {
       // limpa os campos de input
+      this.livro = {};
     }
   }
   
