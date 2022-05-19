@@ -1,4 +1,5 @@
 <template>
+<!-- FORMULARIO PARA LOGIN DE USUÁRIO -->
   <div class="container mt-4">
     <div class="row justify-content-md-center">
       <div class="col-4">
@@ -49,29 +50,32 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content rounded-5 shadow">
         <div class="modal-header p-5 pb-4 border-bottom-0">
-          <!-- <h5 class="modal-title">Modal title</h5> -->
           <h2 class="fw-bold mb-0">Criar uma nova conta</h2>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-5 pt-0">
-          <form class="">
+          <vee-form class="" @submit="newUserLogin" :validation-schema="schema" v-slot="{ errors }">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control rounded-4" id="InputNome" placeholder="Wenceslau">
-              <label for="InputNome">Nome de usuário</label>
+              <vee-field name="nome" type="text" class="form-control rounded-4" id="InputNome" placeholder="Wenceslau" v-model="userLogin.nome"/>
+              <label name="nome" for="InputNome">Nome de usuário</label>
+              <span class="text-danger" v-text="errors.nome" v-show="errors.nome"></span>
             </div>
             <div class="form-floating mb-3">
-              <input type="email" class="form-control rounded-4" id="floatingInput1" placeholder="name@example.com">
-              <label for="floatingInput1">Email</label>
+              <vee-field name="email" type="email" class="form-control rounded-4" id="floatingInput1" placeholder="name@example.com" v-model="userLogin.email"/>
+              <label name="email" for="floatingInput1">Email</label>
+              <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" class="form-control rounded-4" id="floatingPassword1" placeholder="Password">
-              <label for="floatingPassword1">Senha</label>
+              <vee-field name="password" type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password"/>
+              <label name="password" for="floatingPassword">Senha</label>
+              <span class="text-danger" v-text="errors.password" v-show="errors.password"></span>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password">
-              <label for="floatingPassword">Confirme a senha</label>
+              <vee-field name="senha" type="password" class="form-control rounded-4" id="senha" placeholder="Password" v-model="userLogin.senha"/>
+              <label name="senha" for="senha">Confirme a senha</label>
+              <span class="text-danger" v-text="errors.senha" v-show="errors.senha"></span>
             </div>
-            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Cadastrar</button>
+            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" data-bs-dismiss="modal">Cadastrar</button>
             <small class="text-muted">Clicando em cadastrar, você aceita os termos e regras de uso.</small>
             <hr class="my-4">
             <h2 class="fs-5 fw-bold mb-3">Se preferir</h2>
@@ -83,7 +87,7 @@
               <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>
               Cadastrar com o Facebook
             </button>
-          </form>
+          </vee-form>
         </div>
       </div>
     </div>
@@ -101,12 +105,21 @@ export default {
   },
   data() {
     const schema = {
+      nome: "required",
       email: "required|email",
+      password: "required",
       senha: "required"
     }
     return {
       schema,
       login: {},
+      userLogin: {
+        id: Date.now(),
+        autenticado: false,
+        nome: '',
+        email: '',
+        senha: ''
+      },
       loader: {},
     }
   },
@@ -121,9 +134,16 @@ export default {
       alert('Funcionamento em construção. Tente novamente mais tarde.')
     },
 
+    newUserLogin() {
+       this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
+       .then(() => {
+         //console.log(this.userLogin)
+       })
+    },
+
     usuariosLista() {
       this.loader = this.$loading.show();
-      this.$store.dispatch('setUserModule/autenticar', this.login)
+      this.$store.dispatch('setUserLoginModule/autenticar', this.login)
         .then(() => {
           //console.log(this.login)
           // mensagem de login efetuado
@@ -147,12 +167,12 @@ export default {
   computed: {
     
     autenticado() {
-      return this.$store.state.setUserModule.autenticado;
+      return this.$store.state.setUserLoginModule.autenticado;
     }
   },
 
   mounted() {
-    this.$store.state.setUserModule.autenticado = localStorage.getItem('token') ? true : false;
+    this.$store.state.setUserLoginModule.autenticado = localStorage.getItem('token') ? true : false;
   }
 }
 </script>

@@ -62,7 +62,7 @@
 export default {
   methods: {
     logOut() {
-      this.$store.dispatch('setUserModule/logOut')
+      this.$store.dispatch('setUserLoginModule/logOut')
       this.$router.push('/login')
       this.$toast.warning('Logout realizado. Faça login para navegar novamente.', {
         position: 'top'
@@ -73,12 +73,12 @@ export default {
    computed: {
     
     autenticado() {
-      return this.$store.state.setUserModule.autenticado;
+      return this.$store.state.setUserLoginModule.autenticado;
     }
   },
 
   mounted() {
-    this.$store.state.setUserModule.autenticado = localStorage.getItem('token') ? true : false;
+    this.$store.state.setUserLoginModule.autenticado = localStorage.getItem('token') ? true : false;
   }
 }
 </script>
