@@ -16,12 +16,12 @@ export default {
   computed: {
      // definir o usuário que está logado //// ainda falta identificar o usuário e colocar sua foto e nome na navbar
     autenticado() {
-      return this.$store.state.setUserModule.autenticado;
+      return this.$store.state.setUserLoginModule.autenticado;
     }
   },
 
   mounted() {
-    this.$store.state.setUserModule.autenticado = localStorage.getItem('token') ? true : false;
+    this.$store.state.setUserLoginModule.autenticado = localStorage.getItem('token') ? true : false;
   }
 }
 </script>

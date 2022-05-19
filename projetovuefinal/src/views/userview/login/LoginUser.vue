@@ -1,36 +1,98 @@
 <template>
+
+<!-- FORMULARIO PARA LOGIN DE USUÁRIO -->
   <div class="container mt-4">
     <div class="row justify-content-md-center">
       <div class="col-4">
-        <vee-form  @submit="usuariosLista" :validation-schema="schema" v-slot="{ errors }">
+        <vee-form name="formLogin"  :validation-schema="schema" v-slot="{ errors }">
           <h2 class="text-center mb-4 title-login">Faça login</h2>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email:</label>
-            <vee-field type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="login.email"/>
-            <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
+            <vee-field type="email" name="email1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user@user.com" v-model="login.email1"/>
+            <span class="text-danger" v-text="errors.email1" v-show="errors.email1"></span>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Senha:</label>
-            <vee-field name="senha" type="password" class="form-control" id="exampleInputPassword1" v-model="login.senha"/>
-            <span class="text-danger" v-text="errors.senha" v-show="errors.senha"></span>
+            <vee-field name="senha1" type="password" class="form-control" id="exampleInputPassword1" placeholder="*******" v-model="login.senha1"/>
+            <span class="text-danger" v-text="errors.senha1" v-show="errors.senha1"></span>
             <div id="emailHelp" class="form-text">Nunca compartilhe senhas com ninguém.</div>
           </div>
           <div class="mb-3">
-            <small><a href="#">Esqueceu a senha?</a></small>
+            <small><a href="">Esqueceu a senha?</a></small>
           </div>
+          <button class="w-100 py-2 mb-2 btn btn-outline-success rounded-4" @click="autenticaLogin" type="button">
+            Fazer login
+          </button>
+          <hr class="my-4">
           <div class="mb-3">
-            <small><a href="#">Fazer login com a conta Google</a></small>
+            <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucao">
+              <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"></use></svg>
+              Entrar com o Google
+            </button>
+            <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucao">
+              <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>
+              Entrar com o Facebook
+            </button>
           </div>
-          <button type="submit" class="btn btn-success">Fazer login</button>
-          <div class="col-12 mb-3 mt-3">
-            <span>Não tenho cadastro</span>
+          <hr class="my-4">
+          <div class="col-12 mb-3 mt-3 justify-content-md-center">
+            <span>Não tem cadastro?</span>
           </div>
-          <button type="button" class="btn btn-primary" @click="cadastrar">Cadastrar-se</button>
+          <button type="button" class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Cadastrar-se</button>
         </vee-form>
       </div>
-      <p v-show="autenticado">Já tem usuario logado</p>
     </div>
   </div>
+
+  <!-- MODAL PARA CADASTRO DE USUÁRIO -->
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-5 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+          <h2 class="fw-bold mb-0">Criar uma nova conta</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-5 pt-0">
+          <vee-form name="formUserLogin" class="" @submit="newUserLogin" :validation-schema="schema" v-slot="{ errors }">
+            <div class="form-floating mb-3">
+              <vee-field name="nome" type="text" class="form-control rounded-4" id="InputNome" placeholder="Wenceslau" v-model="userLogin.nome"/>
+              <label name="nome" for="InputNome">Nome de usuário</label>
+              <span class="text-danger" v-text="errors.nome" v-show="errors.nome"></span>
+            </div>
+            <div class="form-floating mb-3">
+              <vee-field name="email" type="email" class="form-control rounded-4" id="floatingInput1" placeholder="name@example.com" v-model="userLogin.email"/>
+              <label name="email" for="floatingInput1">Email</label>
+              <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
+            </div>
+            <div class="form-floating mb-3">
+              <vee-field name="password" type="password" class="form-control rounded-4" id="floatingPassword" placeholder="Password"/>
+              <label name="password" for="floatingPassword">Senha</label>
+              <span class="text-danger" v-text="errors.password" v-show="errors.password"></span>
+            </div>
+            <div class="form-floating mb-3">
+              <vee-field name="senha" type="password" class="form-control rounded-4" id="senha" placeholder="Password" v-model="userLogin.senha"/>
+              <label name="senha" for="senha">Confirme a senha</label>
+              <span class="text-danger" v-text="errors.senha" v-show="errors.senha"></span>
+            </div>
+            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit" data-bs-dismiss="modal">Cadastrar</button>
+            <small class="text-muted">Clicando em cadastrar, você aceita os termos e regras de uso.</small>
+            <hr class="my-4">
+            <h2 class="fs-5 fw-bold mb-3">Se preferir</h2>
+            <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucaoModel">
+              <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"></use></svg>
+              Cadastrar com o Google
+            </button>
+            <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" type="button" @click="emConstrucaoModel">
+              <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>
+              Cadastrar com o Facebook
+            </button>
+          </vee-form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -43,21 +105,35 @@ export default {
   },
   data() {
     const schema = {
+      nome: "required",
       email: "required|email",
+      password: "required",
       senha: "required"
     }
     return {
       schema,
-      login: {},
+      login: {
+        email1: 'admin@admin.com.br',
+        senha1: '123'
+      },
+      userLogin: {
+        id: Date.now(),
+        autenticado: false,
+        nome: '',
+        email: '',
+        senha: ''
+      },
       loader: {},
     }
   },
   methods: {
-    usuariosLista() {
+
+    autenticaLogin() {
+      
+      console.log(this.login)
       this.loader = this.$loading.show();
-      this.$store.dispatch('setUserModule/autenticar', this.login)
+      this.$store.dispatch('setUserLoginModule/autenticar', this.login)
         .then(() => {
-          //console.log(this.login)
           // mensagem de login efetuado
           this.$toast.success('Login efetuado com sucesso!', {    // FALTA VERIFICAR O THEN E O CATCH PQ ESTÁ APARECENDO O TOAST ERRADO QUANDO O LOGIN DA ERRADO
             position: 'top'
@@ -74,20 +150,34 @@ export default {
           });
         });
     },
-    cadastrar() {
-      // redireciona para tela de cadastro
-      this.$router.push('/cadastro');
-    }
+
+    newUserLogin() {
+      this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
+       .then(() => {
+         //console.log(this.userLogin)
+       })
+    },
+
+    emConstrucao() {
+    this.$toast.warning('Funcionamento em construção. Tente novamente mais tarde.', {
+        position: 'top'
+      });
+    },
+
+    emConstrucaoModel() {
+      alert('Funcionamento em construção. Tente novamente mais tarde.')
+    },
+    
   },
   computed: {
     
     autenticado() {
-      return this.$store.state.setUserModule.autenticado;
+      return this.$store.state.setUserLoginModule.autenticado;
     }
   },
 
   mounted() {
-    this.$store.state.setUserModule.autenticado = localStorage.getItem('token') ? true : false;
+    this.$store.state.setUserLoginModule.autenticado = localStorage.getItem('token') ? true : false;
   }
 }
 </script>
