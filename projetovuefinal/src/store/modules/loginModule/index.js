@@ -18,24 +18,15 @@ export default {
 
     actions: {
 
-        newUserLogin(context, userLogin) {
-            context.state.listaUsers.push({userLogin});
-            
-            if(context.state.listaUsers.length > 0) {  // ao cadastrar um usuário na lista ele joga pro localStorage
-                var lista = JSON.stringify(context.state.listaUsers);
-                localStorage.setItem('listaUsers', lista);
-            }
-        },
-        
         autenticar(context, login) {
             context.dispatch('getUsers');
             if(context.state.autenticado === false) {
                 context.state.listaUsers.forEach(item => {
                     //validação de email e senha = true => segue login
-                    if(login.email1 === item.userLogin.email && login.senha1 === item.userLogin.senha) {
+                    if(login.email1 === item.email && login.senha1 === item.senha) {
                         
-                        item.userLogin.autenticado = true;
-                        const token = item.userLogin.id;
+                        item.autenticado = true;
+                        const token = item.id;
                         localStorage.setItem('token', token);
                         context.state.autenticado = true;
                         var lista = JSON.stringify(context.state.listaUsers);
@@ -56,7 +47,7 @@ export default {
             context.dispatch('getUsers');
             if(context.state.autenticado === true){
                 context.state.listaUsers.forEach(item => {
-                    item.userLogin.autenticado = false;
+                    item.autenticado = false;
                     localStorage.removeItem('token');
                     context.state.autenticado = false;
                     var lista = JSON.stringify(context.state.listaUsers);
@@ -69,13 +60,32 @@ export default {
 
         getUsers(context) {
             try {
-                let lista = localStorage.getItem('listaUsers')
+                let lista = localStorage.getItem('listaUsers') || []
                 
                 if(lista.length > 0) {
                     lista = JSON.parse(lista)
                     context.state.listaUsers = lista;
                 } else {
                     return context.state.listaUsers = [];
+                }
+            }
+            catch(err) {
+                console.log('erro do catch '+ err)
+            }
+        },
+
+        newUserLogin(context, userLogin) {
+            try {
+                let lista = JSON.parse(localStorage.getItem('listaUsers')) || []
+                
+                if(lista.length > 0) {
+                    lista.push(userLogin);
+                    localStorage.setItem('listaUsers', JSON.stringify(lista))
+                    
+                } else {
+                    context.state.listaUsers.push(userLogin);
+                    lista = JSON.stringify(context.state.listaUsers);
+                    localStorage.setItem('listaUsers', lista);
                 }
             }
             catch(err) {
