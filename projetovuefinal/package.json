@@ -17,6 +17,7 @@
     "vue-loading-overlay": "5.0",
     "vue-router": "^4.0.13",
     "vue-toast-notification": "^3.0.2",
+    "vue3-gravatar": "^3.0.0",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
