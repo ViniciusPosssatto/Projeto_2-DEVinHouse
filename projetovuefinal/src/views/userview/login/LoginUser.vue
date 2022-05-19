@@ -1,32 +1,32 @@
 <template>
+
 <!-- FORMULARIO PARA LOGIN DE USUÁRIO -->
   <div class="container mt-4">
     <div class="row justify-content-md-center">
       <div class="col-4">
-        <vee-form  @submit="usuariosLista" :validation-schema="schema" v-slot="{ errors }">
+        <vee-form name="formLogin"  :validation-schema="schema" v-slot="{ errors }">
           <h2 class="text-center mb-4 title-login">Faça login</h2>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email:</label>
-            <vee-field type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user@user.com" v-model="login.email"/>
-            <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
+            <vee-field type="email" name="email1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user@user.com" v-model="login.email1"/>
+            <span class="text-danger" v-text="errors.email1" v-show="errors.email1"></span>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Senha:</label>
-            <vee-field name="senha" type="password" class="form-control" id="exampleInputPassword1" placeholder="*******" v-model="login.senha"/>
-            <span class="text-danger" v-text="errors.senha" v-show="errors.senha"></span>
+            <vee-field name="senha1" type="password" class="form-control" id="exampleInputPassword1" placeholder="*******" v-model="login.senha1"/>
+            <span class="text-danger" v-text="errors.senha1" v-show="errors.senha1"></span>
             <div id="emailHelp" class="form-text">Nunca compartilhe senhas com ninguém.</div>
           </div>
           <div class="mb-3">
-            <small><a href="#">Esqueceu a senha?</a></small>
+            <small><a href="">Esqueceu a senha?</a></small>
           </div>
-          <button class="w-100 py-2 mb-2 btn btn-outline-success rounded-4" type="submit">
-              <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"></use></svg>
-              Fazer login
-            </button>
+          <button class="w-100 py-2 mb-2 btn btn-outline-success rounded-4" @click="autenticaLogin" type="button">
+            Fazer login
+          </button>
           <hr class="my-4">
           <div class="mb-3">
             <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucao">
-              <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"></use></svg>
+              <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"></use></svg>
               Entrar com o Google
             </button>
             <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucao">
@@ -54,7 +54,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-5 pt-0">
-          <vee-form class="" @submit="newUserLogin" :validation-schema="schema" v-slot="{ errors }">
+          <vee-form name="formUserLogin" class="" @submit="newUserLogin" :validation-schema="schema" v-slot="{ errors }">
             <div class="form-floating mb-3">
               <vee-field name="nome" type="text" class="form-control rounded-4" id="InputNome" placeholder="Wenceslau" v-model="userLogin.nome"/>
               <label name="nome" for="InputNome">Nome de usuário</label>
@@ -112,7 +112,10 @@ export default {
     }
     return {
       schema,
-      login: {},
+      login: {
+        email1: 'admin@admin.com.br',
+        senha1: '123'
+      },
       userLogin: {
         id: Date.now(),
         autenticado: false,
@@ -124,28 +127,13 @@ export default {
     }
   },
   methods: {
-    emConstrucao() {
-    this.$toast.warning('Funcionamento em construção. Tente novamente mais tarde.', {
-        position: 'top'
-      });
-    },
 
-    emConstrucaoModel() {
-      alert('Funcionamento em construção. Tente novamente mais tarde.')
-    },
-
-    newUserLogin() {
-       this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
-       .then(() => {
-         //console.log(this.userLogin)
-       })
-    },
-
-    usuariosLista() {
+    autenticaLogin() {
+      
+      console.log(this.login)
       this.loader = this.$loading.show();
       this.$store.dispatch('setUserLoginModule/autenticar', this.login)
         .then(() => {
-          //console.log(this.login)
           // mensagem de login efetuado
           this.$toast.success('Login efetuado com sucesso!', {    // FALTA VERIFICAR O THEN E O CATCH PQ ESTÁ APARECENDO O TOAST ERRADO QUANDO O LOGIN DA ERRADO
             position: 'top'
@@ -161,6 +149,23 @@ export default {
             position: 'top'
           });
         });
+    },
+
+    newUserLogin() {
+      this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
+       .then(() => {
+         //console.log(this.userLogin)
+       })
+    },
+
+    emConstrucao() {
+    this.$toast.warning('Funcionamento em construção. Tente novamente mais tarde.', {
+        position: 'top'
+      });
+    },
+
+    emConstrucaoModel() {
+      alert('Funcionamento em construção. Tente novamente mais tarde.')
     },
     
   },
