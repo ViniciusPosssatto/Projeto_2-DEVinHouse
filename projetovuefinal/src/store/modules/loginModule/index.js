@@ -4,6 +4,8 @@ export default {
     state() {
         return {
             autenticado: false,
+            usuario: '',
+            email: '',
             listaUsers: [],
             //userLogin: {}
         }
@@ -29,6 +31,8 @@ export default {
                         const token = item.id;
                         localStorage.setItem('token', token);
                         context.state.autenticado = true;
+                        context.state.usuario = item.nome
+                        context.state.email = item.email
                         var lista = JSON.stringify(context.state.listaUsers);
                         localStorage.setItem('listaUsers', lista);
                         

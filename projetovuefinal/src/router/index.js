@@ -15,7 +15,8 @@ const routes = [
     {
         path: '/',
         alias: ['/home', '/main'], 
-        component: HomeView
+        component: HomeView,
+        meta: { auth: true }
     },
     {
         path: '/emprestimo',
@@ -40,7 +41,8 @@ const routes = [
     {
         path: '/newuser',
         alias: ['/registro', '/cadastro'],
-        component: NewUser
+        component: NewUser,
+        meta: { auth: true }
     },
     {
         path: '/login',
