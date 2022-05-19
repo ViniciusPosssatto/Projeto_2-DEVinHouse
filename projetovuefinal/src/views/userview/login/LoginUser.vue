@@ -108,7 +108,7 @@ export default {
       nome: "required",
       email: "required|email",
       password: "required",
-      senha: "required"
+      senha: "required|confirmed:password"
     }
     return {
       schema,
