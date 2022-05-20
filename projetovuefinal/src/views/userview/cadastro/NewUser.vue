@@ -63,12 +63,12 @@
             </div>
             <div class="col-4">
               <label>Cidade</label>
-              <vee-field type="text" name="cidade" class="form-control" v-model="colab.cidade"/>
+              <vee-field type="text" name="cidade" class="form-control" v-model="colab.cidade" data-toggle="tooltip" data-placement="top" title="Preenchimento automatico" readonly/>
               <span class="text-danger" v-text="errors.cidade" v-show="errors.cidade"></span>
             </div>
             <div class="col-3">
               <label>Estado</label>
-              <vee-field type="text" name="estado" class="form-control" v-model="colab.estado"/>
+              <vee-field type="text" name="estado" class="form-control" v-model="colab.estado" data-toggle="tooltip" data-placement="top" title="Preenchimento automatico" readonly/>
               <span class="text-danger" v-text="errors.estado" v-show="errors.estado"></span>
             </div>
             <div class="col-4">
@@ -163,9 +163,10 @@ export default {
   methods: {
 
     newColaborador() {
-      // commit para novo usuario
+      //novo usuario
       this.$store.dispatch('setColaboradorModule/newColaborador', this.colab)
       .then(() => {
+        this.colab = { id: Date.now() };
         //document.getElementById('formUser').reset();
         this.$toast.success('Cadastro criado com sucesso!', { 
           position: 'top'
@@ -178,7 +179,7 @@ export default {
 
     limparCampos() {
       // limpar os campos do formulário
-      this.colab = {};
+      //this.colab = {};
       document.getElementById('formUser').reset()
     },
 

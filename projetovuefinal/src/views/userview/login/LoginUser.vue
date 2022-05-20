@@ -4,7 +4,7 @@
   <div class="container mt-4">
     <div class="row justify-content-md-center">
       <div class="col-4">
-        <vee-form name="formLogin"  :validation-schema="schema" v-slot="{ errors }">
+        <vee-form @submit="autenticaLogin" name="formLogin"  :validation-schema="schema1" v-slot="{ errors }">
           <h2 class="text-center mb-4 title-login">Faça login</h2>
           <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email:</label>
@@ -20,7 +20,7 @@
           <div class="mb-3">
             <small><a href="">Esqueceu a senha?</a></small>
           </div>
-          <button class="w-100 py-2 mb-2 btn btn-outline-success rounded-4" @click="autenticaLogin" type="button">
+          <button class="w-100 py-2 mb-2 btn btn-outline-success rounded-4"  type="submit">
             Fazer login
           </button>
           <hr class="my-4">
@@ -54,7 +54,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body p-5 pt-0">
-          <vee-form name="formUserLogin" class="" @submit="newUserLogin" :validation-schema="schema" v-slot="{ errors }">
+          <vee-form id="formUserLogin" class="" @submit="newUserLogin" :validation-schema="schema" v-slot="{ errors }">
             <div class="form-floating mb-3">
               <vee-field name="nome" type="text" class="form-control rounded-4" id="InputNome" placeholder="Wenceslau" v-model="userLogin.nome"/>
               <label name="nome" for="InputNome">Nome de usuário</label>
@@ -110,8 +110,13 @@ export default {
       password: "required",
       senha: "required|confirmed:password"
     }
+    const schema1 = {
+      email1: "required|email",
+      senha1: "required"
+    }
     return {
       schema,
+      schema1,
       login: {
         email1: 'admin@admin.com.br',
         senha1: '123'
@@ -130,40 +135,46 @@ export default {
 
     autenticaLogin() {
       
-      console.log(this.login)
+      console.log('login')
       this.loader = this.$loading.show();
       this.$store.dispatch('setUserLoginModule/autenticar', this.login)
         .then(() => {
           // mensagem de login efetuado
-          this.$toast.success('Login efetuado com sucesso!', {    // FALTA VERIFICAR O THEN E O CATCH PQ ESTÁ APARECENDO O TOAST ERRADO QUANDO O LOGIN DA ERRADO
-            position: 'top'
-          });
-          
-          // redireciona para tela de dashboard caso o login for correto
-          this.loader.hide();
-          //this.$router.push('/home');
+          if(this.autenticado === true) {
+            this.$toast.success('Login efetuado com sucesso!', { 
+              position: 'top'
+            });
+            this.loader.hide();
+            // redireciona para tela de dashboard caso o login for correto
+            this.$router.push('/inventario');
+          } else {
+            this.$toast.error('Login ou senha incorretos!', {
+              position: 'top'
+            });
+            this.loader.hide();
+          }
         })
         .catch((err) => {
-          console.log(err.message)
-          this.$toast.error('Login ou senha incorretos!', {
-            position: 'top'
-          });
+          console.log('erro do catch login ' + err.message)
         });
     },
 
     newUserLogin() {
       this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
-       .then(() => {
-         this.userLogin = {
-           id: Date.now(),
-           autenticado: false
-           };
-          //document.getElementById('formUserLogin').reset();
-         this.$toast.success('Cadastro criado com sucesso!', {  
-            position: 'top'
-          });
+        .then(() => {
+          this.userLogin = {
+            id: Date.now(),
+            autenticado: false
+          }
+          document.getElementById('formUserLogin').reset();
+          this.$toast.success('Cadastro criado com sucesso!', {  
+              position: 'top'
+            });
          //console.log(this.userLogin)
-       })
+        })
+        .catch((err) => {
+          console.log('erro do catch login ' + err.message)
+        });
     },
 
     emConstrucao() {
