@@ -2,7 +2,7 @@ export default {
     namespaced: true,
     state() {
         return {
-            listaColabs: []
+            listaLivros: []
         }
     },
 
@@ -12,17 +12,17 @@ export default {
 
     actions: {
 
-        getColaborador(context) {
+        getItem(context) {
             try {
-                let lista = localStorage.getItem('listaColabs') || [];
+                let lista = localStorage.getItem('listaLivros') || [];
                 
                 if(lista.length > 0) {
                     lista = JSON.parse(lista)
-                    context.state.listaColabs = lista;
+                    context.state.listaLivros = lista;
                     console.log('caiu no if, tem coisa na lista')
                 } else {
-                    console.log('caiu no else do getcolab')
-                    context.state.listaColabs = [];
+                    console.log('caiu no else do get livros')
+                    context.state.listaLivros = [];
                 }
             }
             catch(err) {
@@ -30,8 +30,10 @@ export default {
             }
         },
 
-        getColabBusca() {
+        getLivro() {
             // deverá fazer a busca na lista para achar baseado no que o usuario digitar na barra
         }
+
+        
     }
 }
