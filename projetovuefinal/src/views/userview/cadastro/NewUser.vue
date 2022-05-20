@@ -4,16 +4,16 @@
       <div class="col-8">
         <h2>Dados Pessoais</h2>
         <hr>
-        <vee-form id="formUser" @submit="newUser" :validation-schema="schema" v-slot="{ errors }">
+        <vee-form id="formUser" @submit="newColaborador" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
             <div class="col-5">
               <label>Nome Completo</label>
-              <vee-field type="text" name="nome" class="form-control" v-model="user.nome"/>
+              <vee-field type="text" name="nome" class="form-control" v-model="colab.nome"/>
               <span class="text-danger" v-text="errors.nome" v-show="errors.nome"></span>
             </div>
             <div class="col-3">
               <label for="genero">Gênero:</label>
-              <select name="genero" id="genero" form="generoForm" class="form-control" v-model="user.genero">
+              <select name="genero" id="genero" form="generoForm" class="form-control" v-model="colab.genero">
                 <option value="masc">Masculino</option>
                 <option value="fem">Feminino</option>
                 <option value="ninfo">Não informado</option>
@@ -22,33 +22,31 @@
             </div>
             <div class="col-4">
               <label>Data Nascimento</label>
-              <vee-field type="date" name="dataNasc" class="form-control" v-model="user.dataNasc"/>
+              <vee-field type="date" name="dataNasc" class="form-control" v-model="colab.dataNasc"/>
               <span class="text-danger" v-text="errors.dataNasc" v-show="errors.dataNasc"></span>
             </div>
             <div class="col-3">
               <label for="cargo">Cargo:</label>
-              <select name="cargo" id="cargo" form="cargoForm" class="form-control" v-model="user.cargo">
-                <option value="estudante">Estudante</option>
-                <option value="professor">Professor</option>
-                <option value="servGerais">Serviços Gerais</option>
-                <option value="outros">Outros</option>
+              <select name="cargo" id="cargo" form="cargoForm" class="form-control" v-model="colab.cargo">
+                <option value="Estudante">Estudante</option>
+                <option value="Professor">Professor</option>
+                <option value="Serviços Gerais">Serviços Gerais</option>
+                <option value="Outros">Outros</option>
               </select>
               <span class="text-danger" v-text="errors.cargo" v-show="errors.cargo"></span>
             </div>
             <div class="col-4">
               <label>Telefone</label>
-              <vee-field type="number" name="telefone" class="form-control" v-model="user.telefone"/>
+              <vee-field type="number" name="telefone" class="form-control" v-model="colab.telefone"/>
               <span class="text-danger" v-text="errors.telefone" v-show="errors.telefone"></span>
             </div>
             <div class="col-5">
               <label>E-Mail</label>
-              <vee-field type="email" name="email" class="form-control" v-model="user.email"/>
+              <vee-field type="email" name="email" class="form-control" v-model="colab.email"/>
               <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
             </div>
           </div>
           
-         
-
           <hr>
           
           <h3>Dados de Endereço</h3>
@@ -56,7 +54,7 @@
           <div class="row g-3">
             <div class="col-4">
               <label>CEP</label>
-              <vee-field type="number" name="cep" class="form-control" v-model="user.cep"/>
+              <vee-field type="number" name="cep" class="form-control" v-model="colab.cep"/>
               <span class="text-danger" v-text="errors.cep" v-show="errors.cep"></span>
             </div>
             <div class="col-1">
@@ -65,37 +63,37 @@
             </div>
             <div class="col-4">
               <label>Cidade</label>
-              <vee-field type="text" name="cidade" class="form-control" v-model="user.cidade"/>
+              <vee-field type="text" name="cidade" class="form-control" v-model="colab.cidade" data-toggle="tooltip" data-placement="top" title="Preenchimento automatico" readonly/>
               <span class="text-danger" v-text="errors.cidade" v-show="errors.cidade"></span>
             </div>
             <div class="col-3">
               <label>Estado</label>
-              <vee-field type="text" name="estado" class="form-control" v-model="user.estado"/>
+              <vee-field type="text" name="estado" class="form-control" v-model="colab.estado" data-toggle="tooltip" data-placement="top" title="Preenchimento automatico" readonly/>
               <span class="text-danger" v-text="errors.estado" v-show="errors.estado"></span>
             </div>
             <div class="col-4">
               <label>Logradouro</label>
-              <vee-field type="text" name="logradouro" class="form-control" v-model="user.logradouro"/>
+              <vee-field type="text" name="logradouro" class="form-control" v-model="colab.logradouro"/>
               <span class="text-danger" v-text="errors.logradouro" v-show="errors.logradouro"></span>
             </div>
             <div class="col-2">
               <label>Número</label>
-              <vee-field type="number" name="numero" class="form-control" v-model="user.numero"/>
+              <vee-field type="number" name="numero" class="form-control" v-model="colab.numero"/>
               <span class="text-danger" v-text="errors.numero" v-show="errors.numero"></span>
             </div>
             <div class="col-6">
               <label>Complemento</label>
-              <vee-field type="text" name="complemento" class="form-control" v-model="user.complemento"/>
+              <vee-field type="text" name="complemento" class="form-control" v-model="colab.complemento"/>
               <span class="text-danger" v-text="errors.complemento" v-show="errors.complemento"></span>
             </div>
             <div class="col-5">
               <label>Bairro</label>
-              <vee-field type="text" name="bairro" class="form-control" v-model="user.bairro"/>
+              <vee-field type="text" name="bairro" class="form-control" v-model="colab.bairro"/>
               <span class="text-danger" v-text="errors.bairro" v-show="errors.bairro"></span>
             </div>
             <div class="col-7">
               <label>Ponto de referência</label>
-              <vee-field type="text" name="pontoRefe" class="form-control" v-model="user.pontoRefe"/>
+              <vee-field type="text" name="pontoRefe" class="form-control" v-model="colab.pontoRefe"/>
               <span class="text-danger" v-text="errors.pontoRefe" v-show="errors.pontoRefe"></span>
             </div>
           </div>
@@ -104,7 +102,7 @@
               <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
             <div class="col-6">
-              <button type="button" class="btn btn-warning" @click="limparCampos">Limpar campos</button>
+              <button type="button" class="btn btn-warning" @click="limparCampos()">Limpar campos</button>
             </div>
           </div>
         </vee-form>
@@ -138,9 +136,9 @@ export default {
     }
     return {
       schema,
-      user: {
+      colab: {
         id: Date.now(),
-        autenticado: false,
+        status: false,
         nome: 'vine',
         genero: 'masc',
         dataNasc: '2022-05-02',
@@ -163,17 +161,16 @@ export default {
     'vee-field': Field
   },
   methods: {
-    newUser() {
-      // commit para novo usuario
-      this.$store.dispatch('setUserModule/newUser', this.user)
+
+    newColaborador() {
+      //novo usuario
+      this.$store.dispatch('setColaboradorModule/newColaborador', this.colab)
       .then(() => {
-        
-        document.getElementById('formUser').reset();
+        this.colab = { id: Date.now() };
+        //document.getElementById('formUser').reset();
         this.$toast.success('Cadastro criado com sucesso!', { 
           position: 'top'
         });
-
-        //this.$router.push('/login')
       }).catch((err) => {
         console.log('erro no catch da criação ' + err)
       })
@@ -182,18 +179,19 @@ export default {
 
     limparCampos() {
       // limpar os campos do formulário
-      this.user = {};
+      //this.colab = {};
+      document.getElementById('formUser').reset()
     },
 
     buscaCep() {  // realiza a busca do cep e preenche alguns campos no formulário
-       axios.get(`https://viacep.com.br/ws/${this.user.cep}/json`)
+       axios.get(`https://viacep.com.br/ws/${this.colab.cep}/json`)
         .then((response) => {
           //console.log(response)
-          this.user.cidade = response.data.localidade;
-          this.user.estado = response.data.uf;
-          this.user.logradouro = response.data.logradouro;
-          this.user.complemento = response.data.complemento;
-          this.user.bairro = response.data.bairro;
+          this.colab.cidade = response.data.localidade;
+          this.colab.estado = response.data.uf;
+          this.colab.logradouro = response.data.logradouro;
+          this.colab.complemento = response.data.complemento;
+          this.colab.bairro = response.data.bairro;
         }) .catch ((error) => {
           console.log(error.message)
           this.$toast.error('Cep informado não existe!', {
