@@ -2,47 +2,53 @@
   <div class="container">
     <!------------------>
     <!-- Estatisticas -->
-    <div class="row justify-content-md-center">
-      <div class="col-12 mt-3">
-        <h3 style="text-align: center">Estatisticas</h3>
+      <div class="d-flex align-items-around">
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem;">
+            <div class="tamanho card-header">
+              <img src="@/assets/img/multiplos-usuarios.png" alt="" style="width: 80px">
+              <h5 class="card-title mt-2">Colaboradores</h5>
+              <hr>
+                <p class="card-text">Quantidade</p>
+            </div>
+            <div class=" tamanho card-footer">
+              
+            </div>
+          </div>
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem;">
+            <div class="tamanho card-header">
+              <img src="@/assets/img/pilha-livros.png" alt="" style="width: 80px">
+              <h5 class="card-title mt-2">Livros</h5>
+              <hr>
+                <p class="card-text">Quantidade</p>
+            </div>
+            <div class=" tamanho card-footer">
+            </div>
+          </div>
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem;">
+            <div class="tamanho card-header">
+              <img src="@/assets/img/bolsa-de-dinheiro.png" alt="" style="width: 80px">
+              <h5 class="card-title mt-2">Valor total</h5>
+              <hr>
+                <p class="card-text">Quantidade</p>
+            </div>
+            <div class=" tamanho card-footer">
+              <p class="card-text"></p>
+            </div>
+          </div>
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem;">
+            <div class="tamanho card-header">
+              <img src="@/assets/img/facam.png" alt="" style="width: 80px">
+              <h5 class="card-title mt-2">Empréstimos</h5>
+              <hr>
+                <p class="card-text">Quantidade</p>
+            </div>
+            <div class=" tamanho card-footer">
+              <p class="card-text"></p>
+            </div>
+          </div>
+
       </div>
-       <div class="cartao-est col-md-3">
-        <div class="card">
-          <img src="@/assets/img/logo.png" alt="">
-        </div>
-        <div class="card-body">
-          <p class="card-text">"estatistisca do card"</p>
-          <h5 class="card-title">Colaboradores</h5>
-        </div>
-      </div>
-      <div class="cartao-est col-md-3">
-        <div class="card">
-          <img src="@/assets/img/logo.png" alt="">
-        </div>
-        <div class="card-body">
-          <p class="card-text">"estatistisca do card"</p>
-          <h5 class="card-title">Livros cadastrados</h5>
-        </div>
-      </div>
-      <div class="cartao-est col-md-3">
-        <div class="card">
-          <img src="@/assets/img/logo.png" alt="">
-        </div>
-        <div class="card-body">
-          <p class="card-text">"estatistisca do card"</p>
-          <h5 class="card-title">Valor dos Livros</h5>
-        </div>
-      </div>
-      <div class="cartao-est col-md-3">
-        <div class="card">
-          <img src="@/assets/img/logo.png" alt="">
-        </div>
-        <div class="card-body">
-          <p class="card-text">"estatistisca do card"</p>
-          <h5 class="card-title">Livros emprestados</h5>
-        </div>
-      </div>
-    </div>
+      
     <hr>
     <!---------------->
     <!-- Inventário -->
@@ -53,61 +59,39 @@
 
       <!----------------------->
       <!-- barra de pesquisa -->
-      <nav class="navbar navbar-light bg-light">
+      <nav class="navbar navbar-light bg-light mb-3">
         <div class="container-fluid">
           <form class="input-group">
             <input class="form-control me-2" type="search" placeholder="Digite o nome do livro ou categoria ou editora" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+            <button class="btn btn-outline-success" type="button" @click="getItem">Buscar</button>
           </form>
         </div>
       </nav>
 
       <!---------------------->
       <!--- cards dos itens -->
-      <div class="cartao-inv col-md-3">
-        <div class="card">
-          <img src="@/assets/img/logo.png" alt="">
-        </div>
-        <div class="card-body">
-          <p class="card-text" style="font-size: 14px">Nome do livro</p>
-        </div>
-        <div class="card-body">
-          <p class="card-text">Editora</p>
-          <h5 class="card-title">Categoria</h5>
-        </div>
-        <div class="card-footer">
-            <p>Emprestado</p>
-          </div>
+<!--
+      <div class="text-center" v-if="listaLivros.length === 0">
+        <h5>Não há livros cadastrados!</h5>
       </div>
-      <div class="cartao-inv col-md-3">
-        <div class="card">
-          <img src="@/assets/img/logo.png" alt="">
-        </div>
-        <div class="card-body">
-          <p class="card-text" style="font-size: 14px">Nome do livro</p>
-        </div>
-        <div class="card-body">
-          <p class="card-text">Editora</p>
-          <h5 class="card-title">Categoria</h5>
-        </div>
-        <div class="card-footer">
-            <p>Emprestado</p>
+      -->
+      <div class="d-flex align-items-around" style="border-radius: 50%">
+        <div v-for="(item, index) in listaLivros" :key="index" class="ml-3">
+          <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem;">
+            <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
+              <img :src="item.url" alt="" style="border-radius: 20px">
+            </div>
+              <div class="tamanho card-header">
+                <h5 class="card-title">{{ item.titulo }}</h5>
+                <hr>
+                  <p class="card-text">{{ item.editora }}</p>
+                  <p class="card-text">{{ item.autor }}</p>
+              </div>
+            <div class=" tamanho card-footer">
+              <p class="card-text">{{ item.descricao }}</p>
+            </div>
           </div>
-      </div>
-      <div class="cartao-inv col-md-3">
-        <div class="card">
-          <img src="@/assets/img/logo.png" alt="">
         </div>
-        <div class="card-body">
-          <p class="card-text" style="font-size: 14px">Nome do livro</p>
-        </div>
-        <div class="card-body">
-          <p class="card-text">Editora</p>
-          <h5 class="card-title">Categoria</h5>
-        </div>
-        <div class="card-footer">
-            <p>Disponível</p>
-          </div>
       </div>
       
     </div>
@@ -118,10 +102,28 @@
 <script>
 export default {
 
+  methods: {
+
+    getItem() {
+      this.$store.dispatch('inventarioModule/getItem');
+    }
+  },
+
+  computed: {
+
+    listaLivros() {
+      return this.$store.state.inventarioModule.listaLivros;
+    }
+
+  }
 }
 </script>
 
-<style>
+<style scoped>
+.card-inventario {
+  color: black !important;
+  background-color: #8e8e8e !important;
+}
 .cartao-inv {
   max-width: 200px;
 }

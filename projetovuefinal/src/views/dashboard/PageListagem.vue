@@ -26,7 +26,7 @@
       <div v-else class="d-flex align-items-around">
         <div v-for="(user, index) in listaColab" :key="index" class="ml-3">
           <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem;">
-            <div class="row m-2 align-items-baseline" style="border-radius: 150px; max-width: 3000px; justify-content: center;">
+            <div class="row m-2 align-items-baseline" style="border-radius: 150px; justify-content: center;">
               <vue-gravatar :email="user.email" style="border-radius: 50%"/>
             </div>
               <div class="tamanho card-header">
@@ -77,6 +77,8 @@ export default {
   width: -webkit-fill-available;
   text-align: center;
   text-overflow: ellipsis;
+  border-radius: 10px;
+  max-width: 15rem;
 }
 
 </style>

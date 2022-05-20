@@ -6,7 +6,7 @@
         <hr>
         <h5>Dados principais</h5>
         <hr>
-        <vee-form id="formItens" @submit="newItens" :validation-schema="schema" v-slot="{ errors }">
+        <vee-form id="formItens" @submit="newItem" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
             
             <div class="col-3">
@@ -51,12 +51,12 @@
             </div>
             <div class="col-6">
               <label>Editora</label>
-              <vee-field type="text" name="marca" class="form-control" v-model="livro.marca"/>
+              <vee-field type="text" name="marca" class="form-control" v-model="livro.editora"/>
               <span class="text-danger" v-text="errors.marca" v-show="errors.marca"></span>
             </div>
             <div class="col-6">
               <label>Autor</label>
-              <vee-field type="text" name="modelo" class="form-control" v-model="livro.modelo"/>
+              <vee-field type="text" name="modelo" class="form-control" v-model="livro.autor"/>
               <span class="text-danger" v-text="errors.modelo" v-show="errors.modelo"></span>
             </div>
             <div class="col-12">
@@ -92,8 +92,8 @@ export default {
       categoria: "",
       valor: "",
       url:"" ,
-      marca: "",
-      modelo: "",
+      editora: "",
+      autor: "",
       descrição: ""
     }
 
@@ -110,9 +110,11 @@ export default {
 
   methods: {
 
-    newItens() {
+    newItem() {
       // cadastra um item
-      this.$store.dispatch('setItemModule/newItem', this.livro);
+      //console.log(this.livro)
+      this.$store.dispatch('setItensModule/newItem', this.livro);
+      this.livro = {};
     },
 
     limparCampos() {
