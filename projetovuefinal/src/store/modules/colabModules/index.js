@@ -30,6 +30,8 @@ export default {
             }
         },
 
-        
+        getColabBusca() {
+            // deverá fazer a busca na lista para achar baseado no que o usuario digitar na barra
+        }
     }
 }

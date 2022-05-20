@@ -63,7 +63,7 @@
         <div class="container-fluid">
           <form class="input-group">
             <input class="form-control me-2" type="search" placeholder="Digite o nome do livro ou categoria ou editora" aria-label="Search">
-            <button class="btn btn-outline-success" type="button" @click="getItem">Buscar</button>
+            <button class="btn btn-outline-success" type="button" >Buscar</button>
           </form>
         </div>
       </nav>
@@ -104,9 +104,11 @@ export default {
 
   methods: {
 
-    getItem() {
-      this.$store.dispatch('inventarioModule/getItem');
+    buscarLivro() {
+      // buscar livro a partir da barra de pesquisa
+      //this.$store.dispatch('inventarioModule/getLivro');  
     }
+    
   },
 
   computed: {
@@ -115,7 +117,11 @@ export default {
       return this.$store.state.inventarioModule.listaLivros;
     }
 
+  },
+  mounted() {
+    this.$store.dispatch('inventarioModule/getItem');
   }
+  
 }
 </script>
 

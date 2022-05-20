@@ -55,7 +55,8 @@ export default {
 
   methods: {
     buscarUser() {
-      this.$store.dispatch('getColaboradorModule/getColaborador')
+      // tem que buscar um colaborador pela barra de pesquisa
+      //this.$store.dispatch('getColaboradorModule/getColabBusca')
     }
   },
   computed: {
@@ -67,7 +68,7 @@ export default {
   },
 
   mounted() {
-    this.$store.state.getColaboradorModule.listaColabs = localStorage.getItem('listaColabs') ? true : false;
+    this.$store.dispatch('getColaboradorModule/getColaborador'); 
   }
 }
 </script>
