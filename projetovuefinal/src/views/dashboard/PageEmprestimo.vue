@@ -18,28 +18,27 @@
         </div>
       </nav>
       <hr>
-      <div class="text-center text-danger">
+      <div class="text-center text-danger" v-if="listaLivros.length === 0">
         <h5>Não há reservas cadastradas</h5>
       </div>
-      <table class="table">
+      <table class="table" v-else>
         <thead>
           <tr>
             <th>Patrimônio</th>
             <th>Título</th>
             <th>Categoria</th>
-            <th>Emprestado para</th>
+            <th>Emprestar para</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in itens" :key="item.id">
-            <td>{{ item.codigo }}</td>
-            <td>{{ item.titulo }}</td>
-            <td>{{ item.categoria }}</td>
+          <tr v-for="livro in listaLivros" :key="livro.id">
+            <td>{{ livro.codigo }}</td>
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.categoria }}</td>
             <td>
-              <select name="user" id="user" form="userForm" class="form-control">  <!-- Adicionar um for para capturar a lista de colaboradores e listar nas options -->
-                <option>Usuario</option>
-                <option>Usuario2</option>
-                <option>Usuario3</option>
+              <select name="user" id="user" form="userForm" class="form-control" v-for="user in listaColabs" :key="user.id">
+                <option>Disponível</option>
+                <option>{{user.nome}}</option>
               </select>
             </td>
           </tr>
@@ -54,8 +53,31 @@
 export default {
   data() {
     return {
-      itens: []
+      //itens: []
     }
+  },
+
+  methods: {
+
+     buscarLivro() {
+      // buscar livro a partir do codigo na barra de pesquisa
+      //this.$store.dispatch('emprestimoModule/getLivro');  
+    }
+  },
+
+  computed: {
+
+    listaLivros() {
+      return this.$store.state.inventarioModule.listaLivros;
+    },
+    listaColabs() {
+      return this.$store.state.getColaboradorModule.listaColabs;
+    }
+
+  },
+  mounted() {
+    this.$store.dispatch('inventarioModule/getItem');
+    this.$store.dispatch('getColaboradorModule/getColaborador');
   }
 }
 

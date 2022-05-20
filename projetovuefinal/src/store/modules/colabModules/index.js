@@ -2,12 +2,15 @@ export default {
     namespaced: true,
     state() {
         return {
-            listaColabs: []
+            listaColabs: [],
+            totalColabs: ''
         }
     },
 
     mutations: {
-
+        somaColabs(state) {
+            state.totalColabs = state.listaColabs.length;
+        }
     },
 
     actions: {

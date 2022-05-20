@@ -123,7 +123,8 @@ export default {
 
     limparCampos() {
       // limpa os campos de input
-      this.livro = {};
+      //this.livro = {};
+      document.getElementById('formItens').reset()
     }
   }
   

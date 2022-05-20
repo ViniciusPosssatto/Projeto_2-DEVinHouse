@@ -2,23 +2,34 @@ export default {
     namespaced: true,
     state() {
         return {
-            listaLivros: []
+            listaLivros: [],
+            somaValor: '',
+            totalLivros: ''
         }
     },
 
     mutations: {
+        somaLivros(state) {
+            state.totalLivros = state.listaLivros.length;
+        },
 
+        somaValores(state) {
+            const soma = state.listaLivros.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
+            state.somaValor = soma;
+            console.log(soma);
+        },
     },
-
+    
     actions: {
-
+        
         getItem(context) {
             try {
                 let lista = localStorage.getItem('listaLivros') || [];
                 
                 if(lista.length > 0) {
-                    lista = JSON.parse(lista)
-                    context.state.listaLivros = lista;
+                    let li = JSON.parse(lista)
+                    context.state.listaLivros = li;
+                    console.log(li)
                     console.log('caiu no if, tem coisa na lista')
                 } else {
                     console.log('caiu no else do get livros')
