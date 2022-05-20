@@ -88,7 +88,8 @@
                   <p class="card-text">{{ item.autor }}</p>
               </div>
             <div class=" tamanho card-footer">
-              <p class="card-text">{{ item.descricao }}</p>
+              <p class="card-text" v-if="item.status === false" style="color: #15FF1B">Disponível</p>
+              <p class="card-text" v-if="item.status === true" style="color: #FF5462">Emprestado</p>
             </div>
           </div>
         </div>

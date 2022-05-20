@@ -99,7 +99,9 @@ export default {
 
     return {
       schema,
-      livro: {}
+      livro: {
+        status: false
+      }
     }
     
   },
@@ -114,7 +116,9 @@ export default {
       // cadastra um item
       //console.log(this.livro)
       this.$store.dispatch('setItensModule/newItem', this.livro);
-      this.livro = {};
+      this.livro = {
+        status: false
+      };
     },
 
     limparCampos() {
