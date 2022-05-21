@@ -23,7 +23,7 @@
       <div class="text-center" v-if="listaColab.length === 0">
         <h5>Não há colaboradores cadastrados</h5>
       </div>
-      <div v-else class="d-flex align-items-around">
+      <div v-else class="display-card align-items-around">
         <div v-for="(user, index) in listaColab" :key="index" class="ml-3">
           <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly">
             <div class="row align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
@@ -82,6 +82,12 @@ export default {
   text-overflow: ellipsis;
   border-radius: 10px;
   max-width: 15rem;
+}
+.display-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 </style>
