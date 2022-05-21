@@ -146,7 +146,7 @@ export default {
             });
             this.loader.hide();
             // redireciona para tela de dashboard caso o login for correto
-            this.$router.push('/inventario');
+            this.$router.push('/home');
           } else {
             this.$toast.error('Login ou senha incorretos!', {
               position: 'top'
