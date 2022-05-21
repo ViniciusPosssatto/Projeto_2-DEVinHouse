@@ -3,20 +3,19 @@
     <!------------------>
     <!-- Estatisticas -->
       <div class="d-flex align-items-around">
-          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem;">
-            <div class="tamanho card-header">
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem; min-width: 11rem; display: block;">
+            <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
               <img src="@/assets/img/multiplos-usuarios.png" alt="Icone de pessoas" style="width: 80px" class="card-img-top">
               <h5 class="card-title mt-2">Colaboradores</h5>
               <hr>
                 <p class="card-text" style="font-size: 40px;">{{totalColabs}}</p>
             </div>
             <div class=" tamanho card-footer">
-              
             </div>
           </div>
-          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem;">
-            <div class="tamanho card-header">
-              <img src="@/assets/img/pilha-livros.png" alt="Icone de livros" style="width: 80px">
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem; min-width: 11rem; display: block;">
+            <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
+              <img src="@/assets/img/pilha-livros.png" alt="Icone de livros" style="width: 80px" >
               <h5 class="card-title mt-2">Livros</h5>
               <hr>
                 <p class="card-text" style="font-size: 40px;">{{somaLivros}}</p>
@@ -24,8 +23,8 @@
             <div class=" tamanho card-footer">
             </div>
           </div>
-          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem;">
-            <div class="tamanho card-header">
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem; min-width: 11rem; display: block;">
+            <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
               <img src="@/assets/img/bolsa-de-dinheiro.png" alt="Icone de sifrão $" style="width: 80px">
               <h5 class="card-title mt-2">Valor total</h5>
               <hr>
@@ -35,12 +34,12 @@
               <p class="card-text"></p>
             </div>
           </div>
-          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem;">
-            <div class="tamanho card-header">
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem; min-width: 11rem; display: block;">
+            <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
               <img src="@/assets/img/facam.png" alt="Icone de página de lista" style="width: 80px">
               <h5 class="card-title mt-2">Empréstimos</h5>
               <hr>
-                <p class="card-text" style="font-size: 40px;">{{}}</p>
+                <p class="card-text" style="font-size: 40px;">{{234}}</p>
             </div>
             <div class=" tamanho card-footer">
               <p class="card-text"></p>
@@ -77,12 +76,12 @@
       -->
       <div class="d-flex align-items-around" style="border-radius: 50%;" >
         <div v-for="(item, index) in listaLivros" :key="index" class="ml-3">
-          <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem;">
-            <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
-              <img :src="item.url" alt="" style="border-radius: 20px">
+          <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem; height: 30rem; max-width: 15rem; max-height: 30rem; justify-content: space-evenly">
+            <div class="row m-2 align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
+              <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
             </div>
               <div class="tamanho card-header">
-                <h5 class="card-title">{{ item.titulo }}</h5>
+                <h5 class="card-title" style="word-wrap: break-word">{{ item.titulo }}</h5>
                 <hr>
                   <p class="card-text">{{ item.editora }}</p>
                   <p class="card-text">{{ item.autor }}</p>

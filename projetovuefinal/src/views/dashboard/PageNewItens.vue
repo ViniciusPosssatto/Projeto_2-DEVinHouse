@@ -11,7 +11,7 @@
             
             <div class="col-3">
               <label>Código patrimônio</label>
-              <vee-field type="number" name="codigo" class="form-control" v-model="livro.codigo"/>
+              <vee-field type="number" name="codigo" class="form-control" v-model.number="livro.codigo"/>
               <span class="text-danger" v-text="errors.codigo" v-show="errors.codigo"></span>
             </div>
 
@@ -42,7 +42,7 @@
 
             <div class="col-3">
               <label>Valor do livro (R$)</label>
-              <vee-field type="number" name="valor" class="form-control" v-model="livro.valor"/>
+              <vee-field type="number" name="valor" class="form-control" v-model.number="livro.valor"/>
               <span class="text-danger" v-text="errors.valor" v-show="errors.valor"></span>
             </div>
             <div class="col-9">

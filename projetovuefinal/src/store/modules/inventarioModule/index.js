@@ -16,7 +16,7 @@ export default {
         somaValores(state) {
             const soma = state.listaLivros.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
             state.somaValor = soma;
-            console.log(soma);
+            //console.log(soma);
         },
     },
     
@@ -29,11 +29,11 @@ export default {
                 if(lista.length > 0) {
                     let li = JSON.parse(lista)
                     context.state.listaLivros = li;
-                    console.log(li)
-                    console.log('caiu no if, tem coisa na lista')
+                    //console.log(li)
+                    //console.log('caiu no if, tem coisa na lista')
                 } else {
                     console.log('caiu no else do get livros')
-                    context.state.listaLivros = [];
+                    //context.state.listaLivros = [];
                 }
             }
             catch(err) {
