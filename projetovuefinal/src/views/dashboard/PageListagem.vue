@@ -13,24 +13,32 @@
         <div class="container-fluid">
           <form class="input-group">
             <input class="form-control me-2" type="search" placeholder="Digite o nome do colaborador" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+            <button class="btn btn-outline-success" type="button" @click="buscarUser">Buscar</button>
           </form>
         </div>
       </nav>
       <hr>
       <!------------------------------>
       <!--- cards dos colaboradores -->
-      <div class="cartao-colab col-md-3">
-        <div class="card">
-          <img src="@/assets/img/logo.png" alt="">
-        </div>
-          <div class="card-body">
-            <h5 class="card-title">Wenceslau Oliver</h5>
-              <p class="card-text">email@email.com.br</p>
-              <p class="card-text">(48)9 9123-4443</p>
+      <div class="text-center" v-if="listaColab.length === 0">
+        <h5>Não há colaboradores cadastrados</h5>
+      </div>
+      <div v-else class="display-card align-items-around">
+        <div v-for="(user, index) in listaColab" :key="index" class="ml-3">
+          <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly">
+            <div class="row align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
+              <vue-gravatar :email="user.email" style="border-radius: 50%;"/>
+            </div>
+              <div class="tamanho card-header">
+                <h5 class="card-title">{{ user.nome }}</h5>
+                <hr>
+                  <p class="card-text">{{ user.email }}</p>
+                  <p class="card-text">{{ user.telefone }}</p>
+              </div>
+            <div class=" tamanho card-footer">
+              <p class="card-text">{{ user.cargo }}</p>
+            </div>
           </div>
-        <div class="card-body">
-          <p class="card-text">Cargo da pessoa</p>
         </div>
       </div>
     </div>
@@ -39,12 +47,47 @@
 
 <script>
 export default {
+  data() {
+    return {
+      //listaColabs: []
+    }
+  },
 
+  methods: {
+    buscarUser() {
+      // tem que buscar um colaborador pela barra de pesquisa
+      //this.$store.dispatch('getColaboradorModule/getColabBusca')
+    }
+  },
+  computed: {
+
+    listaColab() {
+      return this.$store.state.getColaboradorModule.listaColabs;
+    }
+
+  },
+
+  mounted() {
+    this.$store.dispatch('getColaboradorModule/getColaborador'); 
+  }
 }
 </script>
 
 <style>
-.cartao-colab {
-  max-width: 220px;
+.tamanho {
+  width: -webkit-fill-available;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 10px;
+  max-width: 15rem;
 }
+.display-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
 </style>

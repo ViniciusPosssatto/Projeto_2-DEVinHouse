@@ -6,12 +6,12 @@
         <hr>
         <h5>Dados principais</h5>
         <hr>
-        <vee-form id="formItens" @submit="newItens" :validation-schema="schema" v-slot="{ errors }">
+        <vee-form id="formItens" @submit="newItem" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
             
             <div class="col-3">
               <label>Código patrimônio</label>
-              <vee-field type="number" name="codigo" class="form-control" v-model="livro.codigo"/>
+              <vee-field type="number" name="codigo" class="form-control" v-model.number="livro.codigo"/>
               <span class="text-danger" v-text="errors.codigo" v-show="errors.codigo"></span>
             </div>
 
@@ -42,7 +42,7 @@
 
             <div class="col-3">
               <label>Valor do livro (R$)</label>
-              <vee-field type="number" name="valor" class="form-control" v-model="livro.valor"/>
+              <vee-field type="number" name="valor" class="form-control" v-model.number="livro.valor"/>
               <span class="text-danger" v-text="errors.valor" v-show="errors.valor"></span>
             </div>
             <div class="col-9">
@@ -51,12 +51,12 @@
             </div>
             <div class="col-6">
               <label>Editora</label>
-              <vee-field type="text" name="marca" class="form-control" v-model="livro.marca"/>
+              <vee-field type="text" name="marca" class="form-control" v-model="livro.editora"/>
               <span class="text-danger" v-text="errors.marca" v-show="errors.marca"></span>
             </div>
             <div class="col-6">
               <label>Autor</label>
-              <vee-field type="text" name="modelo" class="form-control" v-model="livro.modelo"/>
+              <vee-field type="text" name="modelo" class="form-control" v-model="livro.autor"/>
               <span class="text-danger" v-text="errors.modelo" v-show="errors.modelo"></span>
             </div>
             <div class="col-12">
@@ -92,14 +92,16 @@ export default {
       categoria: "",
       valor: "",
       url:"" ,
-      marca: "",
-      modelo: "",
+      editora: "",
+      autor: "",
       descrição: ""
     }
 
     return {
       schema,
-      livro: {}
+      livro: {
+        status: false
+      }
     }
     
   },
@@ -110,14 +112,19 @@ export default {
 
   methods: {
 
-    newItens() {
+    newItem() {
       // cadastra um item
-      this.$store.dispatch('setItemModule/newItem', this.livro);
+      //console.log(this.livro)
+      this.$store.dispatch('setItensModule/newItem', this.livro);
+      this.livro = {
+        status: false
+      };
     },
 
     limparCampos() {
       // limpa os campos de input
-      this.livro = {};
+      //this.livro = {};
+      document.getElementById('formItens').reset()
     }
   }
   

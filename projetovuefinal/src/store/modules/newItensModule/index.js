@@ -2,7 +2,7 @@ export default {
     namespaced: true,
     state() {
         return {
-            listaColabs: []
+            listaLivros: []
         }
     },
 
@@ -12,18 +12,18 @@ export default {
 
     actions: {
 
-        newColaborador(context, colaborador) {
+        newItem(context, colaborador) {
             try {
-                let lista = JSON.parse(localStorage.getItem('listaColabs')) || []
+                let lista = JSON.parse(localStorage.getItem('listaLivros')) || []
                 
                 if(lista.length > 0) {
                     lista.push(colaborador);
-                    localStorage.setItem('listaColabs', JSON.stringify(lista))
+                    localStorage.setItem('listaLivros', JSON.stringify(lista))
                     
                 } else {
-                    context.state.listaColabs.push(colaborador);
-                    lista = JSON.stringify(context.state.listaColabs);
-                    localStorage.setItem('listaColabs', lista);
+                    context.state.listaLivros.push(colaborador);
+                    lista = JSON.stringify(context.state.listaLivros);
+                    localStorage.setItem('listaLivros', lista);
                 }
             }
             catch(err) {
@@ -32,15 +32,15 @@ export default {
         },
 
 
-        getColaborador(context) {
+        getItem(context) {
             try {
-                let lista = localStorage.getItem('listaColabs') || []
+                let lista = localStorage.getItem('listaLivros') || []
                 
                 if(lista.length > 0) {
                     lista = JSON.parse(lista)
-                    context.state.listaColabs = lista;
+                    context.state.listaLivros = lista;
                 } else {
-                    return context.state.listaColabs = [];
+                    return context.state.listaLivros = [];
                 }
             }
             catch(err) {
