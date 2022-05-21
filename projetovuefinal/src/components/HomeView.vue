@@ -3,7 +3,7 @@
     <div class="col-10 mb-4 text-center">
       <h1>Bem vindo ao sistema biblioteca virtual</h1>
     </div>
-      <div class="col-6 ms-5 display-card align-items-around card text-white bg-dark p-3">
+      <div class="col-6 ms-5 align-items-around card text-white bg-dark p-3">
         <h2>Sistema de empréstimos de livros</h2>
         <span class="card card-home">Aqui nós temos o melhor!!</span>
         <p>Confira! Contate um nossos atendentes virtuais e faça um tour pelo sistema conhecendo o funcionamento e os benefícios de usar a biblioteca virtual.</p>
@@ -101,10 +101,12 @@ export default {
 .card-home {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   padding: 10px;
-  color: rgb(17, 0, 255);
+  color: rgb(7, 7, 7);
   font-size: 18px;
   margin: 10px 0 10px 0;
-  background-color: rgb(6, 238, 18);
+  text-align: center;
+  width: 300px;
+  background-color: #eeeaeab2
 }
 
 .card-home :hover {

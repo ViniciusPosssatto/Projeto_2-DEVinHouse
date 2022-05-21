@@ -25,6 +25,11 @@ import SideBar from './components/template/sidebar/SideBar.vue';
 </script>
 
 <style>
+body {
+  font-size: 18px;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #bbbaba8a !important;
+}
 .div-pai {
   width: calc(100% - 200px);
   float: right;
