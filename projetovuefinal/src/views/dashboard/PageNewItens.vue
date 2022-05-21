@@ -11,7 +11,7 @@
             
             <div class="col-3">
               <label>Código patrimônio</label>
-              <vee-field type="number" name="codigo" class="form-control" v-model="livro.codigo"/>
+              <vee-field type="number" name="codigo" class="form-control" v-model.number="livro.codigo"/>
               <span class="text-danger" v-text="errors.codigo" v-show="errors.codigo"></span>
             </div>
 
@@ -42,7 +42,7 @@
 
             <div class="col-3">
               <label>Valor do livro (R$)</label>
-              <vee-field type="number" name="valor" class="form-control" v-model="livro.valor"/>
+              <vee-field type="number" name="valor" class="form-control" v-model.number="livro.valor"/>
               <span class="text-danger" v-text="errors.valor" v-show="errors.valor"></span>
             </div>
             <div class="col-9">
@@ -99,7 +99,9 @@ export default {
 
     return {
       schema,
-      livro: {}
+      livro: {
+        status: false
+      }
     }
     
   },
@@ -114,12 +116,15 @@ export default {
       // cadastra um item
       //console.log(this.livro)
       this.$store.dispatch('setItensModule/newItem', this.livro);
-      this.livro = {};
+      this.livro = {
+        status: false
+      };
     },
 
     limparCampos() {
       // limpa os campos de input
-      this.livro = {};
+      //this.livro = {};
+      document.getElementById('formItens').reset()
     }
   }
   
