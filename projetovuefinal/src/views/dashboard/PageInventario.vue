@@ -98,7 +98,7 @@
             <div v-for="(item, index) in listaLivros" :key="index" class="row">
             
               <div class="col-3">
-                <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem; height: 30rem; max-width: 15rem; max-height: 30rem; justify-content: space-evenly">
+                <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
                   <div class="row m-2 align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
                     <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
                   </div>
