@@ -25,7 +25,7 @@
       </div>
       <div v-else class="display-card align-items-around">
         <div v-for="(user, index) in listaColab" :key="index" class="ml-3">
-          <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly">
+          <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly" @click="detalhes(user)" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <div class="row align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
               <vue-gravatar :email="user.email" style="border-radius: 50%;"/>
             </div>
@@ -43,13 +43,119 @@
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-5 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0 modal-centro">
+          <h2 class="fw-bold mb-0">Dados do colaborador</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body p-5 pt-0 modal-centro">
+            
+            <hr class="my-4">
+            <form id="formEdicao" aria-disabled="disabled">
+              <fieldset>
+
+                <div class="row" style="justify-content: center;">
+                <div class="form mb-3 col-7">
+                  <label name="nome" >Nome</label>
+                  <input name="nome" type="text" class="form-control rounded-4" disabled id="InputNome" v-model="colab.nome">
+                </div>
+                <div class="form mb-3 col-4">
+                  <label name="genero" for="genero">Gênero</label>
+                  <input name="genero" type="text" class="form-control rounded-4" disabled id="genero" v-model="colab.genero">
+                </div>
+                <div class="form mb-3 col-5">
+                  <label name="dataNasc" for="dataNasc">Data nascimento</label>
+                  <input name="dataNasc" type="text" class="form-control rounded-4" disabled id="dataNasc" v-model="colab.dataNasc">
+                </div>
+                <div class="form mb-3 col-6">
+                  <label name="cargo" for="cargo">Cargo</label>
+                  <input name="cargo" type="text" class="form-control rounded-4" disabled id="cargo" v-model="colab.cargo">
+                </div>
+                <div class="form mb-3 col-4">
+                  <label name="telefone" for="telefone">Telefone</label>
+                  <input name="telefone" type="text" class="form-control rounded-4" disabled id="telefone" v-model="colab.telefone">
+                </div>
+
+                <div class="form mb-3 col-8">
+                  <label name="email" for="email">Email</label>
+                  <input name="email" type="email" class="form-control rounded-4" disabled id="email" placeholder="name@example.com" v-model="colab.email">
+                </div>
+                <h5>Dados de endereço</h5>
+                
+                <div class="form mb-3 col-4">
+                  <label name="cep" for="cep">CEP</label>
+                  <input name="cep" type="number" class="form-control rounded-4" disabled id="cep" v-model="colab.cep">
+                </div>
+                <div class="form mb-3 col-5">
+                  <label name="cidade" for="cidade">Cidade</label>
+                  <input name="cidade" type="text" class="form-control rounded-4" disabled id="cidade" v-model="colab.cidade">
+                </div>
+                <div class="form mb-3 col-3">
+                  <label name="estado" for="estado">Estado</label>
+                  <input name="estado" type="text" class="form-control rounded-4" disabled id="estado" v-model="colab.estado">
+                </div>
+                <div class="form mb-3 col-5">
+                  <label name="logradouro" for="logradouro">Logradouro</label>
+                  <input name="logradouro" type="text" class="form-control rounded-4" disabled id="logradouro" v-model="colab.logradouro">
+                </div>
+                <div class="form mb-3 col-2">
+                  <label name="numero" for="numero">Numero</label>
+                  <input name="numero" type="number" class="form-control rounded-4" disabled id="numero" v-model="colab.numero">
+                </div>
+                <div class="form mb-3 col-5">
+                  <label name="complemento" for="complemento">Complemento</label>
+                  <input name="complemento" type="text" class="form-control rounded-4" disabled id="complemento" v-model="colab.complemento">
+                </div>
+                <div class="form mb-3 col-5">
+                  <label name="bairro" for="bairro">Bairro</label>
+                  <input name="bairro" type="text" class="form-control rounded-4" disabled id="bairro" v-model="colab.bairro">
+                </div>
+                <div class="form mb-3 col-7">
+                  <label name="pontoRefe" for="pontoRefe">Ponto de referência</label>
+                  <input name="pontoRefe" type="text" class="form-control rounded-4" disabled id="pontoRefe" v-model="colab.pontoRefe">
+                </div>
+
+                <hr class="my-4">
+                
+                <button class="w-50 py-2 mb-2 btn btn-outline-primary rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="editarDados">
+                  Editar dados
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script>
 export default {
   data() {
     return {
-      //listaColabs: []
+      listaColabs: [],
+      colab: {
+        id: '',
+        status: '',
+        nome: '',
+        genero: '',
+        dataNasc: '',
+        telefone: '',
+        cargo: '',
+        email: '',
+        cep: '',
+        cidade: '',
+        estado: '',
+        logradouro: '',
+        complemento: '',
+        bairro: '',
+        numero: '',
+        pontoRefe: ''
+      }
     }
   },
 
@@ -57,6 +163,14 @@ export default {
     buscarUser() {
       // tem que buscar um colaborador pela barra de pesquisa
       //this.$store.dispatch('getColaboradorModule/getColabBusca')
+    },
+    detalhes(colab) {
+      this.colab = colab;
+    },
+
+    editarDados() {
+      console.log(this.colab)
+      this.$router.push('/newUser', this.colab)
     }
   },
   computed: {
@@ -74,6 +188,10 @@ export default {
 </script>
 
 <style>
+.modal-centro {
+  background-color: #bbbaba8a !important;
+}
+
 .tamanho {
   width: -webkit-fill-available;
   text-align: center;
