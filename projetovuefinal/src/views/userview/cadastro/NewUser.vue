@@ -98,7 +98,10 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-6">
+            <div class="col-6" v-if="this.$route.params.id">
+              <button type="button" class="btn btn-primary" style="font-weight: bold; font-size: large;" @click="editarColab">Editar</button>
+            </div>
+            <div class="col-6" v-else>
               <button type="submit" class="btn btn-primary" style="font-weight: bold; font-size: large;">Salvar</button>
             </div>
             <div class="col-6">
@@ -138,7 +141,6 @@ export default {
       schema,
       colab: {
         id: Date.now(),
-        status: false,
         nome: '',
         genero: '',
         dataNasc: '',
@@ -163,18 +165,25 @@ export default {
   methods: {
 
     newColaborador() {
-      //novo usuario
+      //novo usuario e edição também
       this.$store.dispatch('setColaboradorModule/newColaborador', this.colab)
       .then(() => {
         this.colab = { id: Date.now() };
         this.$toast.success('Cadastro criado com sucesso!', { 
           position: 'top'
         });
-        this.$store.state.editaModule.colab = {}
-        
+        this.$router.push('/listagem')
       }).catch((err) => {
         console.log('erro no catch da criação ' + err)
       })
+    },
+
+    editarColab() {
+      this.$store.commit('setColaboradorModule/editarColabs', this.colab)
+      this.$toast.success('Usuário editado com sucesso!', { 
+          position: 'top'
+        });
+      this.$router.push('/listagem')
     },
 
     limparCampos() {
