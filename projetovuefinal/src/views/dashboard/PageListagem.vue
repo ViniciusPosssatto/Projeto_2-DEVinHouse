@@ -169,8 +169,7 @@ export default {
     },
 
     editarDados() {
-      console.log(this.colab)
-      this.$router.push('/newUser', this.colab)
+      this.$router.push(`/newUser/${this.colab.id}`);
     }
   },
   computed: {

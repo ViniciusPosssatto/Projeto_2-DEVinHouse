@@ -1,21 +1,20 @@
 export default {
-    // namespaced: true,
-    // state() {
-    //     return {
+    namespaced: true,
+    state() {
+       return {
+        
+
+       }
+    },
+
+    mutations: {
 
 
-    //     }
-    // },
-
-    // mutations: {
-    //     detalhesColabs(state, colabID) {
-            
-    //     }
-    // },
-
-    // actions: {
-
-    // }
+    },
+    
+    actions: {
+        
+    }
 
 
 

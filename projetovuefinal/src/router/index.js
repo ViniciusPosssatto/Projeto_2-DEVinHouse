@@ -40,7 +40,12 @@ const routes = [
     },
     {
         path: '/newuser',
-        alias: ['/registro', '/cadastro'],
+        component: NewUser,
+        meta: { auth: true }
+    },
+// path para levar uma ID para edição
+    {
+        path: '/newuser/:id',
         component: NewUser,
         meta: { auth: true }
     },
