@@ -223,11 +223,11 @@ export default {
     },
 
     totalColabs() {
-      return this.$store.state.getColaboradorModule.totalColabs;
+      return this.$store.state.setColaboradorModule.totalColabs;
     },
 
     listaColabs() {
-      return this.$store.state.getColaboradorModule.listaColabs;
+      return this.$store.state.setColaboradorModule.listaColabs;
     }
 
   },
@@ -236,8 +236,8 @@ export default {
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setItensModule/somaLivros');
     this.$store.commit('setItensModule/somaValores');
-    this.$store.commit('getColaboradorModule/somaColabs');
-    this.$store.dispatch('getColaboradorModule/getColaborador');
+    this.$store.commit('setColaboradorModule/somaColabs');
+    this.$store.commit('setColaboradorModule/getColaborador');
   }
   
 }

@@ -35,11 +35,7 @@ export default {
                         context.state.email = item.email
                         var lista = JSON.stringify(context.state.listaUsers);
                         localStorage.setItem('listaUsers', lista);
-                        
-                    } else {
-                        console.log(item)
-                        console.log('deu ruim na autenticaao');
-                    }
+                    } 
                 })
             } else {
                 console.log('deu ruim no segundo else');
@@ -79,21 +75,23 @@ export default {
         },
 
         newUserLogin(context, userLogin) {
-            try {
-                let lista = JSON.parse(localStorage.getItem('listaUsers')) || []
-                
-                if(lista.length > 0) {
-                    lista.push(userLogin);
-                    localStorage.setItem('listaUsers', JSON.stringify(lista))
-                    
-                } else {
-                    context.state.listaUsers.push(userLogin);
-                    lista = JSON.stringify(context.state.listaUsers);
-                    localStorage.setItem('listaUsers', lista);
+            context.state.listaUsers = JSON.parse(localStorage.getItem('listaUsers')) || []
+            console.log(context.state.listaUsers.length)
+            if(context.state.listaUsers.length > 0 && context.state.listaUsers !== null){
+                for(var i = 0; i <  context.state.listaUsers.length; i++){
+
+                    if(context.state.listaUsers[i].email === userLogin.email) {
+                        return false;
+                    }
                 }
-            }
-            catch(err) {
-                console.log('erro do catch '+ err)
+                context.state.listaUsers.push(userLogin);
+                localStorage.setItem('listaUsers', JSON.stringify(context.state.listaUsers))
+                return true;
+                
+            } else{
+                context.state.listaUsers.push(userLogin);
+                localStorage.setItem('listaUsers', JSON.stringify(context.state.listaUsers))
+                return true;
             }
         },
         

@@ -36,9 +36,9 @@
             <td>{{ livro.titulo }}</td>
             <td>{{ livro.categoria }}</td>
             <td>
-              <select name="user" id="user" form="userForm" class="form-control" v-for="user in listaColabs" :key="user.id">
-                <option>Disponível</option>
-                <option>{{user.nome}}</option>
+              <select name="user" id="user" form="userForm" class="form-control" >
+                <!--option v-for="user in listaColabs" :key="user.id" v-text="user.nome ? user.nome : 'disponivel'" ></option-->
+                
               </select>
             </td>
           </tr>
@@ -71,13 +71,13 @@ export default {
       return this.$store.state.setItensModule.listaLivros;
     },
     listaColabs() {
-      return this.$store.state.getColaboradorModule.listaColabs;
+      return this.$store.state.setColaboradorModule.listaColabs;
     }
 
   },
   mounted() {
     this.$store.commit('setItensModule/getItem');
-    this.$store.dispatch('getColaboradorModule/getColaborador');
+    this.$store.commit('setColaboradorModule/getColaborador');
   }
 }
 

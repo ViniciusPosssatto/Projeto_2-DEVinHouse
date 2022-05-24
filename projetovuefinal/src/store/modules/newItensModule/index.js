@@ -13,7 +13,6 @@ export default {
         newItem(state, colaborador) {
             
             state.listaLivros = JSON.parse(localStorage.getItem('listaLivros')) || []
-            
             if(state.listaLivros.length > 0) {
                 state.listaLivros.push(colaborador);
                 localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))

@@ -8,20 +8,38 @@ export default {
     },
 
     mutations: {
+
+        somaColabs(state) {
+            state.totalColabs = state.listaColabs.length;
+        },
         
-        editarColabs(context, colaborador){   // colaborador é o ID que foi passado por params na rota do router
+        editarColabs(state, colaborador){   // colaborador é o ID que foi passado por params na rota do router
             
-            context.lista = JSON.parse(localStorage.getItem('listaColabs'));
+            state.lista = JSON.parse(localStorage.getItem('listaColabs'));
             
              //console.log(colaborador)
-             if(context.lista.length > 0 && context.lista !== null) {
-                 for(var i = 0; i < context.lista.length; i++){
-                     if(context.lista[i].id == colaborador.id) {
-                         context.lista[i] = colaborador;
+             if(state.lista.length > 0 && state.lista !== null) {
+                 for(var i = 0; i < state.lista.length; i++){
+                     if(state.lista[i].id == colaborador.id) {
+                         state.lista[i] = colaborador;
                      }
                  }
              } 
-             localStorage.setItem('listaColabs', JSON.stringify(context.lista))
+             localStorage.setItem('listaColabs', JSON.stringify(state.lista))
+        },
+
+        getColaborador(state) {
+
+                let lista = localStorage.getItem('listaColabs') || [];
+                
+                if(lista.length > 0) {
+                    lista = JSON.parse(lista)
+                    state.listaColabs = lista;
+                    
+                } else {
+                    
+                    state.listaColabs = [];
+                }
         }
     },
 
@@ -29,21 +47,26 @@ export default {
 
         newColaborador(context, colaborador) {
 
-                let lista = JSON.parse(localStorage.getItem('listaColabs')) || []
-                
-                if(lista.length > 0 && lista !== null) {
-                    lista.push(colaborador);
-                    localStorage.setItem('listaColabs', JSON.stringify(lista))
-                
-                } else {
-                    console.log('caiu no else do if')
-                    context.state.listaColabs.push(colaborador);
-                    lista = JSON.stringify(context.state.listaColabs);
-                    localStorage.setItem('listaColabs', lista);
+            context.state.listaColabs = JSON.parse(localStorage.getItem('listaColabs')) || []
+            console.log(context.state.listaColabs.length)
+            if(context.state.listaColabs.length > 0 && context.state.listaColabs !== null){
+                for(var i = 0; i <  context.state.listaColabs.length; i++){
+
+                    if(context.state.listaColabs[i].email === colaborador.email) {
+                        return false;
+                    }
                 }
-           
+                context.state.listaColabs.push(colaborador);
+                localStorage.setItem('listaColabs', JSON.stringify(context.state.listaColabs))
+                return true;
+                
+            } else{
+                context.state.listaColabs.push(colaborador);
+                localStorage.setItem('listaColabs', JSON.stringify(context.state.listaColabs))
+                return true;
+            }
         },
-        
+
     }
         
     

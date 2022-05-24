@@ -119,8 +119,10 @@ import { Form, Field } from 'vee-validate'
 import '@/views/validate/index.js'
 import axios from 'axios'
 
+
 export default {
   data() {
+    
     const schema = {
       nome: "required",
       genero: "",
@@ -141,20 +143,20 @@ export default {
       schema,
       colab: {
         id: Date.now(),
-        nome: '',
+        nome: 'asasd',
         genero: '',
         dataNasc: '',
-        telefone: '',
+        telefone: '3434',
         cargo: '',
         email: '',
-        cep: '',
+        cep: '88080400',
         cidade: '',
         estado: '',
         logradouro: '',
         complemento: '',
         bairro: '',
-        numero: '',
-        pontoRefe: ''
+        numero: '23',
+        pontoRefe: 'asdasd'
       }
     }
   },
@@ -163,19 +165,24 @@ export default {
     'vee-field': Field
   },
   methods: {
-
-    newColaborador() {
+    
+    async newColaborador() {
       //novo usuario e edição também
-      this.$store.dispatch('setColaboradorModule/newColaborador', this.colab)
-      .then(() => {
+      
+      let newUser = await this.$store.dispatch('setColaboradorModule/newColaborador', this.colab)
+      if(newUser){
         this.colab = { id: Date.now() };
         this.$toast.success('Cadastro criado com sucesso!', { 
           position: 'top'
         });
         this.$router.push('/listagem')
-      }).catch((err) => {
-        console.log('erro no catch da criação ' + err)
-      })
+      }else {
+        this.$toast.warning('Este email já está cadastrado no sistema!', { 
+          position: 'top'
+        });
+        this.$router.push('/listagem')
+      }
+
     },
 
     editarColab() {

@@ -1,3 +1,4 @@
+
 import { defineRule } from 'vee-validate';
 
 const required = defineRule('required', value => {
@@ -12,7 +13,7 @@ const email = defineRule('email', value => {
         return true;
     }
     
-    if (!/[a-z-9._%+-]+@[a-z-9.-]+\.[a-z]{2,4}/.test(value)) {
+    if (!/[a-zA-Z0-9._%+-]+@[a-zA-Z-9.-]+\.[a-z]{2,4}/.test(value)) {
         return 'O email não é valido!';
     }
     return true;
@@ -42,4 +43,6 @@ const dataInferior = defineRule("dataInferior", value => {
     return true;  
 });
 
-export { required, email, confirmed, min, dataInferior };
+
+
+export { required, email, confirmed, min, dataInferior};

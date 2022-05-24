@@ -144,7 +144,6 @@ export default {
 
     autenticaLogin() {
       
-      console.log('login')
       this.loader = this.$loading.show();
       this.$store.dispatch('setUserLoginModule/autenticar', this.login)
         .then(() => {
@@ -168,22 +167,23 @@ export default {
         });
     },
 
-    newUserLogin() {
-      this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
-        .then(() => {
+    async newUserLogin() {
+      let userTest = await this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
+        if(userTest){
           this.userLogin = {
             id: Date.now(),
             autenticado: false
           }
           document.getElementById('formUserLogin').reset();
-          this.$toast.success('Cadastro criado com sucesso!', {  
-              position: 'top'
-            });
-         //console.log(this.userLogin)
-        })
-        .catch((err) => {
-          console.log('erro do catch login ' + err.message)
-        });
+          this.$toast.success('Cadastro criado com sucesso! Faça o login para continuar.', {  
+            position: 'top'
+          });
+         
+        }else {
+          this.$toast.warning('Este email já está cadastrado no sistema!', {  
+            position: 'top'
+          });
+        }
     },
 
     emConstrucao() {
