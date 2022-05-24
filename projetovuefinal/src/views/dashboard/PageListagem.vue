@@ -175,13 +175,13 @@ export default {
   computed: {
 
     listaColab() {
-      return this.$store.state.getColaboradorModule.listaColabs;
+      return this.$store.state.setColaboradorModule.listaColabs;
     }
 
   },
 
   mounted() {
-    this.$store.dispatch('getColaboradorModule/getColaborador'); 
+    this.$store.commit('setColaboradorModule/getColaborador'); 
   }
 }
 </script>
