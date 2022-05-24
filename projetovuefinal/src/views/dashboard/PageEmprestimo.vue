@@ -68,7 +68,7 @@ export default {
   computed: {
 
     listaLivros() {
-      return this.$store.state.inventarioModule.listaLivros;
+      return this.$store.state.setItensModule.listaLivros;
     },
     listaColabs() {
       return this.$store.state.getColaboradorModule.listaColabs;
@@ -76,7 +76,7 @@ export default {
 
   },
   mounted() {
-    this.$store.dispatch('inventarioModule/getItem');
+    this.$store.commit('setItensModule/getItem');
     this.$store.dispatch('getColaboradorModule/getColaborador');
   }
 }

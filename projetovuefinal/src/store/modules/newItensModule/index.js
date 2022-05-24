@@ -2,51 +2,80 @@ export default {
     namespaced: true,
     state() {
         return {
-            listaLivros: []
+            listaLivros: [],
+            somaLivros: '',
+            totalLivros: ''
         }
     },
 
     mutations: {
+        
+        newItem(state, colaborador) {
+            
+            state.listaLivros = JSON.parse(localStorage.getItem('listaLivros')) || []
+            
+            if(state.listaLivros.length > 0) {
+                state.listaLivros.push(colaborador);
+                localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
+                
+                console.log(state.listaLivros)
+            } else {
+                state.listaLivros.push(colaborador);
+                localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
+            }
+            
+        },
+        
+        getItem(state) {
+        
+            let lista = localStorage.getItem('listaLivros') || []
+            
+            if(lista.length > 0) {
+                lista = JSON.parse(lista)
+                state.listaLivros = lista;
+            } else {
+                state.listaLivros = [];
+            }
+           
+        },
 
+        somaLivros(state) {
+            state.totalLivros = state.listaLivros.length;
+        },
+
+        somaValores(state) {
+            const soma = state.listaLivros.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
+            state.somaValor = soma;
+            //console.log(soma);
+        },
+
+        editarLivro(state, livro){   // livro é o codigo que foi passado por params na rota do router
+
+            if(state.listaLivros == null || state.listaLivros === 0) {
+                state.listaLivros = JSON.parse(localStorage.getItem('listaLivros'));
+
+            } else {
+                console.log(state.listaLivros)
+                if(state.listaLivros.length > 0 && state.listaLivros !== null) {
+                    for(var i = 0; i < state.listaLivros.length; i++){
+                        if(state.listaLivros[i].codigo == livro.codigo) {
+                            state.listaLivros[i] = livro;
+                        }
+                    }
+                }
+            }
+            localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
+        },
+
+        getLivro() {
+            // deverá fazer a busca na lista para achar baseado no que o usuario digitar na barra
+        }
     },
-
+    
     actions: {
+        
+        
 
-        newItem(context, colaborador) {
-            try {
-                let lista = JSON.parse(localStorage.getItem('listaLivros')) || []
-                
-                if(lista.length > 0) {
-                    lista.push(colaborador);
-                    localStorage.setItem('listaLivros', JSON.stringify(lista))
-                    
-                } else {
-                    context.state.listaLivros.push(colaborador);
-                    lista = JSON.stringify(context.state.listaLivros);
-                    localStorage.setItem('listaLivros', lista);
-                }
-            }
-            catch(err) {
-                console.log('erro do catch '+ err)
-            }
-        },
-
-
-        getItem(context) {
-            try {
-                let lista = localStorage.getItem('listaLivros') || []
-                
-                if(lista.length > 0) {
-                    lista = JSON.parse(lista)
-                    context.state.listaLivros = lista;
-                } else {
-                    return context.state.listaLivros = [];
-                }
-            }
-            catch(err) {
-                console.log('erro do catch '+ err)
-            }
-        },
 
         
     }

@@ -38,6 +38,12 @@ const routes = [
         component: PageNewItens,
         meta: { auth: true }
     },
+// path para levar um codigo de livro para edição
+    {
+        path: '/newitens/:codigo',
+        component: PageNewItens,
+        meta: { auth: true }
+    },
     {
         path: '/newuser',
         component: NewUser,

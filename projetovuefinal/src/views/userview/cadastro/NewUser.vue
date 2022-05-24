@@ -14,9 +14,9 @@
             <div class="col-3">
               <label for="genero">Gênero:</label>
               <select name="genero" id="genero" form="generoForm" class="form-control" v-model="colab.genero">
-                <option value="masc">Masculino</option>
-                <option value="fem">Feminino</option>
-                <option value="ninfo">Não informado</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Não informado">Não informado</option>
               </select>
               <span class="text-danger" v-text="errors.genero" v-show="errors.genero"></span>
             </div>

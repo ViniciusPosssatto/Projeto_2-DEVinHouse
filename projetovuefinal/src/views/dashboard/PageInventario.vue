@@ -135,7 +135,7 @@
                     <div class="row" style="justify-content: center;">
                     <div class="form mb-3 col-6">
                       <label name="codigo" >Codigo</label>
-                      <input name="codigo" type="number" class="form-control rounded-4" disabled id="Inputcodigo" v-model="livro.codigo">
+                      <input name="codigo" type="text" class="form-control rounded-4" disabled id="Inputcodigo" v-model="livro.codigo">
                     </div>
                     <div class="form mb-3 col-6">
                       <label name="categoria" for="categoria">Categoria</label>
@@ -199,7 +199,11 @@ export default {
 
     buscarLivros() {
       // buscar livro a partir da barra de pesquisa
-      this.$store.dispatch('inventarioModule/somaValores');  
+      this.$store.dispatch('setItensModule/getLivro', 'passar objeto');  
+    },
+
+    editarDados() {
+      this.$router.push(`/newitens/${this.livro.codigo}`);
     }
     
   },
@@ -207,15 +211,15 @@ export default {
   computed: {
 
     listaLivros() {
-      return this.$store.state.inventarioModule.listaLivros;
+      return this.$store.state.setItensModule.listaLivros;
     },
 
     somaLivros() {
-      return this.$store.state.inventarioModule.totalLivros;
+      return this.$store.state.setItensModule.totalLivros;
     },
 
     somaValores() {
-      return this.$store.state.inventarioModule.somaValor;
+      return this.$store.state.setItensModule.somaValor;
     },
 
     totalColabs() {
@@ -229,11 +233,11 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('inventarioModule/getItem');
-    this.$store.commit('inventarioModule/somaLivros');
+    this.$store.commit('setItensModule/getItem');
+    this.$store.commit('setItensModule/somaLivros');
+    this.$store.commit('setItensModule/somaValores');
     this.$store.commit('getColaboradorModule/somaColabs');
     this.$store.dispatch('getColaboradorModule/getColaborador');
-    this.$store.commit('inventarioModule/somaValores');
   }
   
 }

@@ -62,7 +62,7 @@
                   <label name="nome" >Nome</label>
                   <input name="nome" type="text" class="form-control rounded-4" disabled id="InputNome" v-model="colab.nome">
                 </div>
-                <div class="form mb-3 col-4">
+                <div class="form mb-3 col-5">
                   <label name="genero" for="genero">Gênero</label>
                   <input name="genero" type="text" class="form-control rounded-4" disabled id="genero" v-model="colab.genero">
                 </div>
@@ -70,7 +70,7 @@
                   <label name="dataNasc" for="dataNasc">Data nascimento</label>
                   <input name="dataNasc" type="text" class="form-control rounded-4" disabled id="dataNasc" v-model="colab.dataNasc">
                 </div>
-                <div class="form mb-3 col-6">
+                <div class="form mb-3 col-7">
                   <label name="cargo" for="cargo">Cargo</label>
                   <input name="cargo" type="text" class="form-control rounded-4" disabled id="cargo" v-model="colab.cargo">
                 </div>

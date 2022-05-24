@@ -2,13 +2,14 @@ export default {
     namespaced: true,
     state() {
         return {
-            listaColabs: []
+            listaColabs: [],
+            usuárioCadastrado: ''
         }
     },
 
     mutations: {
         
-        editarColabs(context, colaborador){
+        editarColabs(context, colaborador){   // colaborador é o ID que foi passado por params na rota do router
             
             context.lista = JSON.parse(localStorage.getItem('listaColabs'));
             
@@ -43,23 +44,6 @@ export default {
            
         },
         
-            
-        
-        // getColaborador(context) {
-        //     try {
-        //         let lista = localStorage.getItem('listaColabs') || []
-                
-        //         if(lista.length > 0) {
-        //             lista = JSON.parse(lista)
-        //             context.state.listaColabs = lista;
-        //         } else {
-        //             return context.state.listaColabs = [];
-        //         }
-        //     }
-        //     catch(err) {
-        //         console.log('erro do catch '+ err)
-        //     }
-        // },
     }
         
     
