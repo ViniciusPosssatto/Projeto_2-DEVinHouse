@@ -97,7 +97,7 @@
           <div class="display-card align-items-around" style="border-radius: 50%; align-content: center;" >
             <div v-for="(item, index) in listaLivros" :key="index" class="row">
             
-              <div class="col-3">
+              <div class="col-3" @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
                   <div class="row m-2 align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
                     <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
@@ -118,20 +118,92 @@
           </div>
           </div>
         </div>
+      <!------------------------->
+      <!-- Modal para detalhes -->
       
-      
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content rounded-5 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0 modal-centro">
+              <h2 class="fw-bold mb-0">Dados do livro</h2>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <div class="modal-body p-5 pt-0 modal-centro">
+                <hr class="my-4">
+                <form id="formEdicao" aria-disabled="disabled">
+                  <fieldset>
+                    <div class="row" style="justify-content: center;">
+                    <div class="form mb-3 col-6">
+                      <label name="codigo" >Codigo</label>
+                      <input name="codigo" type="text" class="form-control rounded-4" disabled id="Inputcodigo" v-model="livro.codigo">
+                    </div>
+                    <div class="form mb-3 col-6">
+                      <label name="categoria" for="categoria">Categoria</label>
+                      <input name="categoria" type="text" class="form-control rounded-4" disabled id="categoria" v-model="livro.categoria">
+                    </div>
+                    <div class="form mb-3 col-12">
+                      <label name="titulo" for="titulo">Título</label>
+                      <input name="titulo" type="text" class="form-control rounded-4" disabled id="titulo" v-model="livro.titulo">
+                    </div>
+                      <h5>Dados Complementares</h5>
+                    <div class="form mb-3 col-4">
+                      <label name="valor" for="valor">Valor (R$)</label>
+                      <input name="valor" type="text" class="form-control rounded-4" disabled id="valor" v-model="livro.valor">
+                    </div>
+                    <div class="form mb-3 col-12">
+                      <label name="url" for="url">URL da foto</label>
+                      <input name="url" type="text" class="form-control rounded-4" disabled id="url" v-model="livro.url">
+                    </div>
+                    <div class="form mb-3 col-6">
+                      <label name="editora" for="editora">Editora</label>
+                      <input name="editora" type="text" class="form-control rounded-4" disabled id="editora" v-model="livro.editora">
+                    </div>
+                    <div class="form mb-3 col-6">
+                      <label name="autor" for="autor">Autor</label>
+                      <input name="autor" type="text" class="form-control rounded-4" disabled id="autor" v-model="livro.autor">
+                    </div>
+                    <div class="form mb-3 col-12">
+                      <label name="descricao" for="descricao">Descrição</label>
+                      <input name="descricao" type="text" class="form-control rounded-4" disabled id="descricao" v-model="livro.descricao">
+                    </div>
+
+                    <hr class="my-4">
+                    
+                    <button class="w-50 py-2 mb-2 btn btn-outline-primary rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="editarDados">
+                      Editar dados
+                    </button>
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      livro: {}
+    }
+  },
 
   methods: {
 
+    detalhes(livro) {
+      this.livro = livro;
+    },
+
     buscarLivros() {
       // buscar livro a partir da barra de pesquisa
-      this.$store.dispatch('inventarioModule/somaValores');  
+      this.$store.dispatch('setItensModule/getLivro', 'passar objeto');  
+    },
+
+    editarDados() {
+      this.$router.push(`/newitens/${this.livro.codigo}`);
     }
     
   },
@@ -139,15 +211,15 @@ export default {
   computed: {
 
     listaLivros() {
-      return this.$store.state.inventarioModule.listaLivros;
+      return this.$store.state.setItensModule.listaLivros;
     },
 
     somaLivros() {
-      return this.$store.state.inventarioModule.totalLivros;
+      return this.$store.state.setItensModule.totalLivros;
     },
 
     somaValores() {
-      return this.$store.state.inventarioModule.somaValor;
+      return this.$store.state.setItensModule.somaValor;
     },
 
     totalColabs() {
@@ -161,11 +233,11 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch('inventarioModule/getItem');
-    this.$store.commit('inventarioModule/somaLivros');
+    this.$store.commit('setItensModule/getItem');
+    this.$store.commit('setItensModule/somaLivros');
+    this.$store.commit('setItensModule/somaValores');
     this.$store.commit('getColaboradorModule/somaColabs');
     this.$store.dispatch('getColaboradorModule/getColaborador');
-    this.$store.commit('inventarioModule/somaValores');
   }
   
 }

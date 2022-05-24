@@ -11,8 +11,7 @@
             
             <div class="col-3">
               <label>Código patrimônio</label>
-              <vee-field type="number" name="codigo" class="form-control" v-model.number="livro.codigo"/>
-              <span class="text-danger" v-text="errors.codigo" v-show="errors.codigo"></span>
+              <vee-field type="text" name="codigo" class="form-control" disabled="" v-model.number="livro.codigo"/>
             </div>
 
             <div class="col-5">
@@ -24,12 +23,17 @@
             <div class="col-4">
               <label for="categoria">Categoria do livro</label>
               <select name="categoria" id="categoria" form="categoriaForm" class="form-control" v-model="livro.categoria">
-                <option value="geografia">Geografia</option>
-                <option value="historia">História</option>
-                <option value="ingles">Inglês</option>
-                <option value="literatura">Literatura</option>
-                <option value="portugues">Português</option>
-                <option value="biologia">Biologia</option>
+                <option value="Geografia">Geografia</option>
+                <option value="História">História</option>
+                <option value="Inglês">Inglês</option>
+                <option value="Literatura">Literatura</option>
+                <option value="Português">Português</option>
+                <option value="Matemática">Matemática</option>
+                <option value="Biologia">Biologia</option>
+                <option value="Física">Física</option>
+                <option value="Química">Química</option>
+                <option value="Filosofia">Filosofia</option>
+                <option value="Sociologia">Sociologia</option>
               </select>
               <span class="text-danger" v-text="errors.categoria" v-show="errors.categoria"></span>
             </div>
@@ -66,8 +70,11 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-6">
-              <button type="submit" class="btn btn-primary">Salvar</button>
+            <div class="col-6" v-if="this.$route.params.codigo">
+              <button type="button" class="btn btn-primary" style="font-weight: bold; font-size: large;" @click="editarLivros">Editar</button>
+            </div>
+            <div class="col-6" v-else>
+              <button type="submit" class="btn btn-primary" style="font-weight: bold; font-size: large;">Salvar</button>
             </div>
             <div class="col-6">
               <button type="button" class="btn btn-warning" @click="limparCampos">Limpar campos</button>
@@ -83,8 +90,17 @@
 import { Form, Field } from 'vee-validate'
 import '@/views/validate/index.js'
 
+// gerar um código aleatório do patrimônio
+function geraCodigo() {
+    var stringAleatoria = '';
+    var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (var i = 0; i < 6; i++) {
+        stringAleatoria += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+    }
+    return stringAleatoria;
+}
 export default {
-
+  
   data() {
     const schema = {
       codigo: "",
@@ -100,6 +116,7 @@ export default {
     return {
       schema,
       livro: {
+        codigo: geraCodigo(),
         status: false
       }
     }
@@ -115,16 +132,41 @@ export default {
     newItem() {
       // cadastra um item
       //console.log(this.livro)
-      this.$store.dispatch('setItensModule/newItem', this.livro);
-      this.livro = {
-        status: false
-      };
+      this.$store.commit('setItensModule/newItem', this.livro);
+      document.getElementById('formItens').reset()
+      this.$toast.success('Livro adicionado com sucesso!', { 
+          position: 'top'
+        });
+      this.$router.push('/inventario')
+    },
+
+    editarLivros() {
+      this.$store.commit('setItensModule/editarLivro', this.livro)
+      this.$toast.success('Livro editado com sucesso!', { 
+          position: 'top'
+        });
+      this.$router.push('/inventario')
     },
 
     limparCampos() {
       // limpa os campos de input
       //this.livro = {};
       document.getElementById('formItens').reset()
+    }
+  },
+
+  mounted() {  // busca a lista de livros e compara o codigo - O que for igual vai ser jogado para o v-model preencher os campos
+    let lista = JSON.parse(localStorage.getItem('listaLivros'))
+    if(lista !== null) {
+      lista.forEach(element => {
+        if(element.codigo == this.$route.params.codigo) {
+          this.livro = element;
+        } else {
+          console.log('caiu no else da edição')
+        }
+      })
+    } else {
+      console.log('if do else maior')
     }
   }
   

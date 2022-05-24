@@ -14,9 +14,9 @@
             <div class="col-3">
               <label for="genero">Gênero:</label>
               <select name="genero" id="genero" form="generoForm" class="form-control" v-model="colab.genero">
-                <option value="masc">Masculino</option>
-                <option value="fem">Feminino</option>
-                <option value="ninfo">Não informado</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Não informado">Não informado</option>
               </select>
               <span class="text-danger" v-text="errors.genero" v-show="errors.genero"></span>
             </div>
@@ -98,11 +98,14 @@
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-6">
-              <button type="submit" class="btn btn-primary">Salvar</button>
+            <div class="col-6" v-if="this.$route.params.id">
+              <button type="button" class="btn btn-primary" style="font-weight: bold; font-size: large;" @click="editarColab">Editar</button>
+            </div>
+            <div class="col-6" v-else>
+              <button type="submit" class="btn btn-primary" style="font-weight: bold; font-size: large;">Salvar</button>
             </div>
             <div class="col-6">
-              <button type="button" class="btn btn-warning" @click="limparCampos()">Limpar campos</button>
+              <button type="button" style="font-weight: bold; font-size: large;" class="btn btn-warning" @click="limparCampos()">Limpar campos</button>
             </div>
           </div>
         </vee-form>
@@ -138,21 +141,20 @@ export default {
       schema,
       colab: {
         id: Date.now(),
-        status: false,
-        nome: 'vine',
-        genero: 'masc',
-        dataNasc: '2022-05-02',
-        telefone: '34343',
+        nome: '',
+        genero: '',
+        dataNasc: '',
+        telefone: '',
         cargo: '',
-        email: 'admin@admin.com.br',
-        cep: '88080400',
+        email: '',
+        cep: '',
         cidade: '',
         estado: '',
         logradouro: '',
         complemento: '',
         bairro: '',
-        numero: '34',
-        pontoRefe: 'sdfsdfd'
+        numero: '',
+        pontoRefe: ''
       }
     }
   },
@@ -163,18 +165,25 @@ export default {
   methods: {
 
     newColaborador() {
-      //novo usuario
+      //novo usuario e edição também
       this.$store.dispatch('setColaboradorModule/newColaborador', this.colab)
       .then(() => {
         this.colab = { id: Date.now() };
-        //document.getElementById('formUser').reset();
         this.$toast.success('Cadastro criado com sucesso!', { 
           position: 'top'
         });
+        this.$router.push('/listagem')
       }).catch((err) => {
         console.log('erro no catch da criação ' + err)
       })
-     // console.log(this.user)
+    },
+
+    editarColab() {
+      this.$store.commit('setColaboradorModule/editarColabs', this.colab)
+      this.$toast.success('Usuário editado com sucesso!', { 
+          position: 'top'
+        });
+      this.$router.push('/listagem')
     },
 
     limparCampos() {
@@ -198,6 +207,26 @@ export default {
             position: 'top'
           });
         })
+    }
+  },
+
+  computed: {
+
+  },
+
+  mounted() {  // busca a lista de colaboradores e compara o ID - O que for igual vai ser jogado para o v-model preencher os campos
+    let lista = JSON.parse(localStorage.getItem('listaColabs'))
+    if(lista !== null) {
+      lista.forEach(element => {
+        if(element.id == this.$route.params.id) {
+          //console.log(element)
+          this.colab = element;
+        } else {
+          console.log('caiu no else da edição')
+        }
+      })
+    } else {
+      console.log('if do else maior')
     }
   }
 }

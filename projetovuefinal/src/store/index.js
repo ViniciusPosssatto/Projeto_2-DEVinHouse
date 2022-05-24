@@ -4,6 +4,7 @@ import setColaboradorModule from '@/store/modules/newUser'
 import getColaboradorModule from '@/store/modules/colabModules'
 import setItensModule from '@/store/modules/newItensModule'
 import inventarioModule from '@/store/modules/inventarioModule'
+
 const store = createStore({
     modules: {
         setUserLoginModule,
@@ -11,6 +12,7 @@ const store = createStore({
         getColaboradorModule,
         setItensModule,
         inventarioModule
+       
     }
 });
 
