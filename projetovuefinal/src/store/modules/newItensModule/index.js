@@ -3,8 +3,10 @@ export default {
     state() {
         return {
             listaLivros: [],
+            listaLivrosEmprestados: [],
             somaLivros: '',
-            totalLivros: ''
+            totalLivros: '',
+            totalEmprestimos: ''
         }
     },
 
@@ -23,6 +25,24 @@ export default {
                 localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
             }
             
+        },
+
+        salvarEmprestimo(state, livroEdit) {
+            for(var i = 0; i < state.listaLivros.length; i++){
+                if(state.listaLivros[i].codigo == livroEdit.codigo) {
+                    state.listaLivros[i] = livroEdit;
+                }
+            }
+            localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
+        },
+
+        getEmprestados(state) {  // chamar essa no mounted da aba inventário para calcular quantos livros estao emprestados e la fazer uma computada para o totalemprestimos pra atualizar o card
+            let total = 0;
+            state.listaLivros.forEach(element => {
+                if(element.status !== false) {
+                    state.totalEmprestimos += total;
+                }
+            });
         },
         
         getItem(state) {

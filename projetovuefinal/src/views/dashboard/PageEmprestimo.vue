@@ -11,39 +11,64 @@
       <!-- barra de pesquisa -->
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <form class="input-group">
-            <input class="form-control me-2" type="search" placeholder="Ex: geografia" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          <form  class="input-group" @submit="barraPesquisa(busca)">
+            <input class="form-control me-2" id="barraPesquisa" type="search" placeholder="Digite o nome do livro" aria-label="Search" v-model="busca" >
+            <button class="btn btn-outline-success" type="submit" >Buscar</button>
           </form>
         </div>
       </nav>
       <hr>
-      <div class="text-center text-danger" v-if="listaLivros.length === 0">
-        <h5>Não há reservas cadastradas</h5>
+      <div v-if="pesquisaLivro.length > 0">
+        <div class="text-center text-danger" v-if="pesquisaLivro.length === 0">
+        <h5>Nenhum livro encontrado! Verifique o nome e tente novamente.</h5>
+        </div>
+        <table class="table" v-else>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Título</th>
+              <th>Categoria</th>
+              <th>Emprestado para</th>
+            </tr>
+          </thead>
+          <tbody id="tabody">
+            <tr v-for="livro in pesquisaLivro" :key="livro.id"  @click="detalhesLivro(livro)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <td v-text="livro.codigo"></td>
+              <td v-text="livro.titulo"></td>
+              <td v-text="livro.categoria"></td>
+              <td v-text="livro.status ? livro.status : 'Disponível'"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <table class="table" v-else>
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Título</th>
-            <th>Categoria</th>
-            <th>Emprestar para</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="livro in listaLivros" :key="livro.id" @click="detalhesLivro(livro)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <td>{{ livro.codigo }}</td>
-            <td>{{ livro.titulo }}</td>
-            <td>{{ livro.categoria }}</td>
-            <td>
-              <select name="user" id="user" form="userForm" class="form-control" >
-                <option v-for="user in listaColabs" :key="user.id" v-text="user.nome ? user.nome : 'disponivel'" ></option>
-                
-              </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+
+      <div v-else>
+        <div class="text-center text-danger" v-if="listaLivro.length === 0">
+        <h5>Não há reservas cadastradas</h5>
+        </div>
+        <table class="table" v-else>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Título</th>
+              <th>Categoria</th>
+              <th>Emprestado para</th>
+            </tr>
+          </thead>
+          <tbody id="tabody">
+            <tr v-for="livro in listaLivro" :key="livro.id"  @click="detalhesLivro(livro)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <td v-text="livro.codigo"></td>
+              <td v-text="livro.titulo"></td>
+              <td v-text="livro.categoria"></td>
+              <td v-text="livro.status ? livro.status : 'Disponível'"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
     </div>
   </div>
 
@@ -63,6 +88,19 @@
                       <div class="form mb-3 col-12 align-items-baseline" style=" max-width: 250px; align-self: center; justify-content: center; margin: 0 40px">
                           <img :src="livro.url" alt="" style="border-radius: 20px; width: 250px;">
                       </div>
+                       <hr class="my-4">
+                      <h5 style="font-weight: bold">Selecione alguém para emprestar:</h5>
+                    <div class="col-6">
+                      <select name="user" id="user" form="userForm" class="form-control" value="Clique aqui" v-model="emprestimo">
+                        <option v-for="user in listaColab" :key="user.id"  v-text="user.nome" ></option>
+                      </select>
+                    </div>
+                    <div class="col-6">
+                      <button class="w-50 py-2 btn btn-outline-success rounded-4" style="text-align: center;" type="submit" data-bs-dismiss="modal" aria-label="Close" @click="salvarEmprestimo(emprestimo)">
+                        Emprestar
+                      </button>
+                    </div>
+                      <hr class="my-4">
                     <div class="form mb-3 col-6">
                       <label name="codigo" >Codigo</label>
                       <input name="codigo" type="text" class="form-control rounded-4" disabled id="Inputcodigo" v-model="livro.codigo">
@@ -75,7 +113,6 @@
                       <label name="titulo" for="titulo">Título</label>
                       <input name="titulo" type="text" class="form-control rounded-4" disabled id="titulo" v-model="livro.titulo">
                     </div>
-                      <h5>Dados Complementares</h5>
                     <div class="form mb-3 col-6">
                       <label name="editora" for="editora">Editora</label>
                       <input name="editora" type="text" class="form-control rounded-4" disabled id="editora" v-model="livro.editora">
@@ -93,11 +130,6 @@
                       <input name="descricao" type="text" class="form-control rounded-4" disabled id="descricao" v-model="livro.descricao">
                     </div>
 
-                    <hr class="my-4">
-                    
-                    <button class="w-50 py-2 btn btn-outline-primary rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="editarDados">
-                      Editar dados
-                    </button>
                   </div>
                 </fieldset>
               </form>
@@ -113,32 +145,67 @@
 export default {
   data() {
     return {
-      livro: {}
+      livro: '',
+      emprestimo: '',
+      pesquisaLivro: [],
+      busca: ''
     }
   },
 
   methods: {
-
-     buscarLivro() {
-      // buscar livro a partir do codigo na barra de pesquisa
-      console.log('aqui')
-      //this.$store.dispatch('emprestimoModule/getLivro');  
-    },
 
     detalhesLivro(livro){
       this.livro = livro;
     },
 
 
+    salvarEmprestimo(userNome) {
+      if(!userNome){
+        this.livro.status = false;
+        this.$store.commit('setItensModule/salvarEmprestimo', this.livro)
+
+      }
+      else {
+        this.livro.status = userNome;
+        this.$store.commit('setItensModule/salvarEmprestimo', this.livro)
+        this.livro = ''
+      }
+    },
+
+    barraPesquisa() {
+      if(this.busca !== '') {
+        let pesquisa = () => {
+          return this.listaLivro.filter(item =>
+            item.titulo
+              .toLowerCase()
+                .includes(this.busca.toLowerCase()));
+        } 
+        if(pesquisa) {
+          this.pesquisaLivro = pesquisa(this.busca);
+          console.log(pesquisa(this.busca))
+        } else {
+          console.log('else')
+        }
+        
+      } else {
+        this.pesquisaLivro = this.listaLivro;
+        console.log('else ' + ' > ' + this.pesquisaLivro)    /// refazer uma lógica aqui para quando não encontar retornar um aviso 
+      }
+    },
+
   },
 
   computed: {
+    
+    
+    listaLivrosEmprestados() {
+      return this.$store.state.setItensModule.listaLivrosEmprestados;
+    },
 
-
-    listaLivros() {
+    listaLivro() {
       return this.$store.state.setItensModule.listaLivros;
     },
-    listaColabs() {
+    listaColab() {
       return this.$store.state.setColaboradorModule.listaColabs;
     }
 
