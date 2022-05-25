@@ -18,9 +18,14 @@
         </div>
       </nav>
       <hr>
-      <div v-if="pesquisaLivro.length > 0">
+
+
+      <!---------------------------------------------------->
+      <!---- Montagem da tabela para itens pesquisados ----->
+      
+      <div v-if="pesquisaLivro.length">
         <div class="text-center text-danger" v-if="pesquisaLivro.length === 0">
-        <h5>Nenhum livro encontrado! Verifique o nome e tente novamente.</h5>
+        <h5>Nenhum livro encontrado! Verifique e tente novamente.</h5>
         </div>
         <table class="table" v-else>
           <thead>
@@ -42,6 +47,8 @@
         </table>
       </div>
 
+      <!-------------------------------------------------------------->
+      <!---- Montagem da tabela para os itens que tiver na lista -----> 
 
       <div v-else>
         <div class="text-center text-danger" v-if="listaLivro.length === 0">
@@ -66,9 +73,6 @@
           </tbody>
         </table>
       </div>
-
-
-
     </div>
   </div>
 
@@ -96,7 +100,10 @@
                       </select>
                     </div>
                     <div class="col-6">
-                      <button class="w-50 py-2 btn btn-outline-success rounded-4" style="text-align: center;" type="submit" data-bs-dismiss="modal" aria-label="Close" @click="salvarEmprestimo(emprestimo)">
+                      <button class="w-50 py-2 btn btn-outline-success rounded-4" style="text-align: center;" type="submit" data-bs-dismiss="modal" aria-label="Close" @click="salvarEmprestimo(emprestimo)" v-if="!emprestimo">
+                        Disponível
+                      </button>
+                      <button class="w-50 py-2 btn btn-outline-success rounded-4" style="text-align: center;" type="submit" data-bs-dismiss="modal" aria-label="Close" @click="salvarEmprestimo(emprestimo)" v-else>
                         Emprestar
                       </button>
                     </div>
@@ -182,14 +189,14 @@ export default {
         } 
         if(pesquisa) {
           this.pesquisaLivro = pesquisa(this.busca);
-          console.log(pesquisa(this.busca))
-        } else {
-          console.log('else')
-        }
-        
+          if(this.pesquisaLivro.length === 0) {
+            this.$toast.error('Livro não econtrado! Tente outro nome.', {
+              position: 'top'
+            });
+          }
+        } 
       } else {
         this.pesquisaLivro = this.listaLivro;
-        console.log('else ' + ' > ' + this.pesquisaLivro)    /// refazer uma lógica aqui para quando não encontar retornar um aviso 
       }
     },
 
