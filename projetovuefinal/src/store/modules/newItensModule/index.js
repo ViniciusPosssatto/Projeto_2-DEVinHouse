@@ -65,7 +65,6 @@ export default {
         somaValores(state) {
             const soma = state.listaLivros.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
             state.somaValor = soma;
-            //console.log(soma);
         },
 
         editarLivro(state, livro){   // livro é o codigo que foi passado por params na rota do router
@@ -86,9 +85,6 @@ export default {
             localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
         },
 
-        getLivro() {
-            // deverá fazer a busca na lista para achar baseado no que o usuario digitar na barra
-        }
     },
     
     actions: {

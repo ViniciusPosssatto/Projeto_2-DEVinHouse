@@ -2,6 +2,7 @@
   <div class="container">
     <!------------------------------>
     <!-- Colaboradores cadastrados-->
+
     <div class="row justify-content-md-center">
       <div class="col-12 mt-3">
         <h3 style="text-align: center">Listagem de colaboradores</h3>
@@ -9,34 +10,37 @@
 
       <!----------------------->
       <!-- barra de pesquisa -->
+      
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <form class="input-group">
-            <input class="form-control me-2" type="search" placeholder="Digite o nome do colaborador" aria-label="Search">
-            <button class="btn btn-outline-success" type="button" @click="buscarUser">Buscar</button>
+          <form class="input-group" @submit="buscarUser(busca)">
+            <input class="form-control me-2" type="search" placeholder="Digite o nome do colaborador" aria-label="Search" v-model="busca">
+            <button class="btn btn-outline-success" type="submit" >Buscar</button>
           </form>
         </div>
       </nav>
       <hr>
+
       <!------------------------------>
       <!--- cards dos colaboradores -->
+
       <div class="text-center" v-if="listaColab.length === 0">
-        <h5>Não há colaboradores cadastrados</h5>
+        <h5>Colaborador não econtrado ou não cadastrado</h5>
       </div>
       <div v-else class="display-card align-items-around">
-        <div v-for="(user, index) in listaColab" :key="index" class="ml-3">
+        <div v-for="user in (pesquisaUser ? pesquisaUser : listaColab)" :key="user.id" class="ml-3">
           <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly" @click="detalhes(user)" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <div class="row align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
               <vue-gravatar :email="user.email" style="border-radius: 50%;"/>
             </div>
               <div class="tamanho card-header">
-                <h5 class="card-title">{{ user.nome }}</h5>
+                <h5 class="card-title" v-text="user.nome"></h5>
                 <hr>
-                  <p class="card-text">{{ user.email }}</p>
-                  <p class="card-text">{{ user.telefone }}</p>
+                  <p class="card-text" v-text="user.email"></p>
+                  <p class="card-text" v-text="user.telefone"></p>
               </div>
             <div class=" tamanho card-footer">
-              <p class="card-text">{{ user.cargo }}</p>
+              <p class="card-text" v-text="user.cargo"></p>
             </div>
           </div>
         </div>
@@ -137,7 +141,6 @@
 export default {
   data() {
     return {
-      listaColabs: [],
       colab: {
         id: '',
         status: '',
@@ -155,15 +158,36 @@ export default {
         bairro: '',
         numero: '',
         pontoRefe: ''
-      }
+      },
+      pesquisaUser: [],
+      busca: ''
     }
   },
 
   methods: {
+
     buscarUser() {
-      // tem que buscar um colaborador pela barra de pesquisa
-      //this.$store.dispatch('getColaboradorModule/getColabBusca')
+      if(this.busca !== '') {
+        let pesquisa = () => {
+          return this.listaColab.filter(item =>
+            item.nome
+              .toLowerCase()
+                .includes(this.busca.toLowerCase()));
+        } 
+        if(pesquisa) {
+          this.pesquisaUser = pesquisa(this.busca);
+          //console.log(this.pesquisaUser)
+          if(this.pesquisaUser.length === 0) {
+            this.$toast.error('Livro não econtrado! Tente outro nome.', {
+              position: 'top'
+            });
+          }
+        } 
+      } else {
+        this.pesquisaUser = this.listaColab;
+      }
     },
+  
     detalhes(colab) {
       this.colab = colab;
     },
@@ -181,7 +205,8 @@ export default {
   },
 
   mounted() {
-    this.$store.commit('setColaboradorModule/getColaborador'); 
+    this.$store.commit('setColaboradorModule/getColaborador');
+    this.pesquisaUser = this.listaColab;
   }
 }
 </script>

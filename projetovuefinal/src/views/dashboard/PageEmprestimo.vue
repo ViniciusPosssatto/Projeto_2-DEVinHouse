@@ -182,11 +182,6 @@ export default {
 
   computed: {
     
-    
-    listaLivrosEmprestados() {
-      return this.$store.state.setItensModule.listaLivrosEmprestados;
-    },
-
     listaLivro() {
       return this.$store.state.setItensModule.listaLivros;
     },
