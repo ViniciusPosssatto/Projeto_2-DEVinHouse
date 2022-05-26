@@ -19,40 +19,12 @@
       </nav>
       <hr>
 
-
-      <!---------------------------------------------------->
-      <!---- Montagem da tabela para itens pesquisados ----->
-      
-      <div v-if="pesquisaLivro.length">
-        <div class="text-center text-danger" v-if="pesquisaLivro.length === 0">
-        <h5>Nenhum livro encontrado! Verifique e tente novamente.</h5>
-        </div>
-        <table class="table" v-else>
-          <thead>
-            <tr>
-              <th>Código</th>
-              <th>Título</th>
-              <th>Categoria</th>
-              <th>Emprestado para</th>
-            </tr>
-          </thead>
-          <tbody id="tabody">
-            <tr v-for="livro in pesquisaLivro" :key="livro.id"  @click="detalhesLivro(livro)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <td v-text="livro.codigo"></td>
-              <td v-text="livro.titulo"></td>
-              <td v-text="livro.categoria"></td>
-              <td v-text="livro.status ? livro.status : 'Disponível'"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
       <!-------------------------------------------------------------->
       <!---- Montagem da tabela para os itens que tiver na lista -----> 
 
-      <div v-else>
-        <div class="text-center text-danger" v-if="listaLivro.length === 0">
-        <h5>Não há reservas cadastradas</h5>
+      <div >
+        <div class="text-center text-danger" v-if="(pesquisaLivro ? pesquisaLivro.length : listaLivro.length) === 0">
+        <h5>Livro não econtrado ou não cadastrado.</h5>
         </div>
         <table class="table" v-else>
           <thead>
@@ -64,7 +36,7 @@
             </tr>
           </thead>
           <tbody id="tabody">
-            <tr v-for="livro in listaLivro" :key="livro.id"  @click="detalhesLivro(livro)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <tr v-for="livro in (pesquisaLivro ? pesquisaLivro : listaLivro)" :key="livro.id"  @click="detalhesLivro(livro)" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <td v-text="livro.codigo"></td>
               <td v-text="livro.titulo"></td>
               <td v-text="livro.categoria"></td>
@@ -76,7 +48,7 @@
     </div>
   </div>
 
-  <!------------------------->
+      <!------------------------->
       <!-- Modal para detalhes -->
       
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -94,6 +66,7 @@
                       </div>
                        <hr class="my-4">
                       <h5 style="font-weight: bold">Selecione alguém para emprestar:</h5>
+                      <p class="small">Ou clique em "Disponível" para retirar o empréstimo.</p>
                     <div class="col-6">
                       <select name="user" id="user" form="userForm" class="form-control" value="Clique aqui" v-model="emprestimo">
                         <option v-for="user in listaColab" :key="user.id"  v-text="user.nome" ></option>
@@ -170,12 +143,17 @@ export default {
       if(!userNome){
         this.livro.status = false;
         this.$store.commit('setItensModule/salvarEmprestimo', this.livro)
-
+        this.$toast.success('Livro disponível para empréstimo.', {
+          position: 'top'
+        });
       }
       else {
         this.livro.status = userNome;
         this.$store.commit('setItensModule/salvarEmprestimo', this.livro)
-        this.livro = ''
+        this.emprestimo = ''
+        this.$toast.success('O livro foi emprestado.', {
+          position: 'top'
+        });
       }
     },
 
@@ -220,6 +198,7 @@ export default {
   mounted() {
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setColaboradorModule/getColaborador');
+    this.pesquisaLivro = this.listaLivro;
   }
 }
 
