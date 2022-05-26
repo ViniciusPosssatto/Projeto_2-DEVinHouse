@@ -40,7 +40,18 @@ export default {
                     
                     state.listaColabs = [];
                 }
+        },
+
+        excluir(state, id) {
+            for(var i = 0; i < state.listaColabs.length; i++){
+                if(state.listaColabs[i].id == id) {
+                    state.listaColabs.splice(i, 1);
+                }
+            }
+            localStorage.setItem('listaColabs', JSON.stringify(state.listaColabs))
         }
+
+
     },
 
     actions: {

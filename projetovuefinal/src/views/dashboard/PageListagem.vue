@@ -24,11 +24,11 @@
       <!------------------------------>
       <!--- cards dos colaboradores -->
 
-      <div class="text-center" v-if="listaColab.length === 0">
-        <h5>Colaborador não econtrado ou não cadastrado</h5>
+      <div class="text-center" v-if="pesquisaUser.length === 0">
+        <h5>Colaborador não econtrado ou não cadastrado.</h5>
       </div>
       <div v-else class="display-card align-items-around">
-        <div v-for="user in (pesquisaUser ? pesquisaUser : listaColab)" :key="user.id" class="ml-3">
+        <div v-for="(user, index) in (pesquisaUser ? pesquisaUser : listaColab)" :key="index" class="ml-3">
           <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly" @click="detalhes(user)" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <div class="row align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
               <vue-gravatar :email="user.email" style="border-radius: 50%;"/>
@@ -127,6 +127,9 @@
                 <button class="w-50 py-2 mb-2 btn btn-outline-primary rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="editarDados">
                   Editar dados
                 </button>
+                <button class="w-50 py-2 mb-2 btn btn-outline-danger rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="excluir(colab.id)">
+                  Excluir
+                </button>
               </div>
             </fieldset>
           </form>
@@ -165,6 +168,10 @@ export default {
   },
 
   methods: {
+
+    excluir(id) {
+      this.$store.commit('setColaboradorModule/excluir', id)
+    },
 
     buscarUser() {
       if(this.busca !== '') {
