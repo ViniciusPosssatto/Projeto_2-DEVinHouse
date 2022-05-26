@@ -4,7 +4,8 @@ export default {
         return {
             listaLivros: [],
             somaLivros: '',
-            totalLivros: ''
+            totalLivros: '',
+            totalEmprestimos: ''
         }
     },
 
@@ -23,6 +24,25 @@ export default {
                 localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
             }
             
+        },
+
+        salvarEmprestimo(state, livroEdit) {
+            for(var i = 0; i < state.listaLivros.length; i++){
+                if(state.listaLivros[i].codigo == livroEdit.codigo) {
+                    state.listaLivros[i] = livroEdit;
+                }
+            }
+            localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
+        },
+
+        getEmprestados(state) {  // chamar essa no mounted da aba inventário para calcular quantos livros estao emprestados e la fazer uma computada para o totalemprestimos pra atualizar o card
+            let total = 0;
+            state.listaLivros.forEach(element => {
+                if(element.status) {
+                    total++
+                    state.totalEmprestimos = total;
+                }
+            });
         },
         
         getItem(state) {
@@ -45,7 +65,6 @@ export default {
         somaValores(state) {
             const soma = state.listaLivros.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
             state.somaValor = soma;
-            //console.log(soma);
         },
 
         editarLivro(state, livro){   // livro é o codigo que foi passado por params na rota do router
@@ -66,9 +85,6 @@ export default {
             localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
         },
 
-        getLivro() {
-            // deverá fazer a busca na lista para achar baseado no que o usuario digitar na barra
-        }
     },
     
     actions: {
