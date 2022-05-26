@@ -143,7 +143,7 @@ export default {
       if(!userNome){
         this.livro.status = false;
         this.$store.commit('setItensModule/salvarEmprestimo', this.livro)
-        this.$toast.success('Livro disponível para empréstimo.', {
+        this.$toast.info('Livro disponível para empréstimo.', {
           position: 'top'
         });
       }

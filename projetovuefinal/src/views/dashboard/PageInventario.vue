@@ -10,7 +10,7 @@
                 <img src="@/assets/img/multiplos-usuarios.png" alt="Icone de pessoas" style="width: 80px" class="card-img-top">
                 <h5 class="card-title mt-2">Colaboradores</h5>
                 <hr>
-                  <p class="card-text" style="font-size: 40px;">{{totalColabs}}</p>
+                  <p class="card-text" style="font-size: 40px;" v-text="totalColabs"></p>
               </div>
               <div class=" tamanho card-footer">
               </div>
@@ -24,7 +24,7 @@
                 <img src="@/assets/img/pilha-livros.png" alt="Icone de livros" style="width: 80px" >
                 <h5 class="card-title mt-2">Livros</h5>
                 <hr>
-                  <p class="card-text" style="font-size: 40px;">{{somaLivros}}</p>
+                  <p class="card-text" style="font-size: 40px;" v-text="somaLivros"></p>
               </div>
               <div class=" tamanho card-footer">
               </div>
@@ -38,7 +38,7 @@
               <img src="@/assets/img/bolsa-de-dinheiro.png" alt="Icone de sifrão $" style="width: 80px">
               <h5 class="card-title mt-2">Valor total</h5>
               <hr>
-                <p class="card-text" style="font-size: 40px;">{{somaValores}}</p>
+                <p class="card-text" style="font-size: 40px;" v-text="somaValores"></p>
             </div>
             <div class=" tamanho card-footer">
               <p class="card-text"></p>
@@ -53,7 +53,7 @@
               <img src="@/assets/img/facam.png" alt="Icone de página de lista" style="width: 80px">
               <h5 class="card-title mt-2">Empréstimos</h5>
               <hr>
-                <p class="card-text" style="font-size: 40px;">{{234}}</p>
+                <p class="card-text" style="font-size: 40px;" v-text="contaEmprestimos"></p>
             </div>
             <div class=" tamanho card-footer">
               <p class="card-text"></p>
@@ -61,12 +61,12 @@
           </div>
         </div>
       </div>
-
-      
     </div>  
     <hr>
+
     <!---------------->
     <!-- Inventário -->
+    
     <div class="row justify-content-md-center">
       <div class="col-12">
         <h3 style="text-align: center">Inventário de Livros</h3>
@@ -74,43 +74,37 @@
 
       <!----------------------->
       <!-- barra de pesquisa -->
+
       <nav class="navbar navbar-light bg-light mb-3">
         <div class="container-fluid">
-          <form class="input-group">
-            <input class="form-control me-2" type="search" placeholder="Digite o nome do livro ou categoria ou editora" aria-label="Search">
-            <button class="btn btn-outline-success" type="button" @click="buscarLivros">Buscar</button>
+          <form class="input-group" @submit="barraPesquisa(busca)">
+            <input class="form-control me-2" type="search" placeholder="Digite o nome do livro ou categoria ou editora" aria-label="Search" v-model="busca">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
           </form>
         </div>
       </nav>
 
-      <!---------------------->
-      <!--- cards dos itens -->
-<!--
-      <div class="text-center" v-if="listaLivros.length === 0">
-        <h5>Não há livros cadastrados!</h5>
-      </div>
+    <!---------------------->
+    <!--- cards dos itens -->
 
-      -->
     </div>
       <div class="row">
         <div class="col-12">
           <div class="display-card align-items-around" style="border-radius: 50%; align-content: center;" >
-            <div v-for="(item, index) in listaLivros" :key="index" class="row">
-            
+            <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo" class="row">
               <div class="col-3" @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
                   <div class="row m-2 align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
                     <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
                   </div>
                   <div class="tamanho card-header" style="white-space: normal !important;">
-                    <h5 class="card-title" style=" display: contents;">{{ item.titulo }}</h5>
+                    <h5 class="card-title" style=" display: contents;" v-text="item.titulo"></h5>
                     <hr>
-                    <p class="card-text">{{ item.editora }}</p>
-                    <p class="card-text">{{ item.autor }}</p>
+                    <p class="card-text" v-text="item.editora"></p>
+                    <p class="card-text" v-text="item.autor"></p>
                   </div>
                   <div class=" tamanho card-footer">
-                    <p class="card-text" v-if="item.status === false" style="color: #15FF1B">Disponível</p>
-                    <p class="card-text" v-if="item.status === true" style="color: #FF7D03">Emprestado</p>
+                    <p :class="item.status ? 'status-emprestado' : 'status-disponivel'" class="card" v-text="item.status ? 'Emprestado' : 'Disponível'"></p>
                   </div>
                 </div>
               </div>
@@ -118,6 +112,7 @@
           </div>
           </div>
         </div>
+
       <!------------------------->
       <!-- Modal para detalhes -->
       
@@ -146,9 +141,17 @@
                       <input name="titulo" type="text" class="form-control rounded-4" disabled id="titulo" v-model="livro.titulo">
                     </div>
                       <h5>Dados Complementares</h5>
+                    <div class="form mb-3 col-8" v-if="livro.status">
+                      <label name="status" for="status">Emprestado para:</label>
+                      <input name="status" type="text" class="form-control rounded-4" disabled id="status" v-model="livro.status">
+                    </div>
+                    <div class="form mb-3 col-8" v-else>
+                      <label name="status" for="status"></label>
+                      <input name="status" type="text" class="form-control rounded-4" disabled id="status" placeholder="Disponível para empréstimo">
+                    </div>
                     <div class="form mb-3 col-4">
                       <label name="valor" for="valor">Valor (R$)</label>
-                      <input name="valor" type="text" class="form-control rounded-4" disabled id="valor" v-model="livro.valor">
+                      <input name="valor" type="number" class="form-control rounded-4" disabled id="valor" v-model="livro.valor">
                     </div>
                     <div class="form mb-3 col-12">
                       <label name="url" for="url">URL da foto</label>
@@ -187,7 +190,9 @@
 export default {
   data() {
     return {
-      livro: {}
+      livro: {},
+      busca: '',
+      pesquisaLivro: []
     }
   },
 
@@ -197,14 +202,30 @@ export default {
       this.livro = livro;
     },
 
-    buscarLivros() {
-      // buscar livro a partir da barra de pesquisa
-      this.$store.dispatch('setItensModule/getLivro', 'passar objeto');  
-    },
-
     editarDados() {
       this.$router.push(`/newitens/${this.livro.codigo}`);
+    },
+
+    barraPesquisa() {
+    if(this.busca !== '') {
+      let pesquisa = () => {
+        return this.listaLivros.filter(item =>
+          item.titulo
+            .toLowerCase()
+              .includes(this.busca.toLowerCase()));
+      } 
+      if(pesquisa) {
+        this.pesquisaLivro = pesquisa(this.busca);
+        if(this.pesquisaLivro.length === 0) {
+          this.$toast.error('Livro não econtrado! Tente outro nome.', {
+            position: 'top'
+          });
+        }
+      } 
+    } else {
+      this.pesquisaLivro = this.listaLivros;
     }
+    },
     
   },
 
@@ -228,16 +249,22 @@ export default {
 
     listaColabs() {
       return this.$store.state.setColaboradorModule.listaColabs;
+    },
+
+    contaEmprestimos() {
+      return this.$store.state.setItensModule.totalEmprestimos;
     }
 
   },
 
   mounted() {
+    this.pesquisaLivro = this.listaLivro;
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setItensModule/somaLivros');
     this.$store.commit('setItensModule/somaValores');
     this.$store.commit('setColaboradorModule/somaColabs');
     this.$store.commit('setColaboradorModule/getColaborador');
+    this.$store.commit('setItensModule/getEmprestados')
   }
   
 }
@@ -265,5 +292,19 @@ export default {
 }
 .card-text {
   text-overflow: ellipsis !important;
+}
+
+.status-disponivel {
+  font-weight: bold;
+  background-color: #058d05;
+  text-overflow: ellipsis !important;
+  color: #fdfffe;
+}
+
+.status-emprestado {
+  font-weight: bold;
+  background-color: #FF7D03;
+  text-overflow: ellipsis !important;
+  color: #fdfdfd;
 }
 </style>
