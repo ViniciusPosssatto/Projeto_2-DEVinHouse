@@ -5,7 +5,7 @@
     <div class="row" style="justify-content: space-between;">
       <div class="col-3 card-top">
         <div class="d-flex align-items-around">
-            <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem; min-width: 11rem; display: block;">
+            <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
               <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
                 <img src="@/assets/img/multiplos-usuarios.png" alt="Icone de pessoas" style="width: 80px" class="card-img-top">
                 <h5 class="card-title mt-2">Colaboradores</h5>
@@ -17,9 +17,9 @@
             </div>
         </div>
       </div>
-      <div class="col-3 card-top">
+      <div class="col-3 card-top ">
         <div class="d-flex align-items-around">
-            <div class=" tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem; min-width: 11rem; display: block;">
+            <div class=" tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
               <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
                 <img src="@/assets/img/pilha-livros.png" alt="Icone de livros" style="width: 80px" >
                 <h5 class="card-title mt-2">Livros</h5>
@@ -33,7 +33,7 @@
       </div>
       <div class="col-3 card-top">
         <div class="d-flex align-items-around">
-          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem; min-width: 11rem; display: block;">
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
             <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
               <img src="@/assets/img/bolsa-de-dinheiro.png" alt="Icone de sifrão $" style="width: 80px">
               <h5 class="card-title mt-2">Valor total</h5>
@@ -48,7 +48,7 @@
       </div>  
       <div class="col-3 card-top">
         <div class="d-flex align-items-around">
-          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline" style="width: 15rem; min-width: 11rem; display: block;">
+          <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
             <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
               <img src="@/assets/img/facam.png" alt="Icone de página de lista" style="width: 80px">
               <h5 class="card-title mt-2">Empréstimos</h5>
@@ -88,16 +88,16 @@
     <!--- cards dos itens -->
 
     </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="display-card align-items-around" style="border-radius: 50%; align-content: center;" >
-            <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo" class="row">
-              <div class="col-3" @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
-                  <div class="row m-2 align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
+      <div class="row ">
+        <div class="col-12 ">
+          <div class="display-card align-items-around" style="align-content: center;" >
+            <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo" class="row ">
+              <div class="col-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra" style="width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
+                  <div class="row m-2 align-items-baseline " style=" max-width: 300px; align-self: center; justify-content: center;">
                     <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
                   </div>
-                  <div class="tamanho card-header" style="white-space: normal !important;">
+                  <div class="tamanho card-header " style="white-space: normal !important;">
                     <h5 class="card-title" style=" display: contents;" v-text="item.titulo"></h5>
                     <hr>
                     <p class="card-text" v-text="item.editora"></p>
@@ -278,6 +278,10 @@ export default {
 </script>
 
 <style scoped>
+.sombra {
+  box-shadow: 10px 5px 5px black;
+}
+
 .col-3.card-top {
   display: contents !important;
 }

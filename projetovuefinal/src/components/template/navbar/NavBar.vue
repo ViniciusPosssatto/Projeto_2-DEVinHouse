@@ -2,6 +2,9 @@
   <div v-if="autenticado">
     <nav class="navbar navbar-dark bg-dark">
       <div class="direita container-fluid">
+        <div>
+          <i class="fa-solid fa-house me-1"></i>    
+        </div>
         <div class="text-white ms-5">
           <h3 v-text="nomeNavbar"></h3>
         </div>
