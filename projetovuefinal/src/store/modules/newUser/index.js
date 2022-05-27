@@ -3,7 +3,8 @@ export default {
     state() {
         return {
             listaColabs: [],
-            usuárioCadastrado: ''
+            usuárioCadastrado: '',
+            totalColabs: 0
         }
     },
 
@@ -30,24 +31,26 @@ export default {
 
         getColaborador(state) {
 
-                let lista = localStorage.getItem('listaColabs') || [];
-                
-                if(lista.length > 0) {
-                    lista = JSON.parse(lista)
-                    state.listaColabs = lista;
-                    
-                } else {
-                    
-                    state.listaColabs = [];
+            state.listaColabs = localStorage.getItem('listaColabs') ? state.lista = JSON.parse(localStorage.getItem('listaColabs')) : []
+        },
+
+        excluir(state, id) {
+            for(var i = 0; i < state.listaColabs.length; i++){
+                if(state.listaColabs[i].id == id) {
+                    state.listaColabs.splice(i, 1);
                 }
+            }
+            localStorage.setItem('listaColabs', JSON.stringify(state.listaColabs))
         }
+
+
     },
 
     actions: {
 
         newColaborador(context, colaborador) {
 
-            context.state.listaColabs = JSON.parse(localStorage.getItem('listaColabs')) || []
+            context.commit('getColaborador')
             console.log(context.state.listaColabs.length)
             if(context.state.listaColabs.length > 0 && context.state.listaColabs !== null){
                 for(var i = 0; i <  context.state.listaColabs.length; i++){

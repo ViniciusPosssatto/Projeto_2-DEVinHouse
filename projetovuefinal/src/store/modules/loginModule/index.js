@@ -6,8 +6,7 @@ export default {
             autenticado: false,
             usuario: '',
             email: '',
-            listaUsers: [],
-            //userLogin: {}
+            listaUsers: []
         }
     },
 
@@ -15,10 +14,22 @@ export default {
 
         isAutenticado(state) {
             state.autenticado = localStorage.getItem('token') ? true : false;
-        }
-    },
+        },
 
+    },
+    
     actions: {
+        
+        usuarioLogado(context) {
+            let token = localStorage.getItem('token');
+            context.dispatch('getUsers');
+            context.state.listaUsers.forEach(item => {
+                if(item.id == token) {
+                    context.state.usuario = item.nome;
+                    context.state.email = item.email;
+                }
+            })
+        },
 
         autenticar(context, login) {
             context.dispatch('getUsers');
@@ -59,23 +70,11 @@ export default {
         },
 
         getUsers(context) {
-            try {
-                let lista = localStorage.getItem('listaUsers') || []
-                
-                if(lista.length > 0) {
-                    lista = JSON.parse(lista)
-                    context.state.listaUsers = lista;
-                } else {
-                    return context.state.listaUsers = [];
-                }
-            }
-            catch(err) {
-                console.log('erro do catch '+ err)
-            }
+            context.state.listaUsers = localStorage.getItem('listaUsers') ? JSON.parse(localStorage.getItem('listaUsers')) : [];
         },
 
         newUserLogin(context, userLogin) {
-            context.state.listaUsers = JSON.parse(localStorage.getItem('listaUsers')) || []
+            context.state.listaUsers = localStorage.getItem('listaUsers') ? JSON.parse(localStorage.getItem('listaUsers')) : [];
             console.log(context.state.listaUsers.length)
             if(context.state.listaUsers.length > 0 && context.state.listaUsers !== null){
                 for(var i = 0; i <  context.state.listaUsers.length; i++){

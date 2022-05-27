@@ -9,7 +9,7 @@
       
       <!----------------------->
       <!-- barra de pesquisa -->
-      <nav class="navbar navbar-light bg-light">
+      <nav class="navbar navbar-light bg-light barra-pesquisa">
         <div class="container-fluid">
           <form  class="input-group" @submit="barraPesquisa(busca)">
             <input class="form-control me-2" id="barraPesquisa" type="search" placeholder="Digite o nome do livro" aria-label="Search" v-model="busca" >
@@ -194,11 +194,14 @@ export default {
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setColaboradorModule/getColaborador');
     this.pesquisaLivro = this.listaLivro;
+    this.$store.state.setItensModule.nomeNavbar = 'Empréstimo de livros e devolução'
   }
 }
 
 </script>
 
 <style>
-
+.barra-pesquisa {
+  background-color: #bbbaba8a !important;
+}
 </style>

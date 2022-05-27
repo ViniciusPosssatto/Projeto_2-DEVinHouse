@@ -75,7 +75,7 @@
       <!----------------------->
       <!-- barra de pesquisa -->
 
-      <nav class="navbar navbar-light bg-light mb-3">
+      <nav class="navbar navbar-light bg-light mb-3 barra-pesquisa">
         <div class="container-fluid">
           <form class="input-group" @submit="barraPesquisa(busca)">
             <input class="form-control me-2" type="search" placeholder="Digite o nome do livro ou categoria ou editora" aria-label="Search" v-model="busca">
@@ -175,6 +175,9 @@
                     <button class="w-50 py-2 mb-2 btn btn-outline-primary rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="editarDados">
                       Editar dados
                     </button>
+                     <button class="w-50 py-2 mb-2 btn btn-outline-danger rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="excluir(livro.codigo)">
+                      Excluir
+                    </button>
                   </div>
                 </fieldset>
               </form>
@@ -207,26 +210,29 @@ export default {
     },
 
     barraPesquisa() {
-    if(this.busca !== '') {
-      let pesquisa = () => {
-        return this.listaLivros.filter(item =>
-          item.titulo
-            .toLowerCase()
-              .includes(this.busca.toLowerCase()));
-      } 
-      if(pesquisa) {
-        this.pesquisaLivro = pesquisa(this.busca);
-        if(this.pesquisaLivro.length === 0) {
-          this.$toast.error('Livro não econtrado! Tente outro nome.', {
-            position: 'top'
-          });
-        }
-      } 
-    } else {
-      this.pesquisaLivro = this.listaLivros;
-    }
+      if(this.busca !== '') {
+        let pesquisa = () => {
+          return this.listaLivros.filter(item =>
+            item.titulo
+              .toLowerCase()
+                .includes(this.busca.toLowerCase()));
+        } 
+        if(pesquisa) {
+          this.pesquisaLivro = pesquisa(this.busca);
+          if(this.pesquisaLivro.length === 0) {
+            this.$toast.error('Livro não econtrado! Tente outro nome.', {
+              position: 'top'
+            });
+          }
+        } 
+      } else {
+        this.pesquisaLivro = this.listaLivros;
+      }
     },
-    
+
+    excluir(codigo) {
+      this.$store.commit('setItensModule/excluir', codigo)
+    }
   },
 
   computed: {
@@ -258,12 +264,13 @@ export default {
   },
 
   mounted() {
+    this.$store.state.setItensModule.nomeNavbar = 'Inventário de livros e estatísticas'
     this.pesquisaLivro = this.listaLivro;
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setItensModule/somaLivros');
     this.$store.commit('setItensModule/somaValores');
-    this.$store.commit('setColaboradorModule/somaColabs');
     this.$store.commit('setColaboradorModule/getColaborador');
+    this.$store.commit('setColaboradorModule/somaColabs');
     this.$store.commit('setItensModule/getEmprestados')
   }
   
@@ -306,5 +313,8 @@ export default {
   background-color: #FF7D03;
   text-overflow: ellipsis !important;
   color: #fdfdfd;
+}
+.barra-pesquisa {
+  background-color: #bbbaba8a !important;
 }
 </style>

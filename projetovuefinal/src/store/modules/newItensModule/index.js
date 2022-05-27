@@ -5,7 +5,8 @@ export default {
             listaLivros: [],
             somaLivros: '',
             totalLivros: '',
-            totalEmprestimos: ''
+            totalEmprestimos: '',
+            nomeNavbar: ''
         }
     },
 
@@ -13,7 +14,7 @@ export default {
         
         newItem(state, colaborador) {
             
-            state.listaLivros = JSON.parse(localStorage.getItem('listaLivros')) || []
+            state.listaLivros = localStorage.getItem('listaLivros') ? JSON.parse(localStorage.getItem('listaLivros')) : [];
             if(state.listaLivros.length > 0) {
                 state.listaLivros.push(colaborador);
                 localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
@@ -47,24 +48,29 @@ export default {
         
         getItem(state) {
         
-            let lista = localStorage.getItem('listaLivros') || []
-            
-            if(lista.length > 0) {
-                lista = JSON.parse(lista)
-                state.listaLivros = lista;
-            } else {
-                state.listaLivros = [];
-            }
-           
+            state.listaLivros = localStorage.getItem('listaLivros') ? JSON.parse(localStorage.getItem('listaLivros')) : [];
+ 
         },
 
+        //estatística para o inventario - total livros
         somaLivros(state) {
             state.totalLivros = state.listaLivros.length;
         },
 
+        //estatística para o inventario - soma dos valores
         somaValores(state) {
             const soma = state.listaLivros.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
             state.somaValor = soma;
+        },
+
+        //função para exclusão de itens
+        excluir(state, codigo) {
+            for(var i = 0; i < state.listaLivros.length; i++){
+                if(state.listaLivros[i].codigo == codigo) {
+                    state.listaLivros.splice(i, 1);
+                }
+            }
+            localStorage.setItem('listaLivros', JSON.stringify(state.listaLivros))
         },
 
         editarLivro(state, livro){   // livro é o codigo que foi passado por params na rota do router

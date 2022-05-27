@@ -5,13 +5,12 @@
 
     <div class="row justify-content-md-center">
       <div class="col-12 mt-3">
-        <h3 style="text-align: center">Listagem de colaboradores</h3>
       </div>
 
       <!----------------------->
       <!-- barra de pesquisa -->
       
-      <nav class="navbar navbar-light bg-light">
+      <nav class="navbar navbar-light bg-light barra-pesquisa">
         <div class="container-fluid">
           <form class="input-group" @submit="buscarUser(busca)">
             <input class="form-control me-2" type="search" placeholder="Digite o nome do colaborador" aria-label="Search" v-model="busca">
@@ -24,11 +23,11 @@
       <!------------------------------>
       <!--- cards dos colaboradores -->
 
-      <div class="text-center" v-if="listaColab.length === 0">
-        <h5>Colaborador não econtrado ou não cadastrado</h5>
+      <div class="text-center" v-if="pesquisaUser.length === 0">
+        <h5>Colaborador não econtrado ou não cadastrado.</h5>
       </div>
       <div v-else class="display-card align-items-around">
-        <div v-for="user in (pesquisaUser ? pesquisaUser : listaColab)" :key="user.id" class="ml-3">
+        <div v-for="(user, index) in (pesquisaUser ? pesquisaUser : listaColab)" :key="index" class="ml-3">
           <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly" @click="detalhes(user)" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <div class="row align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
               <vue-gravatar :email="user.email" style="border-radius: 50%;"/>
@@ -127,6 +126,9 @@
                 <button class="w-50 py-2 mb-2 btn btn-outline-primary rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="editarDados">
                   Editar dados
                 </button>
+                <button class="w-50 py-2 mb-2 btn btn-outline-danger rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="excluir(colab.id)">
+                  Excluir
+                </button>
               </div>
             </fieldset>
           </form>
@@ -165,6 +167,10 @@ export default {
   },
 
   methods: {
+
+    excluir(id) {
+      this.$store.commit('setColaboradorModule/excluir', id)
+    },
 
     buscarUser() {
       if(this.busca !== '') {
@@ -207,6 +213,7 @@ export default {
   mounted() {
     this.$store.commit('setColaboradorModule/getColaborador');
     this.pesquisaUser = this.listaColab;
+    this.$store.state.setItensModule.nomeNavbar = 'Listagem de colaboradores'
   }
 }
 </script>
@@ -215,7 +222,9 @@ export default {
 .modal-centro {
   background-color: #bbbaba8a !important;
 }
-
+.barra-pesquisa {
+  background-color: #bbbaba8a !important;
+}
 .tamanho {
   width: -webkit-fill-available;
   text-align: center;

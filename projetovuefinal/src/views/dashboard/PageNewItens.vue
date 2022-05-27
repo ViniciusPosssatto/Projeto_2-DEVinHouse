@@ -1,10 +1,9 @@
 <template>
  <div class="container mt-5">
     <div class="row justify-content-md-center">
-      <div class="col-8">
-        <h2>Cadastro de novos Livros</h2>
+      <div class="col-10">
         <hr>
-        <h5>Dados principais</h5>
+        <h2>Dados principais</h2>
         <hr>
         <vee-form id="formItens" @submit="newItem" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
@@ -40,7 +39,7 @@
 
             <hr>
             
-            <h5>Dados complementares</h5>
+            <h2>Dados complementares</h2>
             
             <hr>
 
@@ -161,13 +160,11 @@ export default {
       lista.forEach(element => {
         if(element.codigo == this.$route.params.codigo) {
           this.livro = element;
-        } else {
-          console.log('caiu no else da edição')
         }
       })
-    } else {
-      console.log('if do else maior')
     }
+
+    this.$store.state.setItensModule.nomeNavbar = 'Cadastro de livros'
   }
   
 }
