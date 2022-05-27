@@ -194,6 +194,7 @@ export default {
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setColaboradorModule/getColaborador');
     this.pesquisaLivro = this.listaLivro;
+    this.$store.state.setItensModule.nomeNavbar = 'Empréstimo de livros e devolução'
   }
 }
 

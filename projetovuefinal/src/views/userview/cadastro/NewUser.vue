@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <div class="row justify-content-md-center">
-      <div class="col-8">
+      <div class="col-10">
         <h2>Dados Pessoais</h2>
         <hr>
         <vee-form id="formUser" @submit="newColaborador" :validation-schema="schema" v-slot="{ errors }">
@@ -228,13 +228,11 @@ export default {
         if(element.id == this.$route.params.id) {
           //console.log(element)
           this.colab = element;
-        } else {
-          console.log('caiu no else da edição')
         }
       })
-    } else {
-      console.log('if do else maior')
     }
+
+    this.$store.state.setItensModule.nomeNavbar = 'Cadastro de colaboradores'
   }
 }
 </script>

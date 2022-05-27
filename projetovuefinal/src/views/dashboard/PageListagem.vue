@@ -214,6 +214,7 @@ export default {
   mounted() {
     this.$store.commit('setColaboradorModule/getColaborador');
     this.pesquisaUser = this.listaColab;
+    this.$store.state.setItensModule.nomeNavbar = 'Listagem de colaboradores'
   }
 }
 </script>

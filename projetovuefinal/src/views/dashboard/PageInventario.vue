@@ -264,12 +264,13 @@ export default {
   },
 
   mounted() {
+    this.$store.state.setItensModule.nomeNavbar = 'Inventário de livros e estatísticas'
     this.pesquisaLivro = this.listaLivro;
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setItensModule/somaLivros');
     this.$store.commit('setItensModule/somaValores');
-    this.$store.commit('setColaboradorModule/somaColabs');
     this.$store.commit('setColaboradorModule/getColaborador');
+    this.$store.commit('setColaboradorModule/somaColabs');
     this.$store.commit('setItensModule/getEmprestados')
   }
   

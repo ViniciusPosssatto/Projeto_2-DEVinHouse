@@ -5,7 +5,8 @@ export default {
             listaLivros: [],
             somaLivros: '',
             totalLivros: '',
-            totalEmprestimos: ''
+            totalEmprestimos: '',
+            nomeNavbar: ''
         }
     },
 

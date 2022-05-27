@@ -2,11 +2,16 @@
   <div v-if="autenticado">
     <nav class="navbar navbar-dark bg-dark">
       <div class="direita container-fluid">
-        <a class="navbar-brand" href="#">
-          {{ usuario }}
-          <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
-          <!-- img src="../../../assets/img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top"-->
-        </a>
+        <div class="text-white">
+          <h3 v-text="nomeNavbar"></h3>
+        </div>
+        <div>
+          <a class="navbar-brand" href="#">
+            <h5 v-text="usuario"></h5>
+            <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
+            <!-- img src="../../../assets/img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top"-->
+          </a>
+        </div>
       </div>
     </nav>
   </div>
@@ -20,6 +25,10 @@ export default {
     autenticado() {
       return this.$store.state.setUserLoginModule.autenticado;
     },
+// captura o nome pelo mounted de cada página
+     nomeNavbar() {
+      return this.$store.state.setItensModule.nomeNavbar;
+    },
 // definir e monitorar o email no gravatar
     email() {
       return this.$store.state.setUserLoginModule.email;
@@ -31,6 +40,7 @@ export default {
   },
 // busca o token no local storage e seta autenticado como true ou false caso não tenha token
   mounted() {
+    this.$store.dispatch('setUserLoginModule/usuarioLogado');
     this.$store.state.setUserLoginModule.autenticado = localStorage.getItem('token') ? true : false;
   }
 }
