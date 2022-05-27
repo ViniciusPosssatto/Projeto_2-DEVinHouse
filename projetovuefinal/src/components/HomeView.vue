@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-10 mb-4 text-center">
-      <h1>Bem vindo ao sistema biblioteca virtual</h1>
+      <h1>Bem vind@!</h1>
     </div>
       <div class="col-6 ms-5 align-items-around card text-white bg-dark p-3">
         <h2>Sistema de empréstimos de livros</h2>
@@ -89,11 +89,11 @@ export default {
     }
   },
 
-  btnCadadastrar() {
-    this.$toast.success('Obrigado por se cadastrar. Logo entraremos em contato!', { 
-      position: 'top'
-    });
-}
+  mounted() {
+    this.$store.state.setItensModule.nomeNavbar = 'Biblioteca Virtual'
+  }
+
+
 }
 </script>
 

@@ -115,7 +115,8 @@ export default {
 }
 
 #div {
-  height: 100vh !important;
+  margin-top: 50px;
+  height: 100% !important;
 }
 ul li {
   transition: 1s;

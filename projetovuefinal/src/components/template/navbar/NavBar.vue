@@ -2,15 +2,17 @@
   <div v-if="autenticado">
     <nav class="navbar navbar-dark bg-dark">
       <div class="direita container-fluid">
-        <div class="text-white">
+        <div class="text-white ms-5">
           <h3 v-text="nomeNavbar"></h3>
         </div>
-        <div>
-          <a class="navbar-brand" href="#">
-            <h5 v-text="usuario"></h5>
-            <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
-            <!-- img src="../../../assets/img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top"-->
-          </a>
+        <div class="row" style=" display:flex; flex-direction:row; flex-wrap: nowrap; align-items: center;">
+          <div class="col-9">
+            <h5 v-text="usuario" class="text-white"></h5>
+          </div>
+          <div class="col-8">
+              <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
+              <!-- img src="../../../assets/img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top"-->
+          </div>
         </div>
       </div>
     </nav>

@@ -5,13 +5,12 @@
 
     <div class="row justify-content-md-center">
       <div class="col-12 mt-3">
-        <h3 style="text-align: center">Listagem de colaboradores</h3>
       </div>
 
       <!----------------------->
       <!-- barra de pesquisa -->
       
-      <nav class="navbar navbar-light bg-light">
+      <nav class="navbar navbar-light bg-light barra-pesquisa">
         <div class="container-fluid">
           <form class="input-group" @submit="buscarUser(busca)">
             <input class="form-control me-2" type="search" placeholder="Digite o nome do colaborador" aria-label="Search" v-model="busca">
@@ -223,7 +222,9 @@ export default {
 .modal-centro {
   background-color: #bbbaba8a !important;
 }
-
+.barra-pesquisa {
+  background-color: #bbbaba8a !important;
+}
 .tamanho {
   width: -webkit-fill-available;
   text-align: center;

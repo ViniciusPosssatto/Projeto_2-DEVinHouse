@@ -75,7 +75,7 @@
       <!----------------------->
       <!-- barra de pesquisa -->
 
-      <nav class="navbar navbar-light bg-light mb-3">
+      <nav class="navbar navbar-light bg-light mb-3 barra-pesquisa">
         <div class="container-fluid">
           <form class="input-group" @submit="barraPesquisa(busca)">
             <input class="form-control me-2" type="search" placeholder="Digite o nome do livro ou categoria ou editora" aria-label="Search" v-model="busca">
@@ -313,5 +313,8 @@ export default {
   background-color: #FF7D03;
   text-overflow: ellipsis !important;
   color: #fdfdfd;
+}
+.barra-pesquisa {
+  background-color: #bbbaba8a !important;
 }
 </style>
