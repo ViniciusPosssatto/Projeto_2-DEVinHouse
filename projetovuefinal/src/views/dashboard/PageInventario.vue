@@ -175,6 +175,9 @@
                     <button class="w-50 py-2 mb-2 btn btn-outline-primary rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="editarDados">
                       Editar dados
                     </button>
+                     <button class="w-50 py-2 mb-2 btn btn-outline-danger rounded-4" type="button" data-bs-dismiss="modal" aria-label="Close" @click="excluir(livro.codigo)">
+                      Excluir
+                    </button>
                   </div>
                 </fieldset>
               </form>
@@ -207,26 +210,29 @@ export default {
     },
 
     barraPesquisa() {
-    if(this.busca !== '') {
-      let pesquisa = () => {
-        return this.listaLivros.filter(item =>
-          item.titulo
-            .toLowerCase()
-              .includes(this.busca.toLowerCase()));
-      } 
-      if(pesquisa) {
-        this.pesquisaLivro = pesquisa(this.busca);
-        if(this.pesquisaLivro.length === 0) {
-          this.$toast.error('Livro não econtrado! Tente outro nome.', {
-            position: 'top'
-          });
-        }
-      } 
-    } else {
-      this.pesquisaLivro = this.listaLivros;
-    }
+      if(this.busca !== '') {
+        let pesquisa = () => {
+          return this.listaLivros.filter(item =>
+            item.titulo
+              .toLowerCase()
+                .includes(this.busca.toLowerCase()));
+        } 
+        if(pesquisa) {
+          this.pesquisaLivro = pesquisa(this.busca);
+          if(this.pesquisaLivro.length === 0) {
+            this.$toast.error('Livro não econtrado! Tente outro nome.', {
+              position: 'top'
+            });
+          }
+        } 
+      } else {
+        this.pesquisaLivro = this.listaLivros;
+      }
     },
-    
+
+    excluir(codigo) {
+      this.$store.commit('setItensModule/excluir', codigo)
+    }
   },
 
   computed: {
