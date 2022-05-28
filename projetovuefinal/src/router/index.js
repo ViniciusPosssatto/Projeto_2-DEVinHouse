@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import HomeView from '@/components/HomeView.vue'
+import HomeView from '@/views/dashboard/HomeView.vue'
 
 import PageEmprestimo from '@/views/dashboard/PageEmprestimo.vue'
 import PageInventario from '@/views/dashboard/PageInventario.vue'
