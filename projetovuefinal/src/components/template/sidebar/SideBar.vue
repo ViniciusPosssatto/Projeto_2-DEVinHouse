@@ -134,9 +134,7 @@ export default {
 #div {
   margin-top: 50px;
 }
-ul li {
-  transition: 1s;
-}
+
 ul li:hover {
   background: rgb(111, 113, 121);
   background: radial-gradient(
@@ -146,25 +144,23 @@ ul li:hover {
   );
 }
 
-@media screen and (min-width: 700px){
-
-  .l-navbar{
-    left: 0;
-    padding: 1rem 1rem 0 0
-  }
-  
-}
-
 /* Trnasição sidebar */
-
-.sidabar-enter-active,
-.sidabar-leave-active {
-  transition: opacity 1s ease;
-}
 
 .sidabar-enter-from,
 .sidabar-leave-to {
   opacity: 0;
+  font-size: 0;
+}
+
+.sidabar-enter-to,
+.sidabar-leave-from {
+  opacity: 1;
+  font-size: 35px;
+}
+
+.sidabar-enter-active,
+.sidabar-leave-active {
+  transition: all 1s ease;
 }
 
 </style>
