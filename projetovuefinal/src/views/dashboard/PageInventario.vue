@@ -3,7 +3,7 @@
     <!------------------>
     <!-- Estatisticas -->
     <div class="row" style="justify-content: space-between;">
-      <div class="col-3 card-top">
+      <div class="col-sm-12 col-md-6 col-lg-3 card-top">
         <div class="d-flex align-items-around">
             <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
               <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
@@ -17,7 +17,7 @@
             </div>
         </div>
       </div>
-      <div class="col-3 card-top ">
+      <div class="col-sm-12 col-md-6 col-lg-3 card-top ">
         <div class="d-flex align-items-around">
             <div class=" tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
               <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
@@ -31,7 +31,7 @@
             </div>
           </div>
       </div>
-      <div class="col-3 card-top">
+      <div class="col-sm-12 col-md-6 col-lg-3 card-top">
         <div class="d-flex align-items-around">
           <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
             <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>  
-      <div class="col-3 card-top">
+      <div class="col-sm-12 col-md-6 col-lg-3 card-top">
         <div class="d-flex align-items-around">
           <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
             <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
@@ -68,7 +68,7 @@
     <!-- Inventário -->
     
     <div class="row justify-content-md-center">
-      <div class="col-12">
+      <div class="col-sm-12 col-md-6 col-lg-12">
         <h3 style="text-align: center">Inventário de Livros</h3>
       </div>
 
@@ -89,10 +89,10 @@
 
     </div>
       <div class="row ">
-        <div class="col-12 ">
+        <div class="col-sm-12 col-md-6 col-lg-12 ">
           <div class="display-card align-items-around" style="align-content: center;" >
             <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo" class="row ">
-              <div class="col-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <div class="col-sm-12 col-md-6 col-lg-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra" style="cursor: pointer; width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
                   <div class="row m-2 align-items-baseline " style=" max-width: 300px; align-self: center; justify-content: center;">
                     <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
@@ -128,44 +128,44 @@
                 <form id="formEdicao" aria-disabled="disabled">
                   <fieldset>
                     <div class="row" style="justify-content: center;">
-                    <div class="form mb-3 col-6">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-6">
                       <label name="codigo" >Codigo</label>
                       <input name="codigo" type="text" class="form-control rounded-4" disabled id="Inputcodigo" v-model="livro.codigo">
                     </div>
-                    <div class="form mb-3 col-6">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-6">
                       <label name="categoria" for="categoria">Categoria</label>
                       <input name="categoria" type="text" class="form-control rounded-4" disabled id="categoria" v-model="livro.categoria">
                     </div>
-                    <div class="form mb-3 col-12">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-12">
                       <label name="titulo" for="titulo">Título</label>
                       <input name="titulo" type="text" class="form-control rounded-4" disabled id="titulo" v-model="livro.titulo">
                     </div>
                       <h5>Dados Complementares</h5>
-                    <div class="form mb-3 col-8" v-if="livro.status">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-8" v-if="livro.status">
                       <label name="status" for="status">Emprestado para:</label>
                       <input name="status" type="text" class="form-control rounded-4" disabled id="status" v-model="livro.status">
                     </div>
-                    <div class="form mb-3 col-8" v-else>
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-8" v-else>
                       <label name="status" for="status"></label>
                       <input name="status" type="text" class="form-control rounded-4" disabled id="status" placeholder="Disponível para empréstimo">
                     </div>
-                    <div class="form mb-3 col-4">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-4">
                       <label name="valor" for="valor">Valor (R$)</label>
                       <input name="valor" type="number" class="form-control rounded-4" disabled id="valor" v-model="livro.valor">
                     </div>
-                    <div class="form mb-3 col-12">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-12">
                       <label name="url" for="url">URL da foto</label>
                       <input name="url" type="text" class="form-control rounded-4" disabled id="url" v-model="livro.url">
                     </div>
-                    <div class="form mb-3 col-6">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-6">
                       <label name="editora" for="editora">Editora</label>
                       <input name="editora" type="text" class="form-control rounded-4" disabled id="editora" v-model="livro.editora">
                     </div>
-                    <div class="form mb-3 col-6">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-6">
                       <label name="autor" for="autor">Autor</label>
                       <input name="autor" type="text" class="form-control rounded-4" disabled id="autor" v-model="livro.autor">
                     </div>
-                    <div class="form mb-3 col-12">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-12">
                       <label name="descricao" for="descricao">Descrição</label>
                       <input name="descricao" type="text" class="form-control rounded-4" disabled id="descricao" v-model="livro.descricao">
                     </div>

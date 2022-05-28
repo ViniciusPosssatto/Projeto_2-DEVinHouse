@@ -4,7 +4,7 @@
   <div class="container mt-4">
     <div class="row justify-content-md-center">
       <div sm="5" class="d-flex justify-content-center align-items-center left-login">
-        <div class="col-4">
+        <div class="col-sm-12 col-md-6 col-lg-4">
           <h2 class="text-center mb-4">Biblioteca virtual</h2>
           <hr class="my-3">
           <vee-form @submit="autenticaLogin" name="formLogin"  :validation-schema="schema1" v-slot="{ errors }">
@@ -38,13 +38,13 @@
               </button>
             </div>
             <hr class="my-4">
-            <div class="col-12 mb-3 mt-3 justify-content-md-center">
+            <div class="col-sm-12 col-md-6 col-lg-12 mb-3 mt-3 justify-content-md-center">
               <span>Não tem cadastro?</span>
             </div>
             <button type="button" class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Cadastrar-se</button>
           </vee-form>
         </div>
-        <div class="col-6">
+        <div class="col-sm-12 col-md-6 col-lg-6">
           <div class="d-flex justify-content-center align-items-center left-login ms-5">
             <img src="@/assets/img/tela-login.svg" alt="imagem-livros" class="img-login">
           </div>

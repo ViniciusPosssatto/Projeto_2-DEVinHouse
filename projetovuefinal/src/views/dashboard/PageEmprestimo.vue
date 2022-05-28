@@ -3,7 +3,7 @@
     <!-------------------------->
     <!-- Listagem Emprestimos -->
     <div class="row justify-content-md-center">
-      <div class="col-12 mt-3">
+      <div class="col-sm-12 col-md-6 col-lg-12 mt-3">
         <h3 style="text-align: center">Empréstimo de itens</h3>
       </div>
       
@@ -61,18 +61,18 @@
                 <form id="formEdicao" aria-disabled="disabled">
                   <fieldset>
                     <div class="row" style="justify-content: center;">
-                      <div class="form mb-3 col-12 align-items-baseline" style=" max-width: 250px; align-self: center; justify-content: center; margin: 0 40px">
+                      <div class="form mb-3 col-sm-12 col-md-6 col-lg-12 align-items-baseline" style=" max-width: 250px; align-self: center; justify-content: center; margin: 0 40px">
                           <img :src="livro.url" alt="" style="border-radius: 20px; width: 250px;">
                       </div>
                        <hr class="my-4">
                       <h5 style="font-weight: bold">Selecione alguém para emprestar:</h5>
                       <p class="small">Ou clique em "Disponível" para retirar o empréstimo.</p>
-                    <div class="col-6">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
                       <select name="user" id="user" form="userForm" class="form-control" value="Clique aqui" v-model="emprestimo">
                         <option v-for="user in listaColab" :key="user.id"  v-text="user.nome" ></option>
                       </select>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
                       <button class="w-50 py-2 btn btn-outline-success rounded-4" style="text-align: center;" type="submit" data-bs-dismiss="modal" aria-label="Close" @click="salvarEmprestimo(emprestimo)" v-if="!emprestimo">
                         Disponível
                       </button>
@@ -81,31 +81,31 @@
                       </button>
                     </div>
                       <hr class="my-4">
-                    <div class="form mb-3 col-6">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-6">
                       <label name="codigo" >Codigo</label>
                       <input name="codigo" type="text" class="form-control rounded-4" disabled id="Inputcodigo" v-model="livro.codigo">
                     </div>
-                    <div class="form mb-3 col-6">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-6">
                       <label name="categoria" for="categoria">Categoria</label>
                       <input name="categoria" type="text" class="form-control rounded-4" disabled id="categoria" v-model="livro.categoria">
                     </div>
-                    <div class="form mb-3 col-12">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-12">
                       <label name="titulo" for="titulo">Título</label>
                       <input name="titulo" type="text" class="form-control rounded-4" disabled id="titulo" v-model="livro.titulo">
                     </div>
-                    <div class="form mb-3 col-6">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-6">
                       <label name="editora" for="editora">Editora</label>
                       <input name="editora" type="text" class="form-control rounded-4" disabled id="editora" v-model="livro.editora">
                     </div>
-                    <div class="form mb-3 col-6">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-6">
                       <label name="autor" for="autor">Autor</label>
                       <input name="autor" type="text" class="form-control rounded-4" disabled id="autor" v-model="livro.autor">
                     </div>
-                    <div class="form mb-3 col-3">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-3">
                       <label name="valor" for="valor">ValorR$</label>
                       <input name="valor" type="text" class="form-control rounded-4" disabled id="valor" v-model="livro.valor">
                     </div>
-                    <div class="form mb-3 col-9">
+                    <div class="form mb-3 col-sm-12 col-md-6 col-lg-9">
                       <label name="descricao" for="descricao">Descrição</label>
                       <input name="descricao" type="text" class="form-control rounded-4" disabled id="descricao" v-model="livro.descricao">
                     </div>

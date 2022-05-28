@@ -5,7 +5,7 @@
     <!-- Colaboradores cadastrados-->
 
     <div class="row justify-content-md-center">
-      <div class="col-12 mt-3">
+      <div class="col-sm-12 col-md-6 col-lg-12 mt-3">
       </div>
 
       <!----------------------->
@@ -62,62 +62,62 @@
               <fieldset>
 
                 <div class="row" style="justify-content: center;">
-                <div class="form mb-3 col-7">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-7">
                   <label name="nome" >Nome</label>
                   <input name="nome" type="text" class="form-control rounded-4" disabled id="InputNome" v-model="colab.nome">
                 </div>
-                <div class="form mb-3 col-5">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-5">
                   <label name="genero" for="genero">Gênero</label>
                   <input name="genero" type="text" class="form-control rounded-4" disabled id="genero" v-model="colab.genero">
                 </div>
-                <div class="form mb-3 col-5">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-5">
                   <label name="dataNasc" for="dataNasc">Data nascimento</label>
                   <input name="dataNasc" type="text" class="form-control rounded-4" disabled id="dataNasc" v-model="colab.dataNasc">
                 </div>
-                <div class="form mb-3 col-7">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-7">
                   <label name="cargo" for="cargo">Cargo</label>
                   <input name="cargo" type="text" class="form-control rounded-4" disabled id="cargo" v-model="colab.cargo">
                 </div>
-                <div class="form mb-3 col-4">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-4">
                   <label name="telefone" for="telefone">Telefone</label>
                   <input name="telefone" type="text" class="form-control rounded-4" disabled id="telefone" v-model="colab.telefone">
                 </div>
 
-                <div class="form mb-3 col-8">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-8">
                   <label name="email" for="email">Email</label>
                   <input name="email" type="email" class="form-control rounded-4" disabled id="email" placeholder="name@example.com" v-model="colab.email">
                 </div>
                 <h5>Dados de endereço</h5>
                 
-                <div class="form mb-3 col-4">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-4">
                   <label name="cep" for="cep">CEP</label>
                   <input name="cep" type="number" class="form-control rounded-4" disabled id="cep" v-model="colab.cep">
                 </div>
-                <div class="form mb-3 col-5">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-5">
                   <label name="cidade" for="cidade">Cidade</label>
                   <input name="cidade" type="text" class="form-control rounded-4" disabled id="cidade" v-model="colab.cidade">
                 </div>
-                <div class="form mb-3 col-3">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-3">
                   <label name="estado" for="estado">Estado</label>
                   <input name="estado" type="text" class="form-control rounded-4" disabled id="estado" v-model="colab.estado">
                 </div>
-                <div class="form mb-3 col-5">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-5">
                   <label name="logradouro" for="logradouro">Logradouro</label>
                   <input name="logradouro" type="text" class="form-control rounded-4" disabled id="logradouro" v-model="colab.logradouro">
                 </div>
-                <div class="form mb-3 col-2">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-2">
                   <label name="numero" for="numero">Numero</label>
                   <input name="numero" type="number" class="form-control rounded-4" disabled id="numero" v-model="colab.numero">
                 </div>
-                <div class="form mb-3 col-5">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-5">
                   <label name="complemento" for="complemento">Complemento</label>
                   <input name="complemento" type="text" class="form-control rounded-4" disabled id="complemento" v-model="colab.complemento">
                 </div>
-                <div class="form mb-3 col-5">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-5">
                   <label name="bairro" for="bairro">Bairro</label>
                   <input name="bairro" type="text" class="form-control rounded-4" disabled id="bairro" v-model="colab.bairro">
                 </div>
-                <div class="form mb-3 col-7">
+                <div class="form mb-3 col-sm-12 col-md-6 col-lg-7">
                   <label name="pontoRefe" for="pontoRefe">Ponto de referência</label>
                   <input name="pontoRefe" type="text" class="form-control rounded-4" disabled id="pontoRefe" v-model="colab.pontoRefe">
                 </div>

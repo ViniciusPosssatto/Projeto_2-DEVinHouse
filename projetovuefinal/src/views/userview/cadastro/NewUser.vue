@@ -6,12 +6,12 @@
         <hr>
         <vee-form id="formUser" @submit="newColaborador" :validation-schema="schema" v-slot="{ errors }">
           <div class="row g-3">
-            <div class="col-5">
+            <div class="col-sm-12 col-md-6 col-lg-5">
               <label>Nome Completo</label>
               <vee-field type="text" name="nome" class="form-control" v-model="colab.nome"/>
               <span class="text-danger" v-text="errors.nome" v-show="errors.nome"></span>
             </div>
-            <div class="col-3">
+            <div class="col-sm-12 col-md-6 col-lg-3">
               <label for="genero">Gênero:</label>
               <select name="genero" id="genero" form="generoForm" class="form-control" v-model="colab.genero">
                 <option value="Masculino">Masculino</option>
@@ -20,12 +20,12 @@
               </select>
               <span class="text-danger" v-text="errors.genero" v-show="errors.genero"></span>
             </div>
-            <div class="col-4">
+            <div class="col-sm-12 col-md-6 col-lg-4">
               <label>Data Nascimento</label>
               <vee-field type="date" name="dataNasc" class="form-control" v-model="colab.dataNasc"/>
               <span class="text-danger" v-text="errors.dataNasc" v-show="errors.dataNasc"></span>
             </div>
-            <div class="col-3">
+            <div class="col-sm-12 col-md-6 col-lg-3">
               <label for="cargo">Cargo:</label>
               <select name="cargo" id="cargo" form="cargoForm" class="form-control" v-model="colab.cargo">
                 <option value="Estudante">Estudante</option>
@@ -35,12 +35,12 @@
               </select>
               <span class="text-danger" v-text="errors.cargo" v-show="errors.cargo"></span>
             </div>
-            <div class="col-4">
+            <div class="col-sm-12 col-md-6 col-lg-4">
               <label>Telefone</label>
               <vee-field v-mask="['(##) ####-####', '(##) #####-####']" type="tel" name="telefone" class="form-control" v-model="colab.telefone"/>
               <span class="text-danger" v-text="errors.telefone" v-show="errors.telefone"></span>
             </div>
-            <div class="col-5">
+            <div class="col-sm-12 col-md-6 col-lg-5">
               <label>E-Mail</label>
               <vee-field type="email" name="email" class="form-control" v-model="colab.email"/>
               <span class="text-danger" v-text="errors.email" v-show="errors.email"></span>
@@ -52,7 +52,7 @@
           <h3>Dados de Endereço</h3>
           <br>
           <div class="row g-3">
-            <div class="col-4">
+            <div class="col-sm-12 col-md-6 col-lg-4">
               <label>CEP</label>
               <vee-field v-mask="'#####-###'" type="text" name="cep" class="form-control" v-model="colab.cep"/>
               <span class="text-danger" v-text="errors.cep" v-show="errors.cep"></span>
@@ -61,50 +61,50 @@
               <br>
               <button type="button" @click="buscaCep">Buscar</button>
             </div>
-            <div class="col-4">
+            <div class="col-sm-12 col-md-6 col-lg-4">
               <label>Cidade</label>
               <vee-field type="text" name="cidade" class="form-control" v-model="colab.cidade" data-toggle="tooltip" data-placement="top" title="Preenchimento automatico" readonly/>
               <span class="text-danger" v-text="errors.cidade" v-show="errors.cidade"></span>
             </div>
-            <div class="col-3">
+            <div class="col-sm-12 col-md-6 col-lg-3">
               <label>Estado</label>
               <vee-field type="text" name="estado" class="form-control" v-model="colab.estado" data-toggle="tooltip" data-placement="top" title="Preenchimento automatico" readonly/>
               <span class="text-danger" v-text="errors.estado" v-show="errors.estado"></span>
             </div>
-            <div class="col-4">
+            <div class="col-sm-12 col-md-6 col-lg-4">
               <label>Logradouro</label>
               <vee-field type="text" name="logradouro" class="form-control" v-model="colab.logradouro"/>
               <span class="text-danger" v-text="errors.logradouro" v-show="errors.logradouro"></span>
             </div>
-            <div class="col-2">
+            <div class="col-sm-12 col-md-6 col-lg-2">
               <label>Número</label>
               <vee-field type="number" name="numero" class="form-control" v-model="colab.numero"/>
               <span class="text-danger" v-text="errors.numero" v-show="errors.numero"></span>
             </div>
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <label>Complemento</label>
               <vee-field type="text" name="complemento" class="form-control" v-model="colab.complemento"/>
               <span class="text-danger" v-text="errors.complemento" v-show="errors.complemento"></span>
             </div>
-            <div class="col-5">
+            <div class="col-sm-12 col-md-6 col-lg-5">
               <label>Bairro</label>
               <vee-field type="text" name="bairro" class="form-control" v-model="colab.bairro"/>
               <span class="text-danger" v-text="errors.bairro" v-show="errors.bairro"></span>
             </div>
-            <div class="col-7">
+            <div class="col-sm-12 col-md-6 col-lg-7">
               <label>Ponto de referência</label>
               <vee-field type="text" name="pontoRefe" class="form-control" v-model="colab.pontoRefe"/>
               <span class="text-danger" v-text="errors.pontoRefe" v-show="errors.pontoRefe"></span>
             </div>
           </div>
           <div class="row mt-4">
-            <div class="col-6" v-if="this.$route.params.id">
+            <div class="col-sm-12 col-md-6 col-lg-6" v-if="this.$route.params.id">
               <button type="button" class="btn btn-primary" style="font-weight: bold; font-size: large;" @click="editarColab">Editar</button>
             </div>
-            <div class="col-6" v-else>
+            <div class="col-sm-12 col-md-6 col-lg-6" v-else>
               <button type="submit" class="btn btn-primary" style="font-weight: bold; font-size: large;">Salvar</button>
             </div>
-            <div class="col-6">
+            <div class="col-sm-12 col-md-6 col-lg-6">
               <button type="button" style="font-weight: bold; font-size: large;" class="btn btn-warning" @click="limparCampos()">Limpar campos</button>
             </div>
           </div>

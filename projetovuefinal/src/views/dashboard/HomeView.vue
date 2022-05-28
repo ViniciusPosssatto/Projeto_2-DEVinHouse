@@ -1,29 +1,29 @@
 <template>
   <div class="row">
-    <div class="col-10 mb-4 text-center">
+    <div class="col-sm-12 col-md-6 col-lg-10 mb-4 text-center">
       <h1>Bem vind@!</h1>
     </div>
-      <div class="col-6 ms-5 align-items-around card text-white bg-dark p-3">
+      <div class="col-sm-12 col-md-6 col-lg-6 ms-5 align-items-around card text-white bg-dark p-3">
         <h2>Sistema de empréstimos de livros</h2>
         <span class="card card-home">Aqui nós temos o melhor!!</span>
         <p>Confira! Contate um nossos atendentes virtuais e faça um tour pelo sistema conhecendo o funcionamento e os benefícios de usar a biblioteca virtual.</p>
         <p>Temos um descontão na mensalidade para aqueles que realizarem o tour. Legal né?! </p>
         <p>Participe e garanta já o seu.</p>
       </div>
-    <div class="col-5 ms-5">
+    <div class="col-sm-12 col-md-6 col-lg-5 ms-5">
       <h3>Cadastre livros e colaboradores</h3>
       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero distinctio incidunt labore dolor. Laboriosam obcaecati accusantium id cupiditate minima minus velit necessitatibus eveniet asperiores, molestias in adipisci quae saepe repudiandae!</p>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum adipisci eaque in fugit quae rerum consequuntur autem aperiam ullam fuga optio harum at reiciendis odit, blanditiis facere laudantium eius deleniti?</p>
     </div>
-    <div class="col-6 ms-5 mb-4 mt-4">
+    <div class="col-sm-12 col-md-6 col-lg-6 ms-5 mb-4 mt-4">
       <h3>Controle seu inventário</h3>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam pariatur ducimus nobis blanditiis quam velit distinctio harum? Qui quia consequatur optio reiciendis fugit quaerat quae cum, illum odio ipsum? Eaque.</p>
       <hr>
       <h5>Organização faz a diferença!</h5>
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime blanditiis facere cum, magni voluptates qui reiciendis culpa nisi quibusdam optio numquam voluptatem, soluta fugiat suscipit eos quae nulla. Cum, enim.</p>
     </div>
-    <div class="col-5 ms-5 mb-3">
-      <div class="col-11 ms-5 p-5 card text-white bg-dark mt-3">
+    <div class="col-sm-12 col-md-6 col-lg-5 ms-5 mb-3">
+      <div class="col-sm-12 col-md-6 col-lg-11 ms-5 p-5 card text-white bg-dark mt-3">
         <h3>Por onde começar?</h3>
         <p>Comece cadastrando seu primeiro livro:</p>
         <button @click="pageCL" class="btn btn-primary">Cadastrar um livro</button>
@@ -31,7 +31,7 @@
         <button @click="pageCC" class="btn btn-primary">Cadastrar um colaborador</button>
       </div>
     </div>
-    <div class="col-11 ms-5">
+    <div class="col-sm-12 col-md-6 col-lg-11 ms-5">
       <img src="@/assets/img/fundo-home-2.jpg" alt="imagem-de-livros" style= "width: 1580px; height: 280px;">
     </div>
     
