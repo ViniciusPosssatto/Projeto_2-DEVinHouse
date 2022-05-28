@@ -1,30 +1,45 @@
 <template>
   <div v-if="autenticado">
-    <nav class="navbar navbar-dark bg-dark">
-      <div class="direita container-fluid">
-        <div>
-          <i class="fa-solid fa-house me-1"></i>    
-        </div>
-        <div class="text-white ms-5">
-          <h3 v-text="nomeNavbar"></h3>
-        </div>
-        <div class="row" style=" display:flex; flex-direction:row; flex-wrap: nowrap; align-items: center;">
-          <div class="col-9">
-            <h5 v-text="usuario" class="text-white"></h5>
+    <nav class="navbar navbar-dark bg-dark" style="display: block !important;">
+        <div class="row align-items-center">
+          <div class="col-1">
+            <img src="@/assets/img/seta-esquerda.png" alt="" style="width:45px" @click="sidebarTurn" class="ms-5" :class="sidebarTurnOnOff ? 'btn-vira-left' : 'btn-vira-right' ">
+          </div>  
+          <div class="text-white ms-5 col-4">
+            <h3 v-text="nomeNavbar"></h3>
           </div>
-          <div class="col-8">
+            <div class="text-end col-4" >
+              <h5 v-text="usuario" class="text-white"></h5>
+            </div>
+            <div class="col-2">
               <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
               <!-- img src="../../../assets/img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top"-->
           </div>
         </div>
-      </div>
+    
     </nav>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      sidebarTurnOnOff: ''
+    }
+  },
 
+  methods: {
+
+    sidebarTurn() {
+      this.sidebarTurnOnOff = !this.sidebarTurnOnOff;
+      this.$store.commit('coisasGeraisModule/setSidebar', this.sidebarTurnOnOff)
+    },
+
+    btnVira() {
+      
+    }
+},
   computed: {
 // definir e monitorar se o usuário está logado
     autenticado() {
@@ -53,7 +68,15 @@ export default {
 
 <style>
 
+.btn-vira-left {
+  transform: rotate(180deg);
+  transition: 1s;
+}
 
+.btn-vira-right {
+  transform: rotate(360deg);
+  transition: 1s;
+}
 
 .direita {
   display: flex !important;

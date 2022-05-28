@@ -35,8 +35,8 @@
               <th>Emprestado para</th>
             </tr>
           </thead>
-          <tbody id="tabody">
-            <tr v-for="livro in (pesquisaLivro ? pesquisaLivro : listaLivro)" :key="livro.id"  @click="detalhesLivro(livro)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <tbody>
+            <tr  v-for="livro in (pesquisaLivro ? pesquisaLivro : listaLivro)" :key="livro.id"  @click="detalhesLivro(livro)" data-bs-toggle="modal" data-bs-target="#exampleModal">
               <td v-text="livro.codigo"></td>
               <td v-text="livro.titulo"></td>
               <td v-text="livro.categoria"></td>
@@ -203,5 +203,11 @@ export default {
 <style>
 .barra-pesquisa {
   background-color: #bbbaba8a !important;
+}
+
+table tr:hover {
+  cursor: pointer;
+  transition: 0.7s;
+  background-color: #919394
 }
 </style>

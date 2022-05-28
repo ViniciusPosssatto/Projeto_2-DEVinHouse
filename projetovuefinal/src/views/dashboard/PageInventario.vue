@@ -93,7 +93,7 @@
           <div class="display-card align-items-around" style="align-content: center;" >
             <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo" class="row ">
               <div class="col-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra" style="width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
+                <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra" style="cursor: pointer; width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
                   <div class="row m-2 align-items-baseline " style=" max-width: 300px; align-self: center; justify-content: center;">
                     <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
                   </div>
@@ -278,8 +278,11 @@ export default {
 </script>
 
 <style scoped>
-.sombra {
+.sombra:hover {
   box-shadow: 10px 5px 5px black;
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.6);
+  transform: scale(1.1);
 }
 
 .col-3.card-top {
