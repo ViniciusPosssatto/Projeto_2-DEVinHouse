@@ -8,10 +8,10 @@
           <div class="text-white ms-5 col-4">
             <h3 v-text="nomeNavbar"></h3>
           </div>
-            <div class="text-end col-4" >
+            <div class="text-end col-5" >
               <h5 v-text="usuario" class="text-white"></h5>
             </div>
-            <div class="col-2">
+            <div class="col-1">
               <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
               <!-- img src="../../../assets/img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top"-->
           </div>

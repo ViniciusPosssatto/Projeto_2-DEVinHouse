@@ -1,6 +1,7 @@
 <template>
-  <transition-group name="sidabar">
-    <div :class="sidebarTurn ? 'd-none' : 'd-block'" class=" l-navbar sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" id="div" v-if="autenticado">
+  <Transition name="sidabar">
+    <div v-show="!sidebarTurn">
+    <div class=" l-navbar sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" id="div" v-if="autenticado">
       <div class="nav-l">
           <span class="fs-4">
             <i class="fa-solid fa-book me-2"></i>
@@ -66,7 +67,8 @@
         </ul>
       </div>
     </div>
-  </transition-group>
+    </div>
+  </Transition>
 </template>
 
 <script>
@@ -155,23 +157,14 @@ ul li:hover {
 
 /* Trnasição sidebar */
 
-/*Primeiro estilo*/
-.sidabar-leave-to,
-.sidabar-enter-from{
+.sidabar-enter-active,
+.sidabar-leave-active {
+  transition: opacity 1s ease;
+}
+
+.sidabar-enter-from,
+.sidabar-leave-to {
   opacity: 0;
-}
-
-/*Segundo estilo*/
-.sidabar-leave-from,
-.sidabar-enter-to{
-  opacity: 1;
-}
-
-/*Funcionamento*/
-.sidabar-move,
-.sidabar-leave-active,
-.sidabar-enter-active{
-  transition: all 2s;
 }
 
 </style>
