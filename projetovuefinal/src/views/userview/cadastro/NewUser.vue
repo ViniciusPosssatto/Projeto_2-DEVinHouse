@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5 animate__animated animate__fadeIn">
     <div class="row justify-content-md-center">
       <div class="col-10">
         <h2>Dados Pessoais</h2>

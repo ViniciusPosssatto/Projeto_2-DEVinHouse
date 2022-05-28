@@ -2,16 +2,16 @@
   <div v-if="autenticado">
     <nav class="navbar navbar-dark bg-dark" style="display: block !important;">
         <div class="row align-items-center">
-          <div class="col-sm-12 col-md-6 col-lg-1">
+          <div class="col-sm-3 col-md-6 col-lg-1">
             <img src="@/assets/img/seta-esquerda.png" alt="" style="width:45px" @click="sidebarTurn" class="ms-5" :class="sidebarTurnOnOff ? 'btn-vira-left' : 'btn-vira-right' ">
           </div>  
-          <div class="text-white ms-5 col-sm-12 col-md-6 col-lg-4">
+          <div class="text-white ms-5 col-sm-7 col-md-6 col-lg-4">
             <h3 v-text="nomeNavbar"></h3>
           </div>
             <div class="text-end col-sm-12 col-md-6 col-lg-5" >
               <h5 v-text="usuario" class="text-white"></h5>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-1">
+            <div class="col-sm-2 col-md-6 col-lg-1">
               <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
           </div>
         </div>

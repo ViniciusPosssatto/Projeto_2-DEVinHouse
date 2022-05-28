@@ -34,7 +34,24 @@ body {
   float: right;
 }
 .page{
-  width: calc(100% - 40px);
   float: top;
 }
+
+@media(max-width: 770px) {
+
+  /* Todos os componentes */
+  .div-pai {
+    width: 100%;
+    float: none;
+  }
+
+  .page h5 {
+    display: none;
+  }
+
+  .page {
+    display: flex;
+  }
+}
+  
 </style>

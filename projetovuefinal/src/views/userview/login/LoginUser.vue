@@ -1,7 +1,7 @@
 <template>
 
 <!-- FORMULARIO PARA LOGIN DE USUÁRIO -->
-  <div class="container mt-4">
+  <div class="container mt-4 animate__animated animate__fadeIn">
     <div class="row justify-content-md-center">
       <div sm="5" class="d-flex justify-content-center align-items-center left-login">
         <div class="col-sm-12 col-md-6 col-lg-4">
@@ -44,7 +44,7 @@
             <button type="button" class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Cadastrar-se</button>
           </vee-form>
         </div>
-        <div class="col-sm-12 col-md-6 col-lg-6">
+        <div class="col-sm-12 col-md-6 col-lg-6 div-some">
           <div class="d-flex justify-content-center align-items-center left-login ms-5">
             <img src="@/assets/img/tela-login.svg" alt="imagem-livros" class="img-login">
           </div>
@@ -212,6 +212,18 @@ export default {
 </script>
 
 <style scoped>
+
+@media(max-width: 770px) {
+  .div-some {
+    position: absolute;
+    display: none;
+  }
+  
+}
+
+.div-some{
+ z-index: -1;
+}
 
 .img-login {
   width: 600px;

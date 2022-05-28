@@ -1,11 +1,11 @@
 <template>
-  <div class="row">
+  <div class="row animate__animated animate__fadeIn">
     <div class="col-sm-12 col-md-6 col-lg-10 mb-4 text-center">
       <h1>Bem vind@!</h1>
     </div>
-      <div class="col-sm-12 col-md-6 col-lg-6 ms-5 align-items-around card text-white bg-dark p-3">
+      <div class="col-sm-12 col-md-6 col-lg-6 ms-5 align-items-around card text-white bg-dark p-3 div-card">
         <h2>Sistema de empréstimos de livros</h2>
-        <span class="card card-home">Aqui nós temos o melhor!!</span>
+        <span class="card card-home div-card">Aqui nós temos o melhor!!</span>
         <p>Confira! Contate um nossos atendentes virtuais e faça um tour pelo sistema conhecendo o funcionamento e os benefícios de usar a biblioteca virtual.</p>
         <p>Temos um descontão na mensalidade para aqueles que realizarem o tour. Legal né?! </p>
         <p>Participe e garanta já o seu.</p>
@@ -23,7 +23,7 @@
       <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maxime blanditiis facere cum, magni voluptates qui reiciendis culpa nisi quibusdam optio numquam voluptatem, soluta fugiat suscipit eos quae nulla. Cum, enim.</p>
     </div>
     <div class="col-sm-12 col-md-6 col-lg-5 ms-5 mb-3">
-      <div class="col-sm-12 col-md-6 col-lg-11 ms-5 p-5 card text-white bg-dark mt-3">
+      <div class="col-sm-12 col-md-6 col-lg-11 ms-5 p-5 card text-white bg-dark mt-3 div-card">
         <h3>Por onde começar?</h3>
         <p>Comece cadastrando seu primeiro livro:</p>
         <button @click="pageCL" class="btn btn-primary">Cadastrar um livro</button>
@@ -89,7 +89,7 @@ export default {
   font-size: 18px;
   margin: 10px 0 10px 0;
   text-align: center;
-  width: 300px;
+  max-width: 300px;
   background-color: #eeeaeab2
 }
 
@@ -97,4 +97,21 @@ export default {
   color: white;
   background-color: blue;
 }
+
+.div-card {
+  position: inherit;
+}
+
+@media(max-width: 425px) {
+
+  /* -- */
+  .row {
+    width: 100%;
+    float: none;
+    margin: 10px 5px 0 5px;
+  }
+
+
+}
+
 </style>

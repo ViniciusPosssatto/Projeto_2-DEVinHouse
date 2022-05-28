@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container animate__animated animate__fadeIn">
     <!------------------>
     <!-- Estatisticas -->
     <div class="row" style="justify-content: space-between;">
-      <div class="col-sm-12 col-md-6 col-lg-3 card-top">
+      <div class="col-sm-6 div-card col-md-6 col-lg-3 card-top">
         <div class="d-flex align-items-around">
             <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
               <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
@@ -17,7 +17,7 @@
             </div>
         </div>
       </div>
-      <div class="col-sm-12 col-md-6 col-lg-3 card-top ">
+      <div class="col-sm-6 div-card col-md-6 col-lg-3 card-top ">
         <div class="d-flex align-items-around">
             <div class=" tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
               <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
@@ -31,7 +31,7 @@
             </div>
           </div>
       </div>
-      <div class="col-sm-12 col-md-6 col-lg-3 card-top">
+      <div class="col-sm-6 div-card col-md-6 col-lg-3 card-top">
         <div class="d-flex align-items-around">
           <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
             <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>  
-      <div class="col-sm-12 col-md-6 col-lg-3 card-top">
+      <div class="col-sm-6 div-card col-md-6 col-lg-3 card-top">
         <div class="d-flex align-items-around">
           <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
             <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
@@ -89,10 +89,9 @@
 
     </div>
       <div class="row ">
-        <div class="col-sm-12 col-md-6 col-lg-12 ">
           <div class="display-card align-items-around" style="align-content: center;" >
-            <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo" class="row ">
-              <div class="col-sm-12 col-md-6 col-lg-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo">
+              <div class="col-sm-6 div-card col-md-6 col-lg-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra" style="cursor: pointer; width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
                   <div class="row m-2 align-items-baseline " style=" max-width: 300px; align-self: center; justify-content: center;">
                     <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
@@ -107,7 +106,7 @@
                     <p :class="item.status ? 'status-emprestado' : 'status-disponivel'" class="card" v-text="item.status ? 'Emprestado' : 'Disponível'"></p>
                   </div>
                 </div>
-              </div>
+              
             </div>
           </div>
           </div>
@@ -323,5 +322,11 @@ export default {
 }
 .barra-pesquisa {
   background-color: #bbbaba8a !important;
+}
+
+@media(max-width: 425px) {
+  .col-sm-6.div-card {
+    width: 50%;
+  }
 }
 </style>

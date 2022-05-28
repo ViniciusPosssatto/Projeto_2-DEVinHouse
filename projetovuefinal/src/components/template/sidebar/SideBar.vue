@@ -111,30 +111,13 @@ export default {
 
 <style scoped>
 
-.d-block {
-  transition: 2s !important;
-}
-
 .logout {
   cursor: pointer;
 }
 
 .l-navbar{
-  position: fixed;
-  top: 0;
-  left: 0%;
-  width: var(--nav-width);
-  height: 100vh;
-  background-color: var(--first-color);
-  padding: .5rem 1rem 0 0;
-  transition: .5s;
-  z-index: var(--z-fixed)
+  position:absolute;
   }
-
-#div {
-  margin-top: 50px;
-}
-
 ul li:hover {
   background: rgb(111, 113, 121);
   background: radial-gradient(
@@ -155,7 +138,7 @@ ul li:hover {
 .sidabar-enter-to,
 .sidabar-leave-from {
   opacity: 1;
-  font-size: 35px;
+  font-size: 16px;
 }
 
 .sidabar-enter-active,

@@ -8,6 +8,7 @@ import VueLoading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VueGravatar from 'vue3-gravatar'
 import VueTheMask from 'vue-the-mask';
+import 'animate.css';
 
 const app = createApp(App);
 
