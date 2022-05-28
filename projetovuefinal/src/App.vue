@@ -1,8 +1,7 @@
 <template>
  <div class="app">
-   <NavBar />
-   <SideBar class="page"/>
-   
+   <NavBar class="page"/>
+   <SideBar />
    <div class="div-pai">
      <router-view ></router-view>
    </div>
@@ -31,10 +30,11 @@ body {
   background-color: #bbbaba8a !important;
 }
 .div-pai {
-  width: calc(100% - 200px);
+  width: calc(100% - 180px);
   float: right;
 }
 .page{
-  float: left;
+  width: calc(100% - 40px);
+  float: top;
 }
 </style>

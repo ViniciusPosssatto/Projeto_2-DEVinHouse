@@ -37,7 +37,7 @@
             </div>
             <div class="col-4">
               <label>Telefone</label>
-              <vee-field type="number" name="telefone" class="form-control" v-model="colab.telefone"/>
+              <vee-field v-mask="['(##) ####-####', '(##) #####-####']" type="tel" name="telefone" class="form-control" v-model="colab.telefone"/>
               <span class="text-danger" v-text="errors.telefone" v-show="errors.telefone"></span>
             </div>
             <div class="col-5">
@@ -54,7 +54,7 @@
           <div class="row g-3">
             <div class="col-4">
               <label>CEP</label>
-              <vee-field type="number" name="cep" class="form-control" v-model="colab.cep"/>
+              <vee-field v-mask="'#####-###'" type="text" name="cep" class="form-control" v-model="colab.cep"/>
               <span class="text-danger" v-text="errors.cep" v-show="errors.cep"></span>
             </div>
             <div class="col-1">
@@ -124,7 +124,7 @@ export default {
   data() {
     
     const schema = {
-      nome: "required",
+      nome: "required|nomeDuplo",
       genero: "",
       dataNasc: "required|dataInferior",
       telefone: "required",

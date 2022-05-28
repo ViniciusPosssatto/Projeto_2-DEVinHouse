@@ -51,21 +51,21 @@
             <div class="col-9">
               <label>URL da foto</label>
               <vee-field type="text" name="url" class="form-control" v-model="livro.url"/>
+              <span class="text-danger" v-text="errors.url" v-show="errors.url"></span>
             </div>
             <div class="col-6">
               <label>Editora</label>
-              <vee-field type="text" name="marca" class="form-control" v-model="livro.editora"/>
-              <span class="text-danger" v-text="errors.marca" v-show="errors.marca"></span>
+              <vee-field type="text" name="editora" class="form-control" v-model="livro.editora"/>
+              <span class="text-danger" v-text="errors.editora" v-show="errors.editora"></span>
             </div>
             <div class="col-6">
               <label>Autor</label>
-              <vee-field type="text" name="modelo" class="form-control" v-model="livro.autor"/>
-              <span class="text-danger" v-text="errors.modelo" v-show="errors.modelo"></span>
+              <vee-field type="text" name="autor" class="form-control" v-model="livro.autor"/>
+              <span class="text-danger" v-text="errors.autor" v-show="errors.autor"></span>
             </div>
             <div class="col-12">
               <label>Descrição</label>
               <vee-field type="text" name="descricao" class="form-control" placeholder="Algum detalhe que o livro possui" v-model="livro.descricao"/>
-              <span class="text-danger" v-text="errors.descricao" v-show="errors.descricao"></span>
             </div>
           </div>
           <div class="row mt-4">
@@ -105,10 +105,10 @@ export default {
       codigo: "",
       titulo: "required",
       categoria: "",
-      valor: "",
-      url:"" ,
-      editora: "",
-      autor: "",
+      valor: "required",
+      url:"required" ,
+      editora: "required",
+      autor: "required",
       descrição: ""
     }
 

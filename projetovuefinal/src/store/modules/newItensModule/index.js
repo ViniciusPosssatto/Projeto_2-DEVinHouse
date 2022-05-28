@@ -60,7 +60,7 @@ export default {
         //estatística para o inventario - soma dos valores
         somaValores(state) {
             const soma = state.listaLivros.map(item => item.valor).reduce((prev, curr) => prev + curr, 0);
-            state.somaValor = soma;
+            state.somaValor = soma.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL', minimumFractionDigits: 2});
         },
 
         //função para exclusão de itens
