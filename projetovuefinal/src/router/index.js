@@ -58,7 +58,16 @@ const routes = [
     {
         path: '/login',
         alias: ['/auth'],
-        component: LoginUser
+        component: LoginUser,
+        beforeEnter: (to) => {
+            const auth = localStorage.getItem('token');
+            if (auth) {
+                // eslint-disable-next-line
+                return to = "/"
+            }
+            return true;
+        } 
+        
     },
 ]
 

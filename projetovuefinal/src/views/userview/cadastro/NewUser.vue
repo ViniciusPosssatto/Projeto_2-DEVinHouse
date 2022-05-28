@@ -127,10 +127,10 @@ export default {
       nome: "required|nomeDuplo",
       genero: "",
       dataNasc: "required|dataInferior",
-      telefone: "required",
+      telefone: "required|minLength:10",
       cargo: "",
       email: "required|email",
-      cep: "required",
+      cep: "required|minLength:8",
       cidade: "required",
       estado: "required",
       logradouro: "required",
@@ -143,20 +143,20 @@ export default {
       schema,
       colab: {
         id: Date.now(),
-        nome: 'asasd',
+        nome: '',
         genero: '',
         dataNasc: '',
-        telefone: '3434',
+        telefone: '',
         cargo: '',
         email: '',
-        cep: '88080400',
+        cep: '',
         cidade: '',
         estado: '',
         logradouro: '',
         complemento: '',
         bairro: '',
-        numero: '23',
-        pontoRefe: 'asdasd'
+        numero: '',
+        pontoRefe: ''
       }
     }
   },

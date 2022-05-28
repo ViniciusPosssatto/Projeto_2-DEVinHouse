@@ -114,9 +114,9 @@ export default {
   },
   data() {
     const schema = {
-      nome: "required",
+      nome: "required|nomeDuplo",
       email: "required|email",
-      password: "required",
+      password: "required|minLength:8",
       senha: "required|confirmed:password"
     }
     const schema1 = {
@@ -206,6 +206,7 @@ export default {
 
   mounted() {
     this.$store.state.setUserLoginModule.autenticado = localStorage.getItem('token') ? true : false;
+    this.$store.state.setItensModule.nomeNavbar = 'Login'
   }
 }
 </script>

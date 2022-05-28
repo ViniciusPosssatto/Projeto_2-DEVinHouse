@@ -1,4 +1,5 @@
 <template>
+
   <div class="container">
     <!------------------------------>
     <!-- Colaboradores cadastrados-->
@@ -136,7 +137,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
