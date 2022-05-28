@@ -13,10 +13,8 @@
             </div>
             <div class="col-1">
               <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
-              <!-- img src="../../../assets/img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top"-->
           </div>
         </div>
-    
     </nav>
   </div>
 </template>
