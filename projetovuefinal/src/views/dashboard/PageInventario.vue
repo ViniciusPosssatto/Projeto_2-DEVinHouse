@@ -91,10 +91,10 @@
       <div class="row animate__animated animate__fadeIn">
           <div class="display-card" style="align-content: center;" >
             <transition-group name="lista-cards">
-              <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo">
-                <div class="col-sm-6 col-md-6 col-lg-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra" style="cursor: pointer; width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
-                    <div class="row m-2 align-items-baseline " style=" max-width: 300px; align-self: center; justify-content: center;">
+              <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo" class="card-small">
+                <div class="col-sm-6 col-md-6 col-lg-3 card-small-width" @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra card-small">
+                    <div class="row m-2 align-items-baseline card-small-img" style=" max-width: 300px; align-self: center; justify-content: center;">
                       <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
                     </div>
                     <div class="tamanho card-header " style="white-space: normal !important;">
@@ -264,7 +264,7 @@ export default {
   },
 
   mounted() {
-    this.$store.state.setItensModule.nomeNavbar = 'Inventário de livros e estatísticas'
+    this.$store.state.setItensModule.nomeNavbar = 'Inventário de livros'
     this.pesquisaLivro = this.listaLivro;
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setItensModule/somaLivros');
@@ -288,25 +288,16 @@ export default {
 .card-top {
   display: contents !important;
 }
-/* .display-card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-} */
-/* .card-inventario {
-  color: black !important;
-  background-color: #8e8e8e !important;
-} */
-/* .cartao-inv {
-  max-width: 200px;
-} */
-/* .cartao-est {
-  max-width: 150px;
-} */
-/* .card-text {
-  text-overflow: ellipsis !important;
-} */
+
+.card-small-width {
+  cursor: pointer; 
+  width: 15rem; 
+  height: 31rem; 
+  max-width: 15rem; 
+  max-height: 31rem; 
+  justify-content: space-evenly;
+
+}
 
 .status-disponivel {
   font-weight: bold;
@@ -342,6 +333,36 @@ export default {
     font-size: 1.4rem !important;
   }
 
+  .card-small, .card-small-img {
+    width: 50%;
+  }
+
+  .card-title, .card-text, .card-footer{
+    font-size: 13px;
+  }
+
+  .card-small-width {
+    width: 180px !important;
+    height: 320px !important; 
+  }
+
+}
+
+.tamanho {
+  width: -webkit-fill-available;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  border-radius: 10px;
+  max-width: 15rem;
+}
+
+.display-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 /* transições dos cards excluidos*/

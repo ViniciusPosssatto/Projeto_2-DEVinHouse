@@ -28,22 +28,24 @@
         <h5>Colaborador não econtrado ou não cadastrado.</h5>
       </div>
       <div v-else class="display-card align-items-around">
-        <div v-for="(user, index) in (pesquisaUser ? pesquisaUser : listaColab)" :key="index" class="ml-3">
-          <div class="tamanho card text-white bg-dark m-2 align-items-baseline" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly" @click="detalhes(user)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <div class="row align-items-baseline" style=" max-width: 300px; align-self: center; justify-content: center;">
-              <vue-gravatar :email="user.email" style="border-radius: 50%;"/>
-            </div>
-              <div class="tamanho card-header">
-                <h5 class="card-title" v-text="user.nome"></h5>
-                <hr>
-                  <p class="card-text" v-text="user.email"></p>
-                  <p class="card-text" v-text="user.telefone"></p>
+        <transition-group name="lista-cards">
+          <div v-for="(user, index) in (pesquisaUser ? pesquisaUser : listaColab)" :key="index" class="card-small">
+            <div class=" card text-white bg-dark m-2 align-items-baseline card-small-width" style="width: 16rem; height: 25rem; max-width: 16rem; max-height: 30rem; justify-content: space-evenly" @click="detalhes(user)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <div class="row align-items-baseline card-small " style=" max-width: 170px; align-self: center; justify-content: center;">
+                <vue-gravatar :email="user.email" style="border-radius: 50%;"/>
               </div>
-            <div class=" tamanho card-footer">
-              <p class="card-text" v-text="user.cargo"></p>
+                <div class="tamanho card-header">
+                  <h5 class="card-title" v-text="user.nome"></h5>
+                  <hr>
+                    <p class="card-text" v-text="user.email"></p>
+                    <p class="card-text" v-text="user.telefone"></p>
+                </div>
+              <div class=" tamanho card-footer">
+                <p class="card-text" v-text="user.cargo"></p>
+              </div>
             </div>
           </div>
-        </div>
+        </transition-group>
       </div>
     </div>
   </div>
@@ -221,7 +223,21 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+.card-small-width:hover {
+  cursor: pointer;
+  box-shadow: 10px 5px 5px black;
+  -webkit-transform: scale(1.3);
+  -ms-transform: scale(1.6);
+  transform: scale(1.1);
+}
+
+.card-small-width {
+  
+  border-radius: 20px;
+}
+
 .modal-centro {
   background-color: #bbbaba8a !important;
 }
@@ -244,4 +260,33 @@ export default {
   justify-content: space-around;
 }
 
+@media(max-width: 500px) {
+  .card-small {
+    width: 50%;
+  }
+
+  .card-title, .card-text{
+    font-size: 13px;
+  }
+
+  .card-small-width {
+    width: 175px !important;
+    height: 300px !important; 
+  }
+}
+
+/* transições dos cards excluidos*/
+.lista-cards-leave-to {
+  opacity: 0;
+  font-size: 0;
+}
+
+.lista-cards-leave-from {
+  opacity: 1;
+  font-size: 16px;
+}
+
+.lista-cards-leave-active {
+  transition: all 1.2s ease;
+}
 </style>
