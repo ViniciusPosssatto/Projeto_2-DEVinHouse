@@ -171,8 +171,18 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
+
+@media(max-width: 425px) {
+
+  /* -- */
+  .row {
+    width: 100%;
+    float: none;
+    margin: 10px 5px 0 5px;
+  }
 
 
+}
 
 </style>

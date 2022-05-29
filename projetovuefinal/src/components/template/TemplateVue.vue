@@ -25,7 +25,7 @@ import SideBar from '@/components/template/sidebar/SideBar.vue';
 
 <style>
 body {
-  
+  padding-top: 60px;
   font-family: 'Times New Roman', Times, serif;
   background-color: #bbbaba8a !important;
 }
@@ -34,24 +34,19 @@ body {
   float: right;
 }
 .page{
+  width: 100%;
+  position: fixed;
   float: top;
+  z-index: 999;
 }
 
-@media(max-width: 770px) {
+@media(max-width: 1000px) {
 
   /* Todos os componentes */
   .div-pai {
     width: 100%;
-    float: none;
   }
 
-  .page h5 {
-    display: none;
-  }
-
-  .page {
-    display: flex;
-  }
 }
   
 </style>
