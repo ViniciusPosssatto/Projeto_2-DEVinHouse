@@ -130,7 +130,6 @@ export default {
 
     newItem() {
       // cadastra um item
-      //console.log(this.livro)
       this.$store.commit('setItensModule/newItem', this.livro);
       document.getElementById('formItens').reset()
       this.$toast.success('Livro adicionado com sucesso!', { 
@@ -164,7 +163,7 @@ export default {
       })
     }
 
-    this.$store.state.setItensModule.nomeNavbar = 'Cadastro de livros'
+    this.$store.state.coisasGeraisModule.nomeNavbar = 'Cadastro de livros'
   }
   
 }

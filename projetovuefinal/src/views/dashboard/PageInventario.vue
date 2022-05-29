@@ -264,7 +264,7 @@ export default {
   },
 
   mounted() {
-    this.$store.state.setItensModule.nomeNavbar = 'Inventário de livros'
+    this.$store.state.coisasGeraisModule.nomeNavbar = 'Inventário de livros'
     this.pesquisaLivro = this.listaLivro;
     this.$store.commit('setItensModule/getItem');
     this.$store.commit('setItensModule/somaLivros');

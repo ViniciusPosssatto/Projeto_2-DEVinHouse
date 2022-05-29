@@ -187,7 +187,6 @@ export default {
         } 
         if(pesquisa) {
           this.pesquisaUser = pesquisa(this.busca);
-          //console.log(this.pesquisaUser)
           if(this.pesquisaUser.length === 0) {
             this.$toast.error('Livro não econtrado! Tente outro nome.', {
               position: 'top'
@@ -218,7 +217,7 @@ export default {
   mounted() {
     this.$store.commit('setColaboradorModule/getColaborador');
     this.pesquisaUser = this.listaColab;
-    this.$store.state.setItensModule.nomeNavbar = 'Listagem de colaboradores'
+    this.$store.state.coisasGeraisModule.nomeNavbar = 'Listagem de colaboradores'
   }
 }
 </script>
