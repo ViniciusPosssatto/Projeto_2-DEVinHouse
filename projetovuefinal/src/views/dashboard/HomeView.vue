@@ -54,7 +54,7 @@ export default {
     }
   },
 
-  methods: {
+  methods: {   // transições com o loading só para mostrar o funcionamento
     pageCL() {
       this.loader = this.$loading.show();
       setTimeout(() => {

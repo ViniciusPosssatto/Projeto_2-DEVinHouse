@@ -3,8 +3,8 @@
     <div v-show="!sidebarTurn">
     <div class="div-sobresai l-navbar sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" id="div" v-if="autenticado">
       <div class="nav-l">
-          <span class="fs-4">
-            <i class="fa-solid fa-book me-2"></i>
+        <span class="fs-4">
+          <i class="fa-solid fa-book me-2"></i>
           Biblioteca
         </span>
 
@@ -78,7 +78,9 @@ export default {
       sidebarTur: ''
     }
   },
+
   methods: {
+
     logOut() {
       this.$store.dispatch('setUserLoginModule/logOut')
       this.$router.push('/login')
@@ -87,7 +89,6 @@ export default {
       });
       
     },
-
     
   },
 

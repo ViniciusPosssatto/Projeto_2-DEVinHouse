@@ -177,6 +177,7 @@ export default {
       this.$store.commit('setColaboradorModule/excluir', id)
     },
 
+// função da barra de pesquisa para econtrar colabs através do que for digitado
     buscarUser() {
       if(this.busca !== '') {
         let pesquisa = () => {
@@ -197,15 +198,17 @@ export default {
         this.pesquisaUser = this.listaColab;
       }
     },
-  
+    
     detalhes(colab) {
       this.colab = colab;
     },
-
+    
+// leva o id do colab através de params na rota para a pagina de criação de colabs
     editarDados() {
       this.$router.push(`/newUser/${this.colab.id}`);
     }
   },
+
   computed: {
 
     listaColab() {
@@ -259,6 +262,7 @@ export default {
   justify-content: space-around;
 }
 
+/* a partir de 500px os cards ficam menores */
 @media(max-width: 500px) {
   .card-small {
     width: 50%;

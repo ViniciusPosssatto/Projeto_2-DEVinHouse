@@ -195,7 +195,6 @@ export default {
 
     limparCampos() {
       // limpar os campos do formulário
-      //this.colab = {};
       document.getElementById('formUser').reset()
     },
 
@@ -221,7 +220,7 @@ export default {
 
   },
 
-  mounted() {  // busca a lista de colaboradores e compara o ID - O que for igual vai ser jogado para o v-model preencher os campos
+  mounted() {  // busca a lista de colaboradores e compara o ID - O que for igual vai para o v-model preencher os campos
     let lista = JSON.parse(localStorage.getItem('listaColabs'))
     if(lista !== null) {
       lista.forEach(element => {

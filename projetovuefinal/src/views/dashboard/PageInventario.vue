@@ -209,6 +209,7 @@ export default {
       this.$router.push(`/newitens/${this.livro.codigo}`);
     },
 
+// função da barra de pesquisa para econtrar colabs através do que for digitado
     barraPesquisa() {
       if(this.busca !== '') {
         let pesquisa = () => {
@@ -238,7 +239,7 @@ export default {
   computed: {
 
     listaLivros() {
-      return this.$store.state.setItensModule.listaLivros;
+      return this.$store.state.setItensModule.listaLivros; // monitora e recebe a lista da store
     },
 
     somaLivros() {
@@ -254,7 +255,7 @@ export default {
     },
 
     listaColabs() {
-      return this.$store.state.setColaboradorModule.listaColabs;
+      return this.$store.state.setColaboradorModule.listaColabs; // monitora e recebe a lista da store
     },
 
     contaEmprestimos() {
@@ -312,10 +313,7 @@ export default {
   text-overflow: ellipsis !important;
   color: #fdfdfd;
 }
-/* .barra-pesquisa {
-  background-color: #bbbaba8a !important;
-} */
- 
+
 .modal-backdrop {
   background-color: #fdfdfd !important;
   z-index: -1 !important;

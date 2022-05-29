@@ -29,33 +29,36 @@ export default {
 
   methods: {
 
+    // função para mostrar/esconder a sidebar
     sidebarTurn() {
       this.sidebarTurnOnOff = !this.sidebarTurnOnOff;
       this.$store.commit('coisasGeraisModule/setSidebar', this.sidebarTurnOnOff)
     },
 
-    btnVira() {
-      
-    }
 },
+
   computed: {
 // definir e monitorar se o usuário está logado
     autenticado() {
       return this.$store.state.setUserLoginModule.autenticado;
     },
+
 // captura o nome pelo mounted de cada página
      nomeNavbar() {
       return this.$store.state.coisasGeraisModule.nomeNavbar;
     },
+    
 // definir e monitorar o email no gravatar
     email() {
       return this.$store.state.setUserLoginModule.email;
     },
+
 // definir e monitorar o nome do usuário que está logado
     usuario() {
       return this.$store.state.setUserLoginModule.usuario;
     }
   },
+
 // busca o token no local storage e seta autenticado como true ou false caso não tenha token
   mounted() {
     this.$store.dispatch('setUserLoginModule/usuarioLogado');
@@ -74,8 +77,6 @@ export default {
   height: 60px;
 }
 
-
-
 .btn-vira-left {
   transform: rotate(180deg);
   transition: 1s;
@@ -86,11 +87,7 @@ export default {
   transition: 1s;
 }
 
-/* .direita {
-  display: flex !important;
-  float: right !important;
-} */
-
+/* ajuste para telas menores */
 @media(max-width: 600px) {
   
   .page-h {
@@ -100,6 +97,7 @@ export default {
   width: auto;
   }
 }
+
 @media(max-width: 800px) {
 
   .page h3 {
