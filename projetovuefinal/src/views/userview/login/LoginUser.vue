@@ -127,8 +127,8 @@ export default {
       schema,
       schema1,
       login: {
-        email1: 'admin@admin.com.br',
-        senha1: '123'
+        email1: '',
+        senha1: ''
       },
       userLogin: {
         id: Date.now(),
