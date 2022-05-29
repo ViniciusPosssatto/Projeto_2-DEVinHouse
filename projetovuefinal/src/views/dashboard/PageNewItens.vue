@@ -129,7 +129,6 @@ export default {
   methods: {
 
     newItem() {
-      // cadastra um item
       this.$store.commit('setItensModule/newItem', this.livro);
       document.getElementById('formItens').reset()
       this.$toast.success('Livro adicionado com sucesso!', { 
@@ -148,12 +147,11 @@ export default {
 
     limparCampos() {
       // limpa os campos de input
-      //this.livro = {};
       document.getElementById('formItens').reset()
     }
   },
 
-  mounted() {  // busca a lista de livros e compara o codigo - O que for igual vai ser jogado para o v-model preencher os campos
+  mounted() {  // busca a lista de livros e compara o codigo - O que for igual vai para o v-model preencher os campos
     let lista = JSON.parse(localStorage.getItem('listaLivros'))
     if(lista !== null) {
       lista.forEach(element => {
@@ -172,6 +170,7 @@ export default {
 
 <style scoped>
 
+/* para a row ficar responsiva */
 @media(max-width: 425px) {
 
   /* -- */

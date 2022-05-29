@@ -138,7 +138,7 @@ export default {
       this.livro = livro;
     },
 
-
+// atribui o nome do colab selecionado para o status do livro
     salvarEmprestimo(userNome) {
       if(!userNome){
         this.livro.status = false;
@@ -157,6 +157,7 @@ export default {
       }
     },
 
+// função da barra de pesquisa para econtrar colabs através do que for digitado
     barraPesquisa() {
       if(this.busca !== '') {
         let pesquisa = () => {
@@ -185,6 +186,7 @@ export default {
     listaLivro() {
       return this.$store.state.setItensModule.listaLivros;
     },
+
     listaColab() {
       return this.$store.state.setColaboradorModule.listaColabs;
     }

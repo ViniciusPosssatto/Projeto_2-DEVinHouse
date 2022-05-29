@@ -167,6 +167,7 @@ export default {
         });
     },
 
+// async para esperar a verificação de email, se retornar false mostra aviso de email ja cadastrado
     async newUserLogin() {
       let userTest = await this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
         if(userTest){
@@ -186,6 +187,7 @@ export default {
         }
     },
 
+/// avisos de funções em construção
     emConstrucao() {
     this.$toast.warning('Funcionamento em construção. Tente novamente mais tarde.', {
         position: 'top'
@@ -195,7 +197,8 @@ export default {
     emConstrucaoModel() {
       alert('Funcionamento em construção. Tente novamente mais tarde.')
     },
-    
+////
+
   },
   computed: {
     
@@ -213,6 +216,7 @@ export default {
 
 <style scoped>
 
+/* resposividade para telas menores */
 @media(max-width: 770px) {
   .div-some {
     position: absolute;
