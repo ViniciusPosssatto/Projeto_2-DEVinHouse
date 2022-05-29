@@ -1,3 +1,4 @@
+
 import { defineRule } from 'vee-validate';
 
 const required = defineRule('required', value => {
@@ -11,12 +12,19 @@ const email = defineRule('email', value => {
     if (!value || !value.length) {
         return true;
     }
-    
-    if (!/[a-z-9._%+-]+@[a-z-9.-]+\.[a-z]{2,4}/.test(value)) {
-        return 'O email não é valido!';
+       
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)) {
+      return true;
     }
-    return true;
+    return 'O email não é valido!';
     });
+
+const nomeCompleto = defineRule('nomeDuplo', value => {
+  if(/^[a-zA-ZÃ§Ã‡Ä±ÄŸÄžÄ°Ã¶Ã–ÅŸÅžÃ¼Ãœ]+(?:\s[a-zA-ZÃ§Ã‡Ä±ÄŸÄžÄ°Ã¶Ã–ÅŸÅžÃ¼Ãœ]+)+$/.test(value)) {
+    return true;
+  }
+  return 'Digite o nome completo!'
+})
 
 const confirmed = defineRule('confirmed', (value, [target], ctx) => {
   if (value === ctx.form[target]) {
@@ -42,4 +50,6 @@ const dataInferior = defineRule("dataInferior", value => {
     return true;  
 });
 
-export { required, email, confirmed, min, dataInferior };
+
+
+export { required, email, confirmed, min, dataInferior, nomeCompleto};

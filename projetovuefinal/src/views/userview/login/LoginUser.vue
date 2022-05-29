@@ -1,45 +1,54 @@
 <template>
 
 <!-- FORMULARIO PARA LOGIN DE USUÁRIO -->
-  <div class="container mt-4">
+  <div class="container mt-4 animate__animated animate__fadeIn">
     <div class="row justify-content-md-center">
-      <div class="col-4">
-        <vee-form @submit="autenticaLogin" name="formLogin"  :validation-schema="schema1" v-slot="{ errors }">
-          <h2 class="text-center mb-4 title-login">Faça login</h2>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email:</label>
-            <vee-field type="email" name="email1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user@user.com" v-model="login.email1"/>
-            <span class="text-danger" v-text="errors.email1" v-show="errors.email1"></span>
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Senha:</label>
-            <vee-field name="senha1" type="password" class="form-control" id="exampleInputPassword1" placeholder="*******" v-model="login.senha1"/>
-            <span class="text-danger" v-text="errors.senha1" v-show="errors.senha1"></span>
-            <div id="emailHelp" class="form-text">Nunca compartilhe senhas com ninguém.</div>
-          </div>
-          <div class="mb-3">
-            <small><a href="">Esqueceu a senha?</a></small>
-          </div>
-          <button class="w-100 py-2 mb-2 btn btn-outline-success rounded-4"  type="submit">
-            Fazer login
-          </button>
-          <hr class="my-4">
-          <div class="mb-3">
-            <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucao">
-              <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"></use></svg>
-              Entrar com o Google
+      <div sm="5" class="d-flex justify-content-center align-items-center left-login">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+          <h2 class="text-center mb-4">Biblioteca virtual</h2>
+          <hr class="my-3">
+          <vee-form @submit="autenticaLogin" name="formLogin"  :validation-schema="schema1" v-slot="{ errors }">
+            <h4 class="text-center mb-4 title-login">Realize o login para continuar</h4>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email:</label>
+              <vee-field type="email" name="email1" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="user@user.com" v-model="login.email1"/>
+              <span class="text-danger" v-text="errors.email1" v-show="errors.email1"></span>
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Senha:</label>
+              <vee-field name="senha1" type="password" class="form-control" id="exampleInputPassword1" placeholder="*******" v-model="login.senha1"/>
+              <span class="text-danger" v-text="errors.senha1" v-show="errors.senha1"></span>
+              <div id="emailHelp" class="form-text">Nunca compartilhe senhas com ninguém.</div>
+            </div>
+            <div class="mb-3">
+              <small><a href="">Esqueceu a senha?</a></small>
+            </div>
+            <button class="w-100 py-2 mb-2 btn btn-outline-success rounded-4"  type="submit">
+              Fazer login
             </button>
-            <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucao">
-              <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>
-              Entrar com o Facebook
-            </button>
+            <hr class="my-4">
+            <div class="mb-3">
+              <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucao">
+                <svg class="bi me-1" width="16" height="16"><use xlink:href="#google"></use></svg>
+                Entrar com o Google
+              </button>
+              <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4" type="button" @click="emConstrucao">
+                <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>
+                Entrar com o Facebook
+              </button>
+            </div>
+            <hr class="my-4">
+            <div class="col-sm-12 col-md-6 col-lg-12 mb-3 mt-3 justify-content-md-center">
+              <span>Não tem cadastro?</span>
+            </div>
+            <button type="button" class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Cadastrar-se</button>
+          </vee-form>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6 div-some">
+          <div class="d-flex justify-content-center align-items-center left-login ms-5">
+            <img src="@/assets/img/tela-login.svg" alt="imagem-livros" class="img-login">
           </div>
-          <hr class="my-4">
-          <div class="col-12 mb-3 mt-3 justify-content-md-center">
-            <span>Não tem cadastro?</span>
-          </div>
-          <button type="button" class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Cadastrar-se</button>
-        </vee-form>
+        </div>
       </div>
     </div>
   </div>
@@ -105,9 +114,9 @@ export default {
   },
   data() {
     const schema = {
-      nome: "required",
+      nome: "required|nomeDuplo",
       email: "required|email",
-      password: "required",
+      password: "required|minLength:8",
       senha: "required|confirmed:password"
     }
     const schema1 = {
@@ -135,7 +144,6 @@ export default {
 
     autenticaLogin() {
       
-      console.log('login')
       this.loader = this.$loading.show();
       this.$store.dispatch('setUserLoginModule/autenticar', this.login)
         .then(() => {
@@ -146,7 +154,7 @@ export default {
             });
             this.loader.hide();
             // redireciona para tela de dashboard caso o login for correto
-            this.$router.push('/inventario');
+            this.$router.push('/home');
           } else {
             this.$toast.error('Login ou senha incorretos!', {
               position: 'top'
@@ -159,24 +167,27 @@ export default {
         });
     },
 
-    newUserLogin() {
-      this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
-        .then(() => {
+// async para esperar a verificação de email, se retornar false mostra aviso de email ja cadastrado
+    async newUserLogin() {
+      let userTest = await this.$store.dispatch('setUserLoginModule/newUserLogin', this.userLogin)
+        if(userTest){
           this.userLogin = {
             id: Date.now(),
             autenticado: false
           }
           document.getElementById('formUserLogin').reset();
-          this.$toast.success('Cadastro criado com sucesso!', {  
-              position: 'top'
-            });
-         //console.log(this.userLogin)
-        })
-        .catch((err) => {
-          console.log('erro do catch login ' + err.message)
-        });
+          this.$toast.success('Cadastro criado com sucesso! Faça o login para continuar.', {  
+            position: 'top'
+          });
+         
+        }else {
+          this.$toast.warning('Este email já está cadastrado no sistema!', {  
+            position: 'top'
+          });
+        }
     },
 
+/// avisos de funções em construção
     emConstrucao() {
     this.$toast.warning('Funcionamento em construção. Tente novamente mais tarde.', {
         position: 'top'
@@ -186,7 +197,8 @@ export default {
     emConstrucaoModel() {
       alert('Funcionamento em construção. Tente novamente mais tarde.')
     },
-    
+////
+
   },
   computed: {
     
@@ -197,10 +209,30 @@ export default {
 
   mounted() {
     this.$store.state.setUserLoginModule.autenticado = localStorage.getItem('token') ? true : false;
+    this.$store.state.coisasGeraisModule.nomeNavbar = 'Login'
   }
 }
 </script>
 
-<style>
+<style scoped>
+
+/* resposividade para telas menores */
+@media(max-width: 770px) {
+  .div-some {
+    position: absolute;
+    display: none;
+  }
+  
+}
+
+.div-some{
+ z-index: -1;
+}
+
+.img-login {
+  width: 600px;
+  height: 600px;
+}
+
 
 </style>

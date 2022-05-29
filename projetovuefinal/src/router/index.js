@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import HomeView from '@/components/HomeView.vue'
+import HomeView from '@/views/dashboard/HomeView.vue'
 
 import PageEmprestimo from '@/views/dashboard/PageEmprestimo.vue'
 import PageInventario from '@/views/dashboard/PageInventario.vue'
@@ -38,16 +38,36 @@ const routes = [
         component: PageNewItens,
         meta: { auth: true }
     },
+// path para levar um codigo de livro para edição
+    {
+        path: '/newitens/:codigo',
+        component: PageNewItens,
+        meta: { auth: true }
+    },
     {
         path: '/newuser',
-        alias: ['/registro', '/cadastro'],
+        component: NewUser,
+        meta: { auth: true }
+    },
+// path para levar uma ID para edição
+    {
+        path: '/newuser/:id',
         component: NewUser,
         meta: { auth: true }
     },
     {
         path: '/login',
         alias: ['/auth'],
-        component: LoginUser
+        component: LoginUser,
+        beforeEnter: (to) => {
+            const auth = localStorage.getItem('token');
+            if (auth) {
+                // eslint-disable-next-line
+                return to = "/"
+            }
+            return true;
+        } 
+        
     },
 ]
 
