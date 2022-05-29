@@ -1,7 +1,7 @@
 <template>
   <Transition name="sidabar">
     <div v-show="!sidebarTurn">
-    <div class=" l-navbar sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" id="div" v-if="autenticado">
+    <div class="div-sobresai l-navbar sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" id="div" v-if="autenticado">
       <div class="nav-l">
           <span class="fs-4">
             <i class="fa-solid fa-book me-2"></i>
@@ -144,6 +144,10 @@ ul li:hover {
 .sidabar-enter-active,
 .sidabar-leave-active {
   transition: all 1s ease;
+}
+
+.div-sobresai{
+ z-index: 1;
 }
 
 </style>

@@ -1,62 +1,62 @@
 <template>
-  <div class="container animate__animated animate__fadeIn">
+  <div class="container">
     <!------------------>
     <!-- Estatisticas -->
-    <div class="row" style="justify-content: space-between;">
-      <div class="col-sm-6 div-card col-md-6 col-lg-3 card-top">
-        <div class="d-flex align-items-around">
+    <div class="row animate__animated animate__fadeIn" style="justify-content: center;">
+      <div class="col-sm-6  col-md-6 col-lg-3 card-top">
+        <div class="d-flex div-card align-items-around">
             <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
               <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
                 <img src="@/assets/img/multiplos-usuarios.png" alt="Icone de pessoas" style="width: 80px" class="card-img-top">
                 <h5 class="card-title mt-2">Colaboradores</h5>
                 <hr>
-                  <p class="card-text" style="font-size: 40px;" v-text="totalColabs"></p>
+                  <p class="card-text card-font" style="font-size: 1.9rem;" v-text="totalColabs"></p>
               </div>
               <div class=" tamanho card-footer">
               </div>
             </div>
         </div>
       </div>
-      <div class="col-sm-6 div-card col-md-6 col-lg-3 card-top ">
-        <div class="d-flex align-items-around">
+      <div class="col-sm-6  col-md-6 col-lg-3 card-top ">
+        <div class="d-flex div-card align-items-around">
             <div class=" tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
               <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
                 <img src="@/assets/img/pilha-livros.png" alt="Icone de livros" style="width: 80px" >
                 <h5 class="card-title mt-2">Livros</h5>
                 <hr>
-                  <p class="card-text" style="font-size: 40px;" v-text="somaLivros"></p>
+                  <p class="card-text card-font" style="font-size: 1.9rem;" v-text="somaLivros"></p>
               </div>
               <div class=" tamanho card-footer">
               </div>
             </div>
           </div>
       </div>
-      <div class="col-sm-6 div-card col-md-6 col-lg-3 card-top">
-        <div class="d-flex align-items-around">
+      <div class="col-sm-6  col-md-6 col-lg-3 card-top">
+        <div class="d-flex div-card align-items-around">
           <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
             <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
               <img src="@/assets/img/bolsa-de-dinheiro.png" alt="Icone de sifrão $" style="width: 80px">
               <h5 class="card-title mt-2">Valor total</h5>
               <hr>
-                <p class="card-text" style="font-size: 40px;" v-text="somaValores"></p>
+                <p class="card-text card-font" style="font-size: 1.9rem;" v-text="somaValores"></p>
             </div>
             <div class=" tamanho card-footer">
-              <p class="card-text"></p>
+              <p class="card-text card-font"></p>
             </div>
           </div>
         </div>
       </div>  
-      <div class="col-sm-6 div-card col-md-6 col-lg-3 card-top">
-        <div class="d-flex align-items-around">
+      <div class="col-sm-6  col-md-6 col-lg-3 card-top">
+        <div class="d-flex div-card align-items-around">
           <div class="tamanho card text-white bg-secondary m-2 align-items-baseline sombra" style="width: 15rem; min-width: 11rem; display: block;">
             <div class="row m-2 align-items-baseline" style=" max-width: 300px; justify-content: center;">
               <img src="@/assets/img/facam.png" alt="Icone de página de lista" style="width: 80px">
               <h5 class="card-title mt-2">Empréstimos</h5>
               <hr>
-                <p class="card-text" style="font-size: 40px;" v-text="contaEmprestimos"></p>
+                <p class="card-text card-font" style="font-size: 1.9rem;" v-text="contaEmprestimos"></p>
             </div>
             <div class=" tamanho card-footer">
-              <p class="card-text"></p>
+              <p class="card-text card-font"></p>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@
     
     <div class="row justify-content-md-center">
       <div class="col-sm-12 col-md-6 col-lg-12">
-        <h3 style="text-align: center">Inventário de Livros</h3>
+        <h3 style="text-align: center">Livros</h3>
       </div>
 
       <!----------------------->
@@ -88,27 +88,28 @@
     <!--- cards dos itens -->
 
     </div>
-      <div class="row ">
-          <div class="display-card align-items-around" style="align-content: center;" >
-            <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo">
-              <div class="col-sm-6 div-card col-md-6 col-lg-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra" style="cursor: pointer; width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
-                  <div class="row m-2 align-items-baseline " style=" max-width: 300px; align-self: center; justify-content: center;">
-                    <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
-                  </div>
-                  <div class="tamanho card-header " style="white-space: normal !important;">
-                    <h5 class="card-title" style=" display: contents;" v-text="item.titulo"></h5>
-                    <hr>
-                    <p class="card-text" v-text="item.editora"></p>
-                    <p class="card-text" v-text="item.autor"></p>
-                  </div>
-                  <div class=" tamanho card-footer">
-                    <p :class="item.status ? 'status-emprestado' : 'status-disponivel'" class="card" v-text="item.status ? 'Emprestado' : 'Disponível'"></p>
+      <div class="row animate__animated animate__fadeIn">
+          <div class="display-card" style="align-content: center;" >
+            <transition-group name="lista-cards">
+              <div v-for="item in (pesquisaLivro ? pesquisaLivro : listaLivros)" :key="item.codigo">
+                <div class="col-sm-6 col-md-6 col-lg-3 " @click="detalhes(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <div class="tamanho card text-white bg-dark m-2 align-items-baseline sombra" style="cursor: pointer; width: 15rem; height: 31rem; max-width: 15rem; max-height: 31rem; justify-content: space-evenly">
+                    <div class="row m-2 align-items-baseline " style=" max-width: 300px; align-self: center; justify-content: center;">
+                      <img :src="item.url" alt="" style="border-radius: 20px; width: 250px;">
+                    </div>
+                    <div class="tamanho card-header " style="white-space: normal !important;">
+                      <h5 class="card-title" style=" display: contents;" v-text="item.titulo"></h5>
+                      <hr>
+                      <p class="card-text" v-text="item.editora"></p>
+                      <p class="card-text" v-text="item.autor"></p>
+                    </div>
+                    <div class=" tamanho card-footer">
+                      <p :class="item.status ? 'status-emprestado' : 'status-disponivel'" class="card" v-text="item.status ? 'Emprestado' : 'Disponível'"></p>
+                    </div>
                   </div>
                 </div>
-              
-            </div>
-          </div>
+              </div>
+            </transition-group>
           </div>
         </div>
 
@@ -284,28 +285,28 @@ export default {
   transform: scale(1.1);
 }
 
-.col-3.card-top {
+.card-top {
   display: contents !important;
 }
-.display-card {
+/* .display-card {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-}
-.card-inventario {
+} */
+/* .card-inventario {
   color: black !important;
   background-color: #8e8e8e !important;
-}
-.cartao-inv {
+} */
+/* .cartao-inv {
   max-width: 200px;
-}
-.cartao-est {
+} */
+/* .cartao-est {
   max-width: 150px;
-}
-.card-text {
+} */
+/* .card-text {
   text-overflow: ellipsis !important;
-}
+} */
 
 .status-disponivel {
   font-weight: bold;
@@ -320,13 +321,41 @@ export default {
   text-overflow: ellipsis !important;
   color: #fdfdfd;
 }
-.barra-pesquisa {
+/* .barra-pesquisa {
   background-color: #bbbaba8a !important;
+} */
+ 
+.modal-backdrop {
+  background-color: #fdfdfd !important;
+  z-index: -1 !important;
 }
 
-@media(max-width: 425px) {
-  .col-sm-6.div-card {
-    width: 50%;
+/* A tela ajusta os cards em resoluções menores */
+@media(max-width: 500px) {
+  .div-card {
+    width: 50% !important;
+    display: flex !important;
+    justify-content: center;
+    align-content: center;
   }
+  .card-font {
+    font-size: 1.4rem !important;
+  }
+
+}
+
+/* transições dos cards excluidos*/
+.lista-cards-leave-to {
+  opacity: 0;
+  font-size: 0;
+}
+
+.lista-cards-leave-from {
+  opacity: 1;
+  font-size: 16px;
+}
+
+.lista-cards-leave-active {
+  transition: all 1.2s ease;
 }
 </style>

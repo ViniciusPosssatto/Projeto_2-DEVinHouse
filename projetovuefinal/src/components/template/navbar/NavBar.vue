@@ -64,7 +64,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 .btn-vira-left {
   transform: rotate(180deg);
