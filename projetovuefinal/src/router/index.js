@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 
-import HomeView from '@/components/HomeView.vue'
+import HomeView from '@/views/dashboard/HomeView.vue'
 
 import PageEmprestimo from '@/views/dashboard/PageEmprestimo.vue'
 import PageInventario from '@/views/dashboard/PageInventario.vue'
@@ -58,7 +58,16 @@ const routes = [
     {
         path: '/login',
         alias: ['/auth'],
-        component: LoginUser
+        component: LoginUser,
+        beforeEnter: (to) => {
+            const auth = localStorage.getItem('token');
+            if (auth) {
+                // eslint-disable-next-line
+                return to = "/"
+            }
+            return true;
+        } 
+        
     },
 ]
 

@@ -1,22 +1,20 @@
 <template>
-  <div v-if="autenticado">
-    <nav class="navbar navbar-dark bg-dark" style="display: block !important;">
+  <div v-if="autenticado" class="page-first">
+    <nav class="navbar navbar-dark bg-dark page" style="display: block !important;">
         <div class="row align-items-center">
           <div class="col-1">
-            <img src="@/assets/img/seta-esquerda.png" alt="" style="width:45px" @click="sidebarTurn" class="ms-5" :class="sidebarTurnOnOff ? 'btn-vira-left' : 'btn-vira-right' ">
+            <img src="@/assets/img/seta-esquerda.png" alt="" style="width:45px" @click="sidebarTurn" :class="sidebarTurnOnOff ? 'btn-vira-left' : 'btn-vira-right' ">
           </div>  
-          <div class="text-white ms-5 col-4">
+          <div class="text-white col-5">
             <h3 v-text="nomeNavbar"></h3>
           </div>
-            <div class="text-end col-5" >
+            <div class="text-end col-5 page-h" >
               <h5 v-text="usuario" class="text-white"></h5>
             </div>
             <div class="col-1">
               <vue-gravatar :email="email" :size="40" style="border-radius: 20px"/>
-              <!-- img src="../../../assets/img/logo.png" alt="" width="30" height="24" class="d-inline-block align-text-top"-->
           </div>
         </div>
-    
     </nav>
   </div>
 </template>
@@ -66,7 +64,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.page-first {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 100%;
+  height: 60px;
+}
+
+
 
 .btn-vira-left {
   transform: rotate(180deg);
@@ -78,8 +86,26 @@ export default {
   transition: 1s;
 }
 
-.direita {
+/* .direita {
   display: flex !important;
   float: right !important;
+} */
+
+@media(max-width: 600px) {
+  
+  .page-h {
+    display: none;
+  }
+  .row>* {
+  width: auto;
+  }
+}
+@media(max-width: 800px) {
+
+  .page h3 {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px !important;
+  }
 }
 </style>

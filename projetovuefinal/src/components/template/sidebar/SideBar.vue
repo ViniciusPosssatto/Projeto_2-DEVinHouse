@@ -1,7 +1,7 @@
 <template>
   <Transition name="sidabar">
     <div v-show="!sidebarTurn">
-    <div class=" l-navbar sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" id="div" v-if="autenticado">
+    <div class="div-sobresai l-navbar sid d-flex flex-column p-3 flex-shrink-0 text-white bg-dark" id="div" v-if="autenticado">
       <div class="nav-l">
           <span class="fs-4">
             <i class="fa-solid fa-book me-2"></i>
@@ -111,32 +111,13 @@ export default {
 
 <style scoped>
 
-.d-block {
-  transition: 2s !important;
-}
-
 .logout {
   cursor: pointer;
 }
 
 .l-navbar{
-  position: fixed;
-  top: 0;
-  left: 0%;
-  width: var(--nav-width);
-  height: 100vh;
-  background-color: var(--first-color);
-  padding: .5rem 1rem 0 0;
-  transition: .5s;
-  z-index: var(--z-fixed)
+  position:absolute;
   }
-
-#div {
-  margin-top: 50px;
-}
-ul li {
-  transition: 1s;
-}
 ul li:hover {
   background: rgb(111, 113, 121);
   background: radial-gradient(
@@ -146,25 +127,27 @@ ul li:hover {
   );
 }
 
-@media screen and (min-width: 700px){
-
-  .l-navbar{
-    left: 0;
-    padding: 1rem 1rem 0 0
-  }
-  
-}
-
 /* Trnasição sidebar */
-
-.sidabar-enter-active,
-.sidabar-leave-active {
-  transition: opacity 1s ease;
-}
 
 .sidabar-enter-from,
 .sidabar-leave-to {
   opacity: 0;
+  font-size: 0;
+}
+
+.sidabar-enter-to,
+.sidabar-leave-from {
+  opacity: 1;
+  font-size: 16px;
+}
+
+.sidabar-enter-active,
+.sidabar-leave-active {
+  transition: all 1s ease;
+}
+
+.div-sobresai{
+ z-index: 1;
 }
 
 </style>
