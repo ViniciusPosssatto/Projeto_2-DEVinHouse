@@ -1,3 +1,5 @@
+import { excluir, getColaborador, editarColabs, somaColabs } from '@/store/modules/newUser/mutations.js'
+
 export default {
     namespaced: true,
     state() {
@@ -10,48 +12,19 @@ export default {
 
     mutations: {
 
-        somaColabs(state) {
-            state.totalColabs = state.listaColabs.length;
-        },
-        
-        editarColabs(state, colaborador){   // colaborador é o ID que foi passado por params na rota do router
-            
-            state.lista = JSON.parse(localStorage.getItem('listaColabs'));
-            
-             //console.log(colaborador)
-             if(state.lista.length > 0 && state.lista !== null) {
-                 for(var i = 0; i < state.lista.length; i++){
-                     if(state.lista[i].id == colaborador.id) {
-                         state.lista[i] = colaborador;
-                     }
-                 }
-             } 
-             localStorage.setItem('listaColabs', JSON.stringify(state.lista))
-        },
-
-        getColaborador(state) {
-
-            state.listaColabs = localStorage.getItem('listaColabs') ? state.lista = JSON.parse(localStorage.getItem('listaColabs')) : []
-        },
-
-        excluir(state, id) {
-            for(var i = 0; i < state.listaColabs.length; i++){
-                if(state.listaColabs[i].id == id) {
-                    state.listaColabs.splice(i, 1);
-                }
-            }
-            localStorage.setItem('listaColabs', JSON.stringify(state.listaColabs))
-        }
-
-
+        excluir, 
+        getColaborador, 
+        editarColabs, 
+        somaColabs
+    
     },
 
     actions: {
-
-        newColaborador(context, colaborador) {
+        // cria um novo colaborador
+        newColaborador(context, colaborador) { // colaborador é o objeto com todos os dados capturados no form
 
             context.commit('getColaborador')
-            console.log(context.state.listaColabs.length)
+            
             if(context.state.listaColabs.length > 0 && context.state.listaColabs !== null){
                 for(var i = 0; i <  context.state.listaColabs.length; i++){
 

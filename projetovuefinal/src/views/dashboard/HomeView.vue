@@ -74,7 +74,7 @@ export default {
   },
 
   mounted() {
-    this.$store.state.setItensModule.nomeNavbar = 'Biblioteca Virtual'
+    this.$store.state.coisasGeraisModule.nomeNavbar = 'Biblioteca Virtual'
   }
 
 

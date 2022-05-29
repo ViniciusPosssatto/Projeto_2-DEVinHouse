@@ -45,7 +45,7 @@ export default {
     },
 // captura o nome pelo mounted de cada página
      nomeNavbar() {
-      return this.$store.state.setItensModule.nomeNavbar;
+      return this.$store.state.coisasGeraisModule.nomeNavbar;
     },
 // definir e monitorar o email no gravatar
     email() {

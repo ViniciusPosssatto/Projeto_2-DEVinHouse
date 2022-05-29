@@ -226,13 +226,12 @@ export default {
     if(lista !== null) {
       lista.forEach(element => {
         if(element.id == this.$route.params.id) {
-          //console.log(element)
           this.colab = element;
         }
       })
     }
 
-    this.$store.state.setItensModule.nomeNavbar = 'Cadastro de colaboradores'
+    this.$store.state.coisasGeraisModule.nomeNavbar = 'Cadastro de colaboradores'
   }
 }
 </script>

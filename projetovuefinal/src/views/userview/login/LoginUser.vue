@@ -206,7 +206,7 @@ export default {
 
   mounted() {
     this.$store.state.setUserLoginModule.autenticado = localStorage.getItem('token') ? true : false;
-    this.$store.state.setItensModule.nomeNavbar = 'Login'
+    this.$store.state.coisasGeraisModule.nomeNavbar = 'Login'
   }
 }
 </script>
