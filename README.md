@@ -1,4 +1,4 @@
-# Projeto_2-DEVinHouse
+# Projeto_2-Módulo 1 - DEVinHouse
 
 <h1 align="center">Olá, sou o Vinicius Possatto Stormoski</h1>
 <h2 align="center">Este é um repositório para o projeto final do primeiro módulo do curso DEVinHouse - SENAI</h2>
